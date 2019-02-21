@@ -59,7 +59,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/job" />
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/housework" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/education" />
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/exercise" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/social" />
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -187,7 +187,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/other" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"

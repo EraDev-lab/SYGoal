@@ -12,16 +12,22 @@
         <activity
             android:name=".Home_Screen"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".GoalsActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AboutActivity"
+            android:label="About"
+            />
         <activity android:name=".edit_goal" />
         <activity android:name=".Goal" />
-        <activity android:name=".New_Goal"></activity>
+        <activity android:name=".New_Goal"/>
     </application>
 
 </manifest>

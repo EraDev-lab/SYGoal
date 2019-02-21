@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/nav_current_goal"
+        android:icon="@drawable/ic_current_goal"
+        android:title="@string/current_goals"/>
+    <item android:id="@+id/nav_missed_goals"
+        android:icon="@drawable/ic_missed_goals"
+        android:title="@string/missed_goals"/>
+
+    <item android:id="@+id/nav_achievements"
+        android:icon="@drawable/ic_achievements"
+        android:title="@string/achievements"/>
+
+</menu>

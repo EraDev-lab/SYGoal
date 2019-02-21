@@ -43,7 +43,7 @@
             android:layout_below="@id/percentage"
             android:layout_centerHorizontal="true"
             style="?android:progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/circle"
+
             android:id="@+id/progress"
 
             />

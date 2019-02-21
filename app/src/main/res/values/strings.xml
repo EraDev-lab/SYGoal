@@ -1,10 +1,21 @@
 <resources>
     <string name="app_name">SYGoal</string>
+    <string name="app_version">1.0</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+
     <string name="action_settings">Settings</string>
+    <string name="action_home">Home</string>
+    <string name="action_contact">Contact Us</string>
+    <string name="action_rating">Rate us</string>
+
     <string name="Era_Dev">Era Dev</string>
+    <string name="copyright_text">Copyright © 2018, Era\'Dev </string>
+    <string name="rights">All rights reserved</string>
+    <string name="current_goals">Current goals</string>
+    <string name="missed_goals">Missed goals</string>
+    <string name="achievements">Achievements</string>
 </resources>
