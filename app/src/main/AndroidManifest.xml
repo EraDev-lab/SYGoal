@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".edit_goal" />
+        <activity android:name=".Goal" />
+        <activity android:name=".New_Goal"></activity>
     </application>
 
 </manifest>
