@@ -18,4 +18,13 @@
     <string name="current_goals">Current goals</string>
     <string name="missed_goals">Missed goals</string>
     <string name="achievements">Achievements</string>
+
+    <string name="Display_Language">Display Language :</string>
+    <string name="Night_Mood">Night Mood :</string>
+    <string name="Notifications">Notifications :</string>
+    <string name="Extras">Extras :</string>
+    <string name="About_App">About App</string>
+    <string name="Rate_Us">Rate Us</string>
+    <string name="Done">DONE</string>
+
 </resources>
