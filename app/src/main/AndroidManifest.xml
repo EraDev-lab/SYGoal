@@ -25,10 +25,10 @@
         <activity
             android:name=".AboutActivity"
             android:label="About" />
-        <activity android:name=".edit_goal" />
-        <activity android:name=".Goal" />
-        <activity android:name=".New_Goal" />
-        <activity android:name=".Setting"/>
+        <activity android:name=".Setting" />
+        <activity android:name=".GoalActivity" />
+        <activity android:name=".TaskActivity" />
+        <activity android:name=".DisplayTaskScreen"></activity>
     </application>
 
 </manifest>

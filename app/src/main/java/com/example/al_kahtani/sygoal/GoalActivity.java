@@ -3,7 +3,7 @@ package com.example.al_kahtani.sygoal;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Goal extends AppCompatActivity {
+public class GoalActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
