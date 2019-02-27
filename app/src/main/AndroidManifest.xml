@@ -24,11 +24,17 @@
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="About" />
-        <activity android:name=".Setting" />
+            android:label="About"
+            android:parentActivityName=".GoalsActivity"
+            />
+        <activity android:name=".Setting"
+            android:label="Setting"
+            />
         <activity android:name=".GoalActivity" />
         <activity android:name=".TaskActivity" />
-        <activity android:name=".DisplayTaskScreen"></activity>
+        <activity android:name=".DisplayTaskScreen"
+            android:parentActivityName=".GoalsActivity">
+        </activity>
     </application>
 
 </manifest>

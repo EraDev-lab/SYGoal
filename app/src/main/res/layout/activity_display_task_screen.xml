@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DisplayTaskScreen">
-
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".DisplayTaskScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:paddingTop="20dp">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,32 +19,41 @@
             android:layout_centerHorizontal="true"
             />
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/clean"
             android:text="60%"
+            android:layout_marginTop="44dp"
             android:id="@+id/percentage"
             android:layout_centerHorizontal="true"
             android:textSize="40dp"
 
             />
-
         <ProgressBar
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:progress="75"
-            android:layout_below="@id/percentage"
+            android:progress="100"
+            android:layout_below="@id/clean"
+            android:layout_centerHorizontal="true"
+            style="?android:progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/circle"
+            android:progressTint="#d6e6d7"
+            />
+        <ProgressBar
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:progress="60"
+            android:layout_below="@id/clean"
             android:layout_centerHorizontal="true"
             style="?android:progressBarStyleHorizontal"
             android:progressDrawable="@drawable/circle"
             android:id="@+id/progress"
-
             />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/progress"/>
@@ -61,13 +65,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="left|bottom"
-            android:src="@drawable/ic_plus"
-            android:layout_toEndOf="@+id/clean"
-            android:layout_toRightOf="@id/clean"
-            android:layout_marginBottom="15dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_plus"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="8dp"
             app:elevation="6dp"
             app:fabSize="normal"
             app:pressedTranslationZ="12dp" />
     </RelativeLayout>
-</ScrollView>
+
