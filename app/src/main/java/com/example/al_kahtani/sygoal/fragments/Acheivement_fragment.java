@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.al_kahtani.sygoal.GoalVariables;
+import com.example.al_kahtani.sygoal.GoalClass;
 import com.example.al_kahtani.sygoal.R;
 import com.example.al_kahtani.sygoal.RecyclerViewAdapter;
 
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Acheivement_fragment extends Fragment {
 
-    List<GoalVariables> lstGoal;
+    List<GoalClass> lstGoal;
 
     public  Acheivement_fragment() {
         // Required empty public constructor
@@ -28,14 +28,14 @@ public class Acheivement_fragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lstGoal = new ArrayList<>();
-        lstGoal.add(new GoalVariables("House Cleaning ",R.drawable.homee));
-        lstGoal.add(new GoalVariables("Meeting",R.drawable.meeting));
-        lstGoal.add(new GoalVariables("Education",R.drawable.education));
-        lstGoal.add(new GoalVariables("Exercise",R.drawable.exercise));
-        lstGoal.add(new GoalVariables("House Cleaning ",R.drawable.homee));
-        lstGoal.add(new GoalVariables("Meeting",R.drawable.meeting));
-        lstGoal.add(new GoalVariables("Education",R.drawable.education));
-        lstGoal.add(new GoalVariables("Exercise",R.drawable.exercise));
+        lstGoal.add(new GoalClass("House Cleaning ",R.drawable.homee));
+        lstGoal.add(new GoalClass("Meeting",R.drawable.meeting));
+        lstGoal.add(new GoalClass("Education",R.drawable.education));
+        lstGoal.add(new GoalClass("Exercise",R.drawable.exercise));
+        lstGoal.add(new GoalClass("House Cleaning ",R.drawable.homee));
+        lstGoal.add(new GoalClass("Meeting",R.drawable.meeting));
+        lstGoal.add(new GoalClass("Education",R.drawable.education));
+        lstGoal.add(new GoalClass("Exercise",R.drawable.exercise));
 
     }
 

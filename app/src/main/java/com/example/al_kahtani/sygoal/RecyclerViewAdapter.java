@@ -17,14 +17,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     private Context mContex ;
-    private List<GoalVariables> mData;
+    private List<GoalClass> mData;
 
-    public RecyclerViewAdapter(Context mContex, List<GoalVariables> mData) {
+    public RecyclerViewAdapter(Context mContex, List<GoalClass> mData) {
         this.mContex = mContex;
         this.mData = mData;
     }
 
-    @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 

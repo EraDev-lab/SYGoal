@@ -1,15 +1,36 @@
-package com.example.al_kahtani.sygoal.fragments;
+package com.example.al_kahtani.sygoal;
 
-class GoalClass {
+public class GoalClass {
+    private String Title;
+    private int Thumbnail;
 
     private String mCurrent_goal_name;
     private String mRate;
     private static final int NO_IMAGE_PROVIDED = -1;
-  public GoalClass(String Current_goal_name, String Rate) {
-      mCurrent_goal_name=Current_goal_name;
-      mRate=Rate;
+    public GoalClass(String Current_goal_name, String Rate) {
+        mCurrent_goal_name=Current_goal_name;
+        mRate=Rate;
+    }
+    public GoalClass(String title, int thumbnail) {
+        Title = title;
+        Thumbnail = thumbnail;
     }
 
+    public String getTitle() {
+        return Title;
+    }
+
+    public int getThumbnail() {
+        return Thumbnail;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setThumbnail(int thumbnail) {
+        Thumbnail = thumbnail;
+    }
     public String getRate() {
         return mRate;
     }
