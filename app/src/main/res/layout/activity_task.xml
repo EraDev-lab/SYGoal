@@ -55,10 +55,19 @@
         android:textSize="15sp"
         android:layout_below="@id/one"
         android:layout_toRightOf="@id/date"
-        android:id="@+id/edit_date"
         android:layout_marginTop="10dp"
+        android:id="@+id/edit_date"
         />
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/edit_tasks"
+        android:layout_toRightOf="@id/edit_date"
+        android:id="@+id/logo_date"
+        android:src="@drawable/ic_date" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,10 +87,20 @@
         android:textSize="15sp"
         android:layout_below="@id/date"
         android:layout_toRightOf="@id/notify_on"
-        android:id="@+id/edit_notify"
         android:layout_marginTop="10dp"
+        android:id="@+id/edit_notify"
 
         />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_date"
+        android:layout_toRightOf="@id/edit_notify"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/ic_access_time"
+        android:id="@+id/logo_time"/>
     <TextView
         android:id="@+id/alarm"
         android:layout_width="wrap_content"
@@ -100,10 +119,9 @@
         android:layout_toRightOf="@id/alarm"
         android:layout_below="@id/notify_on"
         android:layout_marginTop="100dp"
+        android:id="@+id/Spinner"/>
 
-        >
 
-    </Spinner>
 
     <Button
         android:layout_width="wrap_content"
@@ -131,5 +149,6 @@
         android:text="cancle"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
-        android:layout_toRightOf="@id/save"/>
+        android:layout_toRightOf="@id/save"
+        android:id="@+id/cancle"/>
 </RelativeLayout>

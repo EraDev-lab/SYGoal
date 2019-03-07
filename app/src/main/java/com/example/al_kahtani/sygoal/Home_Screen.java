@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Home_Screen extends AppCompatActivity {
+import com.example.al_kahtani.sygoal.classes.SharedPref;
 
+public class Home_Screen extends AppCompatActivity {
+    SharedPref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

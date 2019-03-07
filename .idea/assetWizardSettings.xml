@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/E:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/toggle/ic_star_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_date_range_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,9 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="autoMirrored" value="true" />
-                            <entry key="outputName" value="ic_achievements" />
-                            <entry key="sourceFile" value="C:\Users\personnel" />
+                            <entry key="outputName" value="ic_date" />
+                            <entry key="sourceFile" value="C:\Users\AHMED MAGDY" />
                           </map>
                         </option>
                       </PersistentState>

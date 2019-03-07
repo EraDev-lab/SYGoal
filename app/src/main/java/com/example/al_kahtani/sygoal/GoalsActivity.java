@@ -8,14 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.fragments.Acheivement_fragment;
 import com.example.al_kahtani.sygoal.fragments.CurrentGoalsFragment;
 import com.example.al_kahtani.sygoal.fragments.MissedGoalsFragment;
 
 public class GoalsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
+    SharedPref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()==true) {
+            setTheme(R.style.darktheme);
+        }else{  setTheme(R.style.AppTheme);}
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
 

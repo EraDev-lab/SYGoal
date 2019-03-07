@@ -29,4 +29,10 @@
     <string name="Rate_Us">Rate Us</string>
     <string name="Done">DONE</string>
 
+    <string-array name="repeating_array">
+        <item>Daily</item>
+        <item>Weakly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
 </resources>
