@@ -24,6 +24,9 @@ public class MissedGoalsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * // Create a list of Missed Goals with its name and photo
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +47,22 @@ public class MissedGoalsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.missed_goals_fragments, container, false);
 
+        // Find the {@link RecyclerView} object in the view hierarchy of the {@link missed_goals_fragments}.
+        // There should be a {@link RecyclerView} with the view ID called recyclerViewMissed.
         RecyclerView myrv = (RecyclerView) view.findViewById(R.id.recyclerViewMissed);
+        //sure that the size of the RecyclerView won't be changing
+        myrv.setHasFixedSize(true);
+
+        // Create an {@link RecyclerViewAdapter}, whose data source is a list of {@link Goal}s. The
+        // adapter knows how to create Recycler View items for each item in the list.
         RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(),lstGoal);
+
+        //This LayoutManager subclass will, by default, make the RecyclerView look like a ListView.
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         myrv.setLayoutManager(gridLayoutManager);
+
+        // Make the {@link RecyclerView} use the {@link RecyclerViewAdapter} we created above, so that the
+        // {@link RecyclerView} will display Recycler View items for each {@link Goal} in the list.
         myrv.setAdapter(myAdapter);
         return view;
     }

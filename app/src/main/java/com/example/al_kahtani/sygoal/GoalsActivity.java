@@ -41,7 +41,7 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GoalsActivity.this,TaskActivity.class));
+                startActivity(new Intent(GoalsActivity.this,GoalActivity.class));
             }
         });
     }
