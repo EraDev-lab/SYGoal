@@ -1,5 +1,6 @@
 package com.example.al_kahtani.sygoal.classes;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.view.View;
 
 import com.example.al_kahtani.sygoal.TaskActivity;
 
@@ -19,12 +21,19 @@ public class AlarmReceiver extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        // Get id & message from intent.
         int random = intent.getIntExtra("random", 0);
         int notificationId = intent.getIntExtra("notificationId", 0);
         String message = intent.getStringExtra("todo");
-       // String repeat = intent.getStringExtra("repeating");
+        setAlarm(context,random,notificationId,message);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public void setAlarm(Context context, int random, int notificationId, String message){
+
+        // Get id & message from intent.
+
+        // String repeat = intent.getStringExtra("repeating");
 
         // When notification is tapped, call MainActivity.
         Intent mainIntent = new Intent(context, TaskActivity.class);
@@ -40,7 +49,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         builder.setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setContentTitle("It's Time!")
                 .setContentText(message)
-               // .setWhen(System.currentTimeMillis())
+                // .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 .setContentIntent(contentIntent)
                 .setPriority(Notification.PRIORITY_MAX)
@@ -49,5 +58,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Notify
         myNotificationManager.notify(notificationId, builder.build());
 
+
     }
+
+
+
 }

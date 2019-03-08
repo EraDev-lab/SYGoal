@@ -35,7 +35,7 @@ public class TaskActivity extends AppCompatActivity {
     private ImageView detecttime,detectdate;
     private Spinner spinnerrepeat;
     EditText editTextTask,editTextDate,editTextTime;
-
+    int random=0;
     private int notificationId = 1;
     long alarmStartTime;
     Calendar mCurrentDate;
@@ -67,8 +67,7 @@ public class TaskActivity extends AppCompatActivity {
 
 
 
-
-        //is chkIos checked?
+//to start calender
         ImageGenerator mImageGenerator = new ImageGenerator(TaskActivity.this);
 
 // Set the icon size to the generated in dip.
@@ -85,7 +84,7 @@ public class TaskActivity extends AppCompatActivity {
 // Set the color of the font to be generated
         mImageGenerator.setDateColor(Color.parseColor("#3c6eaf"));
         mImageGenerator.setMonthColor(Color.WHITE);
-
+//select date
         detectdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +109,7 @@ public class TaskActivity extends AppCompatActivity {
             }
         });///////////////////*Calender////////////////////---------------------
 
-
+//select time
 
         detecttime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +137,7 @@ public class TaskActivity extends AppCompatActivity {
 
             }
         });
-        // spinner for insurance
+        // spinner for repeating
         ArrayAdapter<CharSequence> adapters = ArrayAdapter.createFromResource(
                 TaskActivity.this, R.array.repeating_array, android.R.layout.simple_spinner_item);
         adapters.setDropDownViewResource(R.layout.spinner_list_item);
@@ -156,10 +155,12 @@ public class TaskActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        //to save time and date for notification system
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+// convert time from string to date variable
                 String myDate = caltext+" "+startTime;
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd HH:mm");
                 Date date = null;
@@ -171,7 +172,7 @@ public class TaskActivity extends AppCompatActivity {
                 //long millis = date.getTime();
                 // Long alerttime=new GregorianCalendar().getTimeInMillis()+5*1000;
                 Long alerttime= date.getTime();
-                final int random = new Random().nextInt(100000)  ;
+                random = new Random().nextInt(100000)  ;
                 Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
                 intent.putExtra("notificationId", notificationId);
                 intent.putExtra("todo", editTextTask.getText().toString());
@@ -189,15 +190,29 @@ public class TaskActivity extends AppCompatActivity {
                     alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime,AlarmManager.INTERVAL_DAY*30,alarmIntent);
                 }else if(repeat.equalsIgnoreCase("Yearly")){
                     alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime,AlarmManager.INTERVAL_DAY*365,alarmIntent);
+                }else if(repeat.equalsIgnoreCase("Once")) {
+                    alarm.set(AlarmManager.RTC_WAKEUP, alerttime, alarmIntent);
                 }
-
                 //alarm.set(AlarmManager.RTC_WAKEUP, alerttime,alarmIntent);
 
                 //   PendingIntent.getBroadcast(ahmed.this, 1,intent, PendingIntent.FLAG_UPDATE_CURRENT));
 
             }
         });
+// cancel notefication
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
 
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskActivity.this, random,intent, 0);
 
+                //PendingIntent pendingIntent = PendingIntent.getBroadcast(Setting.this, id, intent,0);
+                AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                alarm.cancel(pendingIntent);
+
+            }
+        });
     }
 }

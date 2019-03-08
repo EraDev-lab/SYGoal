@@ -31,6 +31,7 @@
     <string name="Goal_Name">Goal Name</string>
 
     <string-array name="repeating_array">
+        <item>Once</item>
         <item>Daily</item>
         <item>Weakly</item>
         <item>Monthly</item>
