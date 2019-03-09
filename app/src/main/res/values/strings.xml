@@ -34,7 +34,17 @@
     <string name="date_is_required">Date is required</string>
     <string name="time_is_required">Time is required</string>
 
-
+    <string name="The_Goal">The Goal</string>
+    <string name="Goal_Type">Goal Type</string>
+    <string name="Description">Description</string>
+    <string name="Job">Job</string>
+    <string name="Housework">Housework</string>
+    <string name="Education">Education</string>
+    <string name="Exercise">Exercise</string>
+    <string name="Social">Social</string>
+    <string name="Other">Other</string>
+    <string name="Delete">Delete</string>
+    <string name="Save">Save</string>
 
     <string-array name="repeating_array">
         <item>Once</item>

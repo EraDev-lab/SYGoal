@@ -32,7 +32,7 @@ EditText new_goal;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
         new_goal = findViewById(R.id.goal);
-        radioButton = findViewById(R.id.radio1);
+        radioButton = findViewById(R.id.radiobutton);
     //    radioGroup = (RadioGroup) findViewById(R.id.radio);
         btnSave = (Button) findViewById(R.id.Button);
 
