@@ -40,6 +40,7 @@ public class CurrentGoalsFragment extends Fragment {
 //////////////////////////
 
         listViewcurrent =  rootView.findViewById(R.id.current_goals_lv);
+        name_current =  rootView.findViewById(R.id.name_current);
 
 
         return rootView;
