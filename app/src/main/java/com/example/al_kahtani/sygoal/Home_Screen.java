@@ -17,11 +17,11 @@ public class Home_Screen extends AppCompatActivity {
     SharedPref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedpref = new SharedPref(this);
+        sharedpref = new SharedPref(this);//load night mode setting
         if(sharedpref.loadNightModeState()==true) {
             setTheme(R.style.darktheme);
         }else{  setTheme(R.style.AppTheme);}
-        loadLocale();
+        loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__screen);
 
@@ -50,6 +50,7 @@ public class Home_Screen extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

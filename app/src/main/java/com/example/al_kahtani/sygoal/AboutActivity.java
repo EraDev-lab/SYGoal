@@ -20,11 +20,11 @@ public class AboutActivity extends AppCompatActivity {
     ImageView facepic, tweetpic, emailpic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedpref = new SharedPref(this);
+        sharedpref = new SharedPref(this);//load night mode setting
         if(sharedpref.loadNightModeState()==true) {
             setTheme(R.style.darktheme);
         }else{  setTheme(R.style.AppTheme);}
-        loadLocale();
+        loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
@@ -67,6 +67,7 @@ public class AboutActivity extends AppCompatActivity {
         });
 
     }
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

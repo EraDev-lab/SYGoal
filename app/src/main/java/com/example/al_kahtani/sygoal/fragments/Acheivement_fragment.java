@@ -51,7 +51,7 @@ public class Acheivement_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        loadLocale();
+        loadLocale();//load languge setting
         View view = inflater.inflate(R.layout.achievements_fragment, container, false);
 
         // Find the {@link RecyclerView} object in the view hierarchy of the {@link achievements_fragment}.
@@ -71,7 +71,7 @@ public class Acheivement_fragment extends Fragment {
         myrv.setAdapter(myAdapter);
         return view;
     }
-
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

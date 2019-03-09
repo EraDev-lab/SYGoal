@@ -34,7 +34,7 @@ public class CurrentGoalsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        loadLocale();
+        loadLocale();//load languge setting
 
         View rootView = getLayoutInflater().inflate(R.layout.current_goals_fragment,container,false);
 //////////////////////////
@@ -77,6 +77,7 @@ public class CurrentGoalsFragment extends Fragment {
             }
         });
     }
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

@@ -24,11 +24,11 @@ EditText new_goal;
     SharedPref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedpref = new SharedPref(this);
+        sharedpref = new SharedPref(this);//load night mode setting
         if(sharedpref.loadNightModeState()==true) {
             setTheme(R.style.darktheme);
         }else{  setTheme(R.style.AppTheme);}
-        loadLocale();
+        loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
         new_goal = findViewById(R.id.goal);
@@ -54,6 +54,7 @@ EditText new_goal;
         });
 
     }
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

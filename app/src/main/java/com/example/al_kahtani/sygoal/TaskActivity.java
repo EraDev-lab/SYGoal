@@ -52,11 +52,11 @@ public class TaskActivity extends AppCompatActivity {
     SharedPref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedpref = new SharedPref(this);
+        sharedpref = new SharedPref(this);//load night mode setting
         if(sharedpref.loadNightModeState()==true) {
             setTheme(R.style.darktheme);
         }else{  setTheme(R.style.AppTheme);}
-        loadLocale();
+        loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
@@ -172,7 +172,7 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 // convert time from string to date variable
-
+// to force user to enter task data
                 if ( editTextTask.getText().toString().isEmpty()) {
                     editTextTask.setError(getString(R.string.task_is_required));
                     editTextTask.requestFocus();
@@ -258,6 +258,7 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
     }
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
