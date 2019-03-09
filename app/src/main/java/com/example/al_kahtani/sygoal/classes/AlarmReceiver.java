@@ -11,6 +11,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 
+import com.example.al_kahtani.sygoal.GoalsActivity;
 import com.example.al_kahtani.sygoal.TaskActivity;
 
 /**
@@ -36,7 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // String repeat = intent.getStringExtra("repeating");
 
         // When notification is tapped, call MainActivity.
-        Intent mainIntent = new Intent(context, TaskActivity.class);
+        Intent mainIntent = new Intent(context, GoalsActivity.class);
 
         PendingIntent contentIntent = PendingIntent.getActivity(context, random, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         //PendingIntent contentIntent = PendingIntent.getActivity(context, 0, mainIntent, 0);
@@ -47,7 +48,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Prepare notification.
         Notification.Builder builder = new Notification.Builder(context);
         builder.setSmallIcon(android.R.drawable.ic_dialog_info)
-                .setContentTitle("It's Time!")
+                .setContentTitle("SYGoal")
                 .setContentText(message)
                 // .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)

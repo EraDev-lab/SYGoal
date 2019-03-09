@@ -1,7 +1,11 @@
 package com.example.al_kahtani.sygoal;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +23,8 @@ import com.example.al_kahtani.sygoal.fragments.Acheivement_fragment;
 import com.example.al_kahtani.sygoal.fragments.CurrentGoalsFragment;
 import com.example.al_kahtani.sygoal.fragments.MissedGoalsFragment;
 
+import java.util.Locale;
+
 public class GoalsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     SharedPref sharedpref;
     FloatingActionButton fab;
@@ -28,6 +34,7 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         if(sharedpref.loadNightModeState()==true) {
             setTheme(R.style.darktheme);
         }else{  setTheme(R.style.AppTheme);}
+        loadLocale();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
 
@@ -119,4 +126,22 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         }
         return true;
     }
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Setting", Context.MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+
+    }
+
+    public void loadLocale() {
+        SharedPreferences pref = getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        String language = pref.getString("My_Lang", "");
+        setLocale(language);
+    }
+
 }

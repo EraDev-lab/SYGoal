@@ -18,11 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-<<<<<<< HEAD
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_date_range_black_24dp.xml" />
-=======
-                                      <entry key="url" value="jar:file:/E:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
->>>>>>> 1af88d174f40f37ed305e2570deecb6f20f61e53
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_settings_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -32,14 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-<<<<<<< HEAD
-                            <entry key="outputName" value="ic_date" />
+                            <entry key="outputName" value="ic_settings_lang" />
                             <entry key="sourceFile" value="C:\Users\AHMED MAGDY" />
-=======
-                            <entry key="autoMirrored" value="true" />
-                            <entry key="outputName" value="ic_add" />
-                            <entry key="sourceFile" value="C:\Users\personnel" />
->>>>>>> 1af88d174f40f37ed305e2570deecb6f20f61e53
                           </map>
                         </option>
                       </PersistentState>

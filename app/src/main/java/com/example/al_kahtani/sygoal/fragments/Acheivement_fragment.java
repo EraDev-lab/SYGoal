@@ -1,5 +1,9 @@
 package com.example.al_kahtani.sygoal.fragments;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +19,7 @@ import com.example.al_kahtani.sygoal.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Acheivement_fragment extends Fragment {
 
@@ -46,6 +51,7 @@ public class Acheivement_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        loadLocale();
         View view = inflater.inflate(R.layout.achievements_fragment, container, false);
 
         // Find the {@link RecyclerView} object in the view hierarchy of the {@link achievements_fragment}.
@@ -65,4 +71,23 @@ public class Acheivement_fragment extends Fragment {
         myrv.setAdapter(myAdapter);
         return view;
     }
+
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getActivity().getResources().updateConfiguration(configuration, getActivity().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences("Setting", Context.MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+
+    }
+
+    public void loadLocale() {
+        SharedPreferences pref = getActivity().getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        String language = pref.getString("My_Lang", "");
+        setLocale(language);
+    }
+
 }

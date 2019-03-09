@@ -3,6 +3,8 @@
     package="com.example.al_kahtani.sygoal">
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <application
         android:allowBackup="true"
@@ -27,19 +29,19 @@
         <activity
             android:name=".AboutActivity"
             android:label="About"
-            android:parentActivityName=".GoalsActivity"
-            />
-        <activity android:name=".Setting"
-            android:label="Setting"
-            />
+            android:parentActivityName=".GoalsActivity" />
+        <activity
+            android:name=".Setting"
+            android:label="Setting" />
         <activity android:name=".GoalActivity" />
         <activity android:name=".TaskActivity" />
 
         <receiver android:name=".classes.AlarmReceiver" />
 
-        <activity android:name=".DisplayTaskScreen"
-            android:parentActivityName=".GoalsActivity">
-        </activity>
+        <activity
+            android:name=".DisplayTaskScreen"
+            android:parentActivityName=".GoalsActivity"></activity>
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>

@@ -25,13 +25,14 @@
            android:text="@string/Display_Language"
             />
 
-       <Spinner
-           android:id="@+id/spinner"
-           android:layout_width="match_parent"
+       <ImageView
+           android:id="@+id/Language_setting"
+           android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="200dp"
            android:layout_marginStart="200dp"
-           android:spinnerMode="dialog" />
+           android:src="@drawable/ic_settings_lang"
+           />
    </LinearLayout>
 
    <LinearLayout
@@ -123,6 +124,7 @@
        android:orientation="vertical">
 
        <LinearLayout
+           android:id="@+id/about"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="5dp"
@@ -146,6 +148,7 @@
        </LinearLayout>
 
        <LinearLayout
+           android:id="@+id/rate"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal">
@@ -167,28 +170,29 @@
            <!--  android:background="?attr/textred"-->
        </LinearLayout>
    </LinearLayout>
+    <!--
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="30dp"
+          android:layout_gravity="end"
+          android:layout_marginRight="10dp"
+          android:layout_marginTop="130dp"
+          android:background="@android:drawable/checkbox_off_background"
+          android:text="@string/Done"
+          android:layout_marginEnd="10dp" />
 
-   <Button
-       android:layout_width="wrap_content"
-       android:layout_height="30dp"
-       android:layout_gravity="end"
-       android:layout_marginRight="10dp"
-       android:layout_marginTop="130dp"
-       android:background="@android:drawable/checkbox_off_background"
-       android:text="@string/Done"
-       android:layout_marginEnd="10dp" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/Display_Language"
+               android:textColor="#000000" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Display_Language"
-            android:textColor="#000000" />
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
-            android:layout_marginStart="200dp"
-            android:spinnerMode="dialog" />
+           <Spinner
+               android:id="@+id/spinner1"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="200dp"
+               android:layout_marginStart="200dp"
+               android:spinnerMode="dialog" />
+       -->
     </LinearLayout>

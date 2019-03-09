@@ -43,4 +43,5 @@ public class CurrentAdapter extends ArrayAdapter<GoalClass> {
 
         return listItemView;
     }
+
 }

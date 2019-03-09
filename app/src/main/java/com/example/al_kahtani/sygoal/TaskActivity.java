@@ -1,5 +1,6 @@
 package com.example.al_kahtani.sygoal;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.NotificationManager;
@@ -7,6 +8,8 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,12 +25,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.al_kahtani.sygoal.classes.AlarmReceiver;
+import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class TaskActivity extends AppCompatActivity {
@@ -44,8 +49,14 @@ public class TaskActivity extends AppCompatActivity {
     String  startTime;
     boolean isnotifyactive=false;
     NotificationManager notificationManager;
+    SharedPref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()==true) {
+            setTheme(R.style.darktheme);
+        }else{  setTheme(R.style.AppTheme);}
+        loadLocale();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
@@ -161,6 +172,23 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 // convert time from string to date variable
+
+                if ( editTextTask.getText().toString().isEmpty()) {
+                    editTextTask.setError(getString(R.string.task_is_required));
+                    editTextTask.requestFocus();
+                    return;
+                }
+
+                if ( editTextDate.getText().toString().isEmpty()) {
+                    editTextDate.setError(getString(R.string.date_is_required));
+                    editTextDate.requestFocus();
+                    return;
+                }
+                if ( editTextTime.getText().toString().isEmpty()) {
+                    editTextTime.setError(getString(R.string.time_is_required));
+                    editTextTime.requestFocus();
+                    return;
+                }
                 String myDate = caltext+" "+startTime;
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd HH:mm");
                 Date date = null;
@@ -214,5 +242,38 @@ public class TaskActivity extends AppCompatActivity {
 
             }
         });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskActivity.this, random,intent, 0);
+
+                //PendingIntent pendingIntent = PendingIntent.getBroadcast(Setting.this, id, intent,0);
+                AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                alarm.cancel(pendingIntent);
+
+            }
+        });
     }
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Setting", Context.MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+
+    }
+
+    public void loadLocale() {
+        SharedPreferences pref = getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        String language = pref.getString("My_Lang", "");
+        setLocale(language);
+    }
+
 }

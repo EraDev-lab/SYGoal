@@ -1,7 +1,11 @@
 package com.example.al_kahtani.sygoal.fragments;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +25,7 @@ import com.example.al_kahtani.sygoal.Setting;
 import com.example.al_kahtani.sygoal.TaskActivity;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CurrentGoalsFragment extends Fragment {
     ListView listViewcurrent;
@@ -29,6 +34,7 @@ public class CurrentGoalsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        loadLocale();
 
         View rootView = getLayoutInflater().inflate(R.layout.current_goals_fragment,container,false);
 //////////////////////////
@@ -69,5 +75,22 @@ public class CurrentGoalsFragment extends Fragment {
                 return false;
             }
         });
+    }
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getActivity().getResources().updateConfiguration(configuration, getActivity().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences("Setting", Context.MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+
+    }
+
+    public void loadLocale() {
+        SharedPreferences pref = getActivity().getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        String language = pref.getString("My_Lang", "");
+        setLocale(language);
     }
     }

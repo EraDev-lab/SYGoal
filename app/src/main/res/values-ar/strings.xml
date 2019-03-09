@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SYGoal</string>
+    <string name="app_version">1.0</string>
+    <string name="navigation_drawer_open">افتح القائمة الجانبية</string>
+    <string name="navigation_drawer_close">اغلق القائمة الجانبية</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="Goals_Activity">الاهداف الحالية</string>
+
+    <string name="action_settings">الاعدادات</string>
+    <string name="action_home">الرئيسية</string>
+    <string name="action_contact">اتصل بنا</string>
+    <string name="action_rating">التقييم</string>
+
+    <string name="Era_Dev">Era Dev</string>
+    <string name="copyright_text">Copyright © 2018, Era\'Dev </string>
+    <string name="rights">All rights reserved</string>
+    <string name="current_goals">الاهداف الحالية</string>
+    <string name="missed_goals">الاهداف الفائتة</string>
+    <string name="achievements">الانجازات</string>
+
+    <string name="Display_Language">اعدادات اللغة :</string>
+    <string name="Night_Mood">الوضع الليلى :</string>
+    <string name="Notifications">الاشعارات :</string>
+    <string name="Extras">المزيد :</string>
+    <string name="About_App">About App</string>
+    <string name="Rate_Us">التقييم</string>
+    <string name="Done">تم</string>
+    <string name="Goal_Name">اسم الهدف</string>
+    <string name="choose_anguage">اختر اللغة</string>
+    <string name="task_is_required">يجب اعطاء اسم للمهمة</string>
+    <string name="date_is_required">يجب ادخال الناريخ</string>
+    <string name="time_is_required">يجب ادخال الوقت</string>
+
+    <string-array name="repeating_array">
+        <item>Once</item>
+        <item>Daily</item>
+        <item>Weakly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+</resources>
