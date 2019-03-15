@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewAchi"
+    <ListView
+        android:id="@+id/list_view_achievement"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="6dp"
+        android:padding="5dp"
         android:scrollbars="vertical" />
 
 </LinearLayout>

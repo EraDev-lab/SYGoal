@@ -16,7 +16,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/goal"
+        android:id="@+id/goal_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp" />
@@ -41,37 +41,37 @@
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
-                android:id="@+id/radiobutton" />
+                android:id="@+id/job_radiobutton" />
 
             <RadioButton
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="23dp"
-                android:id="@+id/radiobutton1"/>
+                android:id="@+id/housework_radiobutton"/>
 
             <RadioButton
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="22dp"
-                android:id="@+id/radiobutton2" />
+                android:id="@+id/education_radiobutton" />
 
             <RadioButton
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="26dp"
-                android:id="@+id/radiobutton3" />
+                android:id="@+id/exercise_radiobutton" />
 
             <RadioButton
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="27dp"
-                android:id="@+id/radiobutton4" />
+                android:id="@+id/socail_radiobutton" />
 
             <RadioButton
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="28dp"
-                android:id="@+id/radiobutton5" />
+                android:id="@+id/other_radiobutton" />
 
         </RadioGroup>
 
@@ -422,7 +422,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-
+        android:id="@+id/goal_description"
         />
 
 
@@ -441,10 +441,11 @@
             android:layout_marginRight="15dp"
             android:layout_marginEnd="15dp"
             android:text="@string/Delete"
+            android:id="@+id/delete_goal"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/Button"
+            android:id="@+id/save_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Save"

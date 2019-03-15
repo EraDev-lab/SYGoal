@@ -36,6 +36,7 @@
     <string name="time_is_required">يجب ادخال الوقت</string>
 
     <string-array name="repeating_array">
+        <item>Off</item>
         <item>Once</item>
         <item>Daily</item>
         <item>Weakly</item>

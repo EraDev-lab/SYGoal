@@ -33,7 +33,7 @@
         android:textSize="15sp"
         android:layout_toRightOf="@id/one"
         android:layout_below="@id/tasks"
-        android:id="@+id/edit_tasks"
+        android:id="@+id/task_name"
 
         />
 
@@ -49,14 +49,14 @@
         android:id="@+id/date"
         />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_below="@id/one"
         android:layout_toRightOf="@id/date"
-        android:layout_marginTop="10dp"
-        android:id="@+id/edit_date"
+        android:layout_marginTop="30dp"
+        android:id="@+id/task_date"
         />
     <ImageView
         android:layout_width="wrap_content"
@@ -64,8 +64,8 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/edit_tasks"
-        android:layout_toRightOf="@id/edit_date"
+        android:layout_below="@id/task_name"
+        android:layout_toRightOf="@id/task_date"
         android:id="@+id/logo_date"
         android:src="@drawable/ic_date" />
     <TextView
@@ -81,21 +81,21 @@
 
         />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_below="@id/date"
         android:layout_toRightOf="@id/notify_on"
-        android:layout_marginTop="10dp"
-        android:id="@+id/edit_notify"
+        android:layout_marginTop="30dp"
+        android:id="@+id/task_notify_on"
 
         />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/logo_date"
-        android:layout_toRightOf="@id/edit_notify"
+        android:layout_toRightOf="@id/task_notify_on"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="0dp"
@@ -118,10 +118,26 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/alarm"
         android:layout_below="@id/notify_on"
-        android:layout_marginTop="100dp"
-        android:id="@+id/Spinner"/>
+        android:layout_marginTop="60dp"
+        android:id="@+id/task_alarm"/>
 
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/task_alarm"
+    android:layout_marginTop="60dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="40dp"
+    android:text="Completed State"
+    android:id="@+id/complete_text_view"/>
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/task_alarm"
+        android:layout_marginTop="55dp"
+        android:id="@+id/checkbox_completed"
+        android:layout_toRightOf="@+id/complete_text_view"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -130,7 +146,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
         android:layout_marginLeft="50dp"
-        android:id="@+id/delete"
+        android:id="@+id/delete_task"
         />
 
     <Button
@@ -139,16 +155,17 @@
         android:text="Save"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
-        android:layout_toRightOf="@id/delete"
-        android:id="@+id/save"
+        android:layout_toRightOf="@id/delete_task"
+        android:id="@+id/save_task"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="cancle"
+        android:text="cancel"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
-        android:layout_toRightOf="@id/save"
-        android:id="@+id/cancle"/>
+        android:layout_toRightOf="@id/save_task"
+        android:id="@+id/cancel_task"/>
+
 </RelativeLayout>

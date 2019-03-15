@@ -23,7 +23,7 @@ public class Home_Screen extends AppCompatActivity {
         }else{  setTheme(R.style.AppTheme);}
         loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home__screen);
+        setContentView(R.layout.activity_home_screen);
 
     }
 
@@ -57,14 +57,14 @@ public class Home_Screen extends AppCompatActivity {
         Configuration configuration = new Configuration();
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-        SharedPreferences.Editor editor = getSharedPreferences("Setting", Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences("SettingActivity", Context.MODE_PRIVATE).edit();
         editor.putString("My_Lang", lang);
         editor.apply();
 
     }
 
     public void loadLocale() {
-        SharedPreferences pref = getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         String language = pref.getString("My_Lang", "");
         setLocale(language);
     }

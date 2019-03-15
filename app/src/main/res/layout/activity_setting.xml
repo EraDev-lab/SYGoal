@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="?attr/backgroundcolor"
-    tools:context=".Setting">
+    tools:context=".SettingActivity">
     <!--   -->
 
     <!-- Light/Day Mode theme. -->

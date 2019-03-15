@@ -1,6 +1,5 @@
 package com.example.al_kahtani.sygoal.classes;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,10 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.view.View;
 
-import com.example.al_kahtani.sygoal.GoalsActivity;
-import com.example.al_kahtani.sygoal.TaskActivity;
+import com.example.al_kahtani.sygoal.BottomNavigationViewActivity;
 
 /**
  * Created by sara on 2017/12/28.
@@ -37,7 +34,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // String repeat = intent.getStringExtra("repeating");
 
         // When notification is tapped, call MainActivity.
-        Intent mainIntent = new Intent(context, GoalsActivity.class);
+        Intent mainIntent = new Intent(context, BottomNavigationViewActivity.class);
 
         PendingIntent contentIntent = PendingIntent.getActivity(context, random, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         //PendingIntent contentIntent = PendingIntent.getActivity(context, 0, mainIntent, 0);

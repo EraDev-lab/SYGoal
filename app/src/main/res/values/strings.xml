@@ -47,6 +47,7 @@
     <string name="Save">Save</string>
 
     <string-array name="repeating_array">
+        <item>Off</item>
         <item>Once</item>
         <item>Daily</item>
         <item>Weakly</item>

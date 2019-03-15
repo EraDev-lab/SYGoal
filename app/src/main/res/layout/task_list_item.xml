@@ -2,60 +2,49 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-
+     android:padding="10dp"
+    android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            >
+            android:background="@drawable/shap"
+            android:padding="8dp">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/checkbox"/>
             <ImageView
-                android:layout_toRightOf="@id/checkbox"
-                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_check_box_black_24dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/display_task_checkbox"/>
+
+            <ImageView
+                android:layout_toRightOf="@id/display_task_checkbox"
+                android:id="@+id/display_task_alarm"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="4dp"
                 android:src="@drawable/off" />
 
-
             <TextView
-                android:id="@+id/textViewTitle"
+                android:id="@+id/display_task_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/imageView"
+                android:layout_toRightOf="@id/display_task_alarm"
                 android:text="تنظيف مجلس النساء"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#000000" />
 
-
             <TextView
-                android:id="@+id/textViewShortDesc"
+                android:id="@+id/display_task_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewTitle"
+                android:layout_below="@id/display_task_name"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/imageView"
+                android:layout_toRightOf="@id/display_task_alarm"
                 android:text="11/1/2019"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
-
         </RelativeLayout>
-
-
-    </android.support.v7.widget.CardView>
-
 </LinearLayout>

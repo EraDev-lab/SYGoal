@@ -23,7 +23,7 @@ import com.example.al_kahtani.sygoal.classes.SharedPref;
 
 import java.util.Locale;
 
-public class Setting extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
     SharedPref sharedpref;
     private Switch daynight,notyoff;
     private ImageView langsetting;
@@ -118,7 +118,7 @@ public class Setting extends AppCompatActivity {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(Setting.this, AboutActivity.class);
+                Intent it = new Intent(SettingActivity.this, AboutActivity.class);
                 startActivity(it);
             }
         });
@@ -136,7 +136,7 @@ public class Setting extends AppCompatActivity {
 
     }
     private Intent rateIntentForUrl(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?goalId=%s", url, getPackageName())));
         int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
         if (Build.VERSION.SDK_INT >= 21) {
             flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
@@ -148,16 +148,16 @@ public class Setting extends AppCompatActivity {
         return intent;
     } // rate us helper method
     public void restartApp () {
-        Intent i = new Intent(getApplicationContext(),Setting.class);
+        Intent i = new Intent(getApplicationContext(),SettingActivity.class);
         startActivity(i);
         finish();
     }
 
     private void showChangeLanguageDialog() {
-        SharedPreferences pref = getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         int position = pref.getInt("position", -1);
         final String[] listItme = {"English", "العربية"};
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Setting.this);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingActivity.this);
         mBuilder.setTitle(R.string.choose_anguage);
         mBuilder.setIcon(R.drawable.ic_settings_lang);
         mBuilder.setSingleChoiceItems(listItme, position, new DialogInterface.OnClickListener() {
@@ -185,7 +185,7 @@ public class Setting extends AppCompatActivity {
         Configuration configuration = new Configuration();
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-        SharedPreferences.Editor editor = getSharedPreferences("Setting", Context.MODE_PRIVATE).edit();// keep language in SharedPreferences
+        SharedPreferences.Editor editor = getSharedPreferences("SettingActivity", Context.MODE_PRIVATE).edit();// keep language in SharedPreferences
         editor.putString("My_Lang", lang);
         editor.putInt("position", pos);
         editor.apply();
@@ -193,7 +193,7 @@ public class Setting extends AppCompatActivity {
     }
 // pull language from SharedPreferences
     public void loadLocale() {
-        SharedPreferences pref = getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         String language = pref.getString("My_Lang", "");
         int position = pref.getInt("position", -1);
         setLocale(language,position);
