@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.al_kahtani.sygoal.classes.SharedPref;
-import com.example.al_kahtani.sygoal.fragments.Acheivement_fragment;
+import com.example.al_kahtani.sygoal.fragments.Achievement_fragment;
 import com.example.al_kahtani.sygoal.fragments.CurrentGoalsFragment;
 import com.example.al_kahtani.sygoal.fragments.MissedGoalsFragment;
 
@@ -31,7 +31,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
     FloatingActionButton fab;
 
     String updateGoal = "0";
-    int goalActivityNumber;
+    int goalActivityNumber = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +128,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
             case R.id.nav_missed_goals: selectedFragment = new MissedGoalsFragment();
             goalActivityNumber = 2;
             break;
-            case R.id.nav_achievements: selectedFragment = new Acheivement_fragment();
+            case R.id.nav_achievements: selectedFragment = new Achievement_fragment();
             goalActivityNumber = 3;
             break;
         }

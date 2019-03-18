@@ -21,18 +21,16 @@ import android.widget.PopupMenu;
 import com.example.al_kahtani.sygoal.DisplayTaskScreen;
 import com.example.al_kahtani.sygoal.GoalActivity;
 import com.example.al_kahtani.sygoal.R;
-import com.example.al_kahtani.sygoal.TaskActivity;
 import com.example.al_kahtani.sygoal.data.GoalAdapter;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class CurrentGoalsFragment extends Fragment {
 
     ListView currentListView;
-    View empty;
+    View emptyView;
 
     GoalAdapter adapter;
     HelperClass helper;
@@ -42,6 +40,7 @@ public class CurrentGoalsFragment extends Fragment {
     String updateTask = "0";
     int selectedItem;
     int i = 0;
+    int goalActivityNumber;
 
     @Nullable
     @Override
@@ -55,20 +54,13 @@ public class CurrentGoalsFragment extends Fragment {
     @Override
     public void onViewCreated(final View rootView, @Nullable Bundle savedInstanceState) {
         currentListView = rootView.findViewById(R.id.current_goal_list);
-        empty = rootView.findViewById(R.id.empty_view);
+        emptyView = rootView.findViewById(R.id.empty_view);
 
         helper =new HelperClass(rootView.getContext());
 
         try {
             //open Database to read info from it
             db = helper.getReadableDatabase();
-
-            String[] projection = {
-                    GoalContract._ID,
-                    GoalContract.Goal_Name,
-                    GoalContract.Goal_Type,
-                    GoalContract.Goal_Description
-            };
 
             final Cursor mcursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
 
@@ -85,7 +77,7 @@ public class CurrentGoalsFragment extends Fragment {
 
                 adapter = new GoalAdapter(rootView.getContext(), cursor);
 
-                currentListView.setEmptyView(empty);
+                currentListView.setEmptyView(emptyView);
 
                 currentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -108,9 +100,11 @@ public class CurrentGoalsFragment extends Fragment {
                                 if (selectedItem == R.id.update) {
                                     updateGoal = "1";
                                     updateTask = "1";
+                                    goalActivityNumber = 1;
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
+                                    intent.putExtra("goalActivity",goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
@@ -139,7 +133,7 @@ public class CurrentGoalsFragment extends Fragment {
 
                 adapter = new GoalAdapter(rootView.getContext(), cursor);
 
-                currentListView.setEmptyView(empty);
+                currentListView.setEmptyView(emptyView);
 
                 currentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -162,9 +156,12 @@ public class CurrentGoalsFragment extends Fragment {
                                 if (selectedItem == R.id.update) {
                                     updateGoal = "1";
                                     updateTask = "1";
+                                    goalActivityNumber = 1;
+
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
+                                    intent.putExtra("goalActivity",goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {

@@ -41,6 +41,8 @@ public class GoalActivity extends AppCompatActivity {
     String mGoalDescription;
     String updateGoal ="0";
     String updateTask = "0";
+    double percentage;
+    String maxDate;
 
     SharedPref sharedpref;
     HelperClass helper;
@@ -178,8 +180,12 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 }
                 else if (updateGoal.equals("0")){
                     Intent intent = new Intent(GoalActivity.this, TaskActivity.class);
-                    goalId = helper.insertGoal(mGoalName, selectedType, mGoalDescription,goalActivityNumber);
                     updateGoal ="0";
+                    percentage = 00.0;
+                    maxDate = "2019-3-17";
+
+                    goalId = helper.insertGoal(mGoalName, selectedType, mGoalDescription, maxDate, percentage, goalActivityNumber);
+
                     intent.putExtra("goalId", goalId);
                     //intent.putExtra("updateGoal", updateGoal);
                     intent.putExtra("updateTask", updateTask);

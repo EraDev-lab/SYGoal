@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -20,18 +22,38 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.example.al_kahtani.sygoal.classes.SharedPref;
+import com.example.al_kahtani.sygoal.data.GoalContract;
+import com.example.al_kahtani.sygoal.data.HelperClass;
+import com.example.al_kahtani.sygoal.data.TaskContract;
 
 import java.util.Locale;
 
 public class SettingActivity extends AppCompatActivity {
-    SharedPref sharedpref;
+
     private Switch daynight,notyoff;
     private ImageView langsetting;
     LinearLayout about, rate;
+
+    long taskId;
+    long taskGoalId;
+    int activityNumber;
+    int taskCount = 0;
+    String taskName;
+    String taskDate;
+    String taskAlarm;
+    String taskNotifyOn;
+    String taskCompletedState;
+    int goalActivityNumber = 1;
+
+    SharedPref sharedpref;
+    SQLiteDatabase db;
+    HelperClass helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 // select any mode day/night and save it in sharedpref
         sharedpref = new SharedPref(this);//load night mode setting
+        helper = new HelperClass(this);
 
 
         if(sharedpref.loadNightModeState()==true) {
@@ -92,6 +114,55 @@ public class SettingActivity extends AppCompatActivity {
                     editor1.apply();
 
                     // motwakel, for loop for activate notification will be here.
+
+                    //opening the database
+                    db = helper.getReadableDatabase();
+
+                    //sql query to fetch data
+                    String sqlQuery = "SELECT t." + TaskContract.Task_Id + ", "
+                            + "t." + TaskContract.Task_Goal_Id + ", "
+                            + "t." + TaskContract.Task_Name + ", "
+                            + "t." + TaskContract.Task_Date + ", "
+                            + "t." + TaskContract.Task_Notify_On + ", "
+                            + "t." + TaskContract.Task_Alarm + ", "
+                            + "t." + TaskContract.Task_CheckBox_Completed + ", "
+                            + "g." + GoalContract._ID + ", "
+                            + "g." + GoalContract.Goal_Activity
+                            + " FROM " + TaskContract.TABLE_NAME + " t "
+                            + " LEFT JOIN " + GoalContract.TABLE_NAME + " g "
+                            + " ON g." + GoalContract.Goal_Activity + " = " + goalActivityNumber;
+
+                    //store the fetching data from sqlQuery in the cursor
+                    Cursor cursor = db.rawQuery(sqlQuery,null);
+
+                    try {
+                        //fetching all date from the database
+                        while (cursor.moveToNext()) {
+                            taskId = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
+                            taskGoalId = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Goal_Id));
+                            activityNumber = cursor.getInt(cursor.getColumnIndex(GoalContract.Goal_Activity));
+                            /**
+                             * --------what you want is here Mr.Ahmed-----------
+                             * */
+                            taskName = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Name));
+                            taskDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
+                            taskAlarm = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Alarm));
+                            taskNotifyOn = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Notify_On));
+                            taskCompletedState = cursor.getString(cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed));
+
+                            //taskCount to know how many tasks we have in the Current Activity
+                            taskCount = taskCount + 1;
+                        }
+                        //make taskCount zero to know the real tasks count
+                        taskCount = 0;
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }finally {
+                        //close  the database and the cursor to avoid leaks
+                        db.close();
+                        cursor.close();
+                    }
+
                 }
             }
         });
@@ -200,3 +271,4 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 }
+

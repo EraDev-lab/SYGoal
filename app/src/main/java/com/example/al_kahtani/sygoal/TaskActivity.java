@@ -35,7 +35,6 @@ import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 import com.example.al_kahtani.sygoal.data.TaskAdapter;
 import com.example.al_kahtani.sygoal.data.TaskContract;
-import com.example.al_kahtani.sygoal.data.TaskGoalContract;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
 
 import java.text.ParseException;

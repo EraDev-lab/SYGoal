@@ -7,24 +7,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class HelperClass extends SQLiteOpenHelper {
 
-    SQLiteDatabase db;
-
+    //DataBase Name
     private static final String DATABASE_NAME = "goals.db";
-
-    private static final int DATABASE_VERSION = 6 ;
-
+    //DataBase Version
+    private static final int DATABASE_VERSION = 7;
+    SQLiteDatabase db;
+    //Create Goal Table Query
     String CREATE_GOAL_TABLE = "CREATE TABLE " + GoalContract.TABLE_NAME + " ("
             + GoalContract._ID + " INTEGER  PRIMARY KEY  AUTOINCREMENT , "
             + GoalContract.Goal_Name + " TEXT NOT NULL, "
             + GoalContract.Goal_Type + " INTEGER NOT NULL, "
+            + GoalContract.Goal_MaxDate + " DATE NOT NULL, "
+            + GoalContract.Goal_Percentage + " INTEGER NOT NULL, "
             + GoalContract.Goal_Activity + " INTEGER NOT NULL, "
             + GoalContract.Goal_Description + " TEXT NOT NULL);";
 
+    //Create Task Table Query
     String CREATE_TASK_TABLE = "CREATE TABLE " + TaskContract.TABLE_NAME + " ("
             + TaskContract.Task_Id + " INTEGER  PRIMARY KEY  AUTOINCREMENT , "
             + TaskContract.Task_Goal_Id + " INTEGER  NOT NULL, "
@@ -34,16 +34,20 @@ public class HelperClass extends SQLiteOpenHelper {
             + TaskContract.Task_Notify_On + " TIME NOT NULL, "
             + TaskContract.Task_CheckBox_Completed + " INTEGER NOT NULL);";
 
-
+    //Constructor
     public HelperClass(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //on Create DataBase it will Create out Table
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_GOAL_TABLE);
         db.execSQL(CREATE_TASK_TABLE);
     }
+
+    //On Upgrade DataBase it will Upgrade our dataBase on user clear the database..
+    //.. from the cache memory or on the DataBase Version updated.
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -54,75 +58,111 @@ public class HelperClass extends SQLiteOpenHelper {
 
     //-----------------------------------our Goal Operation-------------------------------------------------
 
-
-    final public long insertGoal(String name, int type, String description, int activity) {
-        // get writable database as we want to write data
+    //insert data into the Goal Table
+    final public long insertGoal(String name, int type, String description, String maxDate, double percentage, int activity) {
+        //get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        // `id` and `timestamp` will be inserted automatically.
-        // no need to add them
+
+        //Goal ID will be inserted automatically.
         values.put(GoalContract.Goal_Name, name);
+        values.put(GoalContract.Goal_MaxDate, maxDate);
+        values.put(GoalContract.Goal_Percentage, percentage);
         values.put(GoalContract.Goal_Activity, activity);
         values.put(GoalContract.Goal_Type, type);
         values.put(GoalContract.Goal_Description, description);
 
-        // insert row
+        //insert row
         long id = db.insert(GoalContract.TABLE_NAME, null, values);
 
-        // close db connection
+        //close database connection
         db.close();
 
-        // return newly inserted row id
+        //return newly inserted row id
         return id;
     }
 
 
-   
     //________________________________________________________________________________
+
+    //update data from the Goal Table
     public int updateGoal(long goalId, String name, int type, String description, int activity) {
+        //get writable database as we want to write data
         db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+
         values.put(GoalContract.Goal_Name, name);
         values.put(GoalContract.Goal_Type, type);
         values.put(GoalContract.Goal_Activity, activity);
         values.put(GoalContract.Goal_Description, description);
 
+        //the where clause (SELECT * FROM TABLE_NAME -WHERE- ..)
         String selection = GoalContract._ID + " = ?";
         String selectionArgs[] = new String[]{String.valueOf(goalId)};
-        // updating row
+
+        //updating row
+        return db.update(GoalContract.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    //other needed update method
+    public int updateGoal(long goalId, String maxDate, double percentage, int activity) {
+        //get writable database as we want to write data
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(GoalContract.Goal_MaxDate, maxDate);
+        values.put(GoalContract.Goal_Percentage, percentage);
+        values.put(GoalContract.Goal_Activity, activity);
+
+        //the where clause (SELECT * FROM TABLE_NAME -WHERE- ..)
+        String selection = GoalContract._ID + " = ?";
+        String selectionArgs[] = new String[]{String.valueOf(goalId)};
+
+        //updating row
         return db.update(GoalContract.TABLE_NAME, values, selection, selectionArgs);
     }
 
     //________________________________________________________________________________
-    public void deleteGoal( long id) {
+
+    //delete data from the Goal Table with condition
+    public void deleteGoal(long id) {
+        //get writable database as we want to write data
         db = this.getWritableDatabase();
 
+        //deleting data where id = ~~
         db.delete(GoalContract.TABLE_NAME, GoalContract._ID + " = ?",
                 new String[]{String.valueOf(id)});
 
+        //delete the Goal Tasks too to give a free Memory resources
         deleteWithTask(id);
+        //close the database connection
         db.close();
     }
-    public void deleteWithTask(long id){
+
+    public void deleteWithTask(long id) {
+        //getting all the Tasks of the specific deleting Goal
         String selectQuery = "SELECT  * FROM " + TaskContract.TABLE_NAME + " Where " + TaskContract.Task_Goal_Id
                 + " = " + id;
-
+        //get writable database as we want to write data
         db = this.getWritableDatabase();
+        //get all of the specifics Tasks in the cursor
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
+        //looping through all Task rows
         if (cursor.moveToFirst()) {
             do {
-                int i =cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
-                long currentId = Long.valueOf(i);
+                //getting the Task ID to delete it from the DataBase
+                long currentId = cursor.getLong(cursor.getColumnIndex(TaskContract.Task_Id));
 
+                //then call the delete task method to delete it
                 deleteTask(currentId);
             } while (cursor.moveToNext());
         }
 
-        // close db connection
+        //close database connection
         db.close();
     }
 
@@ -131,12 +171,11 @@ public class HelperClass extends SQLiteOpenHelper {
     //--------------------------------------------------------------------------------------------------------
 
     final public long insertTask(long taskGoalId, String name, String date, String notifyOn, int alarm, int checkBoxCompleted) {
-        // get writable database as we want to write data
+        //get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        // `id` and `timestamp` will be inserted automatically.
-        // no need to add them
+        //Task ID will be inserted automatically.
 
         values.put(TaskContract.Task_Goal_Id, taskGoalId);
         values.put(TaskContract.Task_Name, name);
@@ -145,18 +184,21 @@ public class HelperClass extends SQLiteOpenHelper {
         values.put(TaskContract.Task_Alarm, alarm);
         values.put(TaskContract.Task_CheckBox_Completed, checkBoxCompleted);
 
-        // insert row
+        //insert row
         long id = db.insert(TaskContract.TABLE_NAME, null, values);
 
-        // close db connection
+        //close database connection
         db.close();
 
-        // return newly inserted row id
+        //return newly inserted row id
         return id;
     }
 
     //________________________________________________________________________________
+
+    //update data from the Task Table
     public int updateTask(long taskId, String name, String date, String notifyOn, int alarm, int checkBox) {
+        //get writable database as we want to write data
         db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -166,19 +208,26 @@ public class HelperClass extends SQLiteOpenHelper {
         values.put(TaskContract.Task_Alarm, alarm);
         values.put(TaskContract.Task_CheckBox_Completed, checkBox);
 
+        //the where clause (SELECT * FROM TABLE_NAME -WHERE- ..)
         String selection = TaskContract.Task_Id + " = ?";
         String selectionArgs[] = new String[]{String.valueOf(taskId)};
-        // updating row
+
+        //updating row
         return db.update(TaskContract.TABLE_NAME, values, selection, selectionArgs);
     }
 
     //________________________________________________________________________________
+
+    //delete data from the Task Table
     public void deleteTask(long id) {
+        //get writable database as we want to write data
         db = this.getWritableDatabase();
 
+        //deleting data where id = ~~
         db.delete(TaskContract.TABLE_NAME, TaskContract.Task_Id + " = ?",
                 new String[]{String.valueOf(id)});
+
+        //close the database connection
         db.close();
     }
-
 }

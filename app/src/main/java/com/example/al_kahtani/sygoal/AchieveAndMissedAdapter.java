@@ -14,11 +14,11 @@ import com.example.al_kahtani.sygoal.data.GoalAdapter;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 
-public class AcheiveAdapter extends CursorAdapter {
+public class AchieveAndMissedAdapter extends CursorAdapter {
     HelperClass helperClass;
     SQLiteDatabase db;
 
-    public AcheiveAdapter(Context context, Cursor c) {
+    public AchieveAndMissedAdapter(Context context, Cursor c) {
         super(context, c, 0);
     }
 

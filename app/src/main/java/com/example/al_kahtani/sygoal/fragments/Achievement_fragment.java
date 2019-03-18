@@ -15,34 +15,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
-import com.example.al_kahtani.sygoal.AcheiveAdapter;
+import com.example.al_kahtani.sygoal.AchieveAndMissedAdapter;
 import com.example.al_kahtani.sygoal.DisplayTaskScreen;
 import com.example.al_kahtani.sygoal.GoalActivity;
 import com.example.al_kahtani.sygoal.R;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
-import com.example.al_kahtani.sygoal.data.TaskContract;
 
 import java.util.Locale;
 
-public class Acheivement_fragment extends Fragment {
+public class Achievement_fragment extends Fragment {
 
-    ListView lv;
+    ListView achieveListView;
+    ImageView emptyView;
 
     String updateGoal;
     String updateTask = "0";
     int selectedItem;
-    int i = 0;
+    int countedData = 0;
+    int goalActivityNumber;
 
     HelperClass helper;
-    AcheiveAdapter myAdapter;
+    AchieveAndMissedAdapter myAdapter;
     SQLiteDatabase db;
 
-    public Acheivement_fragment() {
-        // Required empty public constructor
+    public Achievement_fragment() {
+        // Required emptyView public constructor
     }
 
     @Override
@@ -51,28 +53,21 @@ public class Acheivement_fragment extends Fragment {
         loadLocale();//load languge setting
         final View view = inflater.inflate(R.layout.achievements_fragment, container, false);
 
-        // Find the {@link RecyclerView} object in the view hierarchy of the {@link achievements_fragment}.
-        // There should be a {@link RecyclerView} with the view ID called recyclerViewAchi.
-        lv = view.findViewById(R.id.list_view_achievement);
-
+        // Find the {@link ListView} object in the view hierarchy of the {@link achievements_fragment}.
+        // There should be a {@link ListView} with the view ID called list_view_achievement.
+        achieveListView = view.findViewById(R.id.list_view_achievement);
+        emptyView = view.findViewById(R.id.empty_view);
         return view;
     }
 
     @Override
     public void onViewCreated(final View rootView, @Nullable Bundle savedInstanceState) {
-
+        //instantiate object from HelperClass to access to it method
         helper = new HelperClass(rootView.getContext());
 
         try {
             //open Database to read info from it
             db = helper.getReadableDatabase();
-
-            String[] projection = {
-                    GoalContract._ID,
-                    GoalContract.Goal_Name,
-                    GoalContract.Goal_Type,
-                    GoalContract.Goal_Description
-            };
 
             String query = "SELECT * FROM " + GoalContract.TABLE_NAME;
 
@@ -80,18 +75,19 @@ public class Acheivement_fragment extends Fragment {
 
             if (mcursor.moveToFirst()) {
                 while (mcursor.moveToNext()) {
-                    i = i + 1;
+                    countedData = countedData + 1;
                 }
                 db.close();
                 mcursor.close();
             }
             db = helper.getReadableDatabase();
-            if (i == 0) {
-                final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
+            if (countedData == 0) {
+                final Cursor cursor = db.rawQuery(" SELECT * FROM " + GoalContract.TABLE_NAME, null);
 
-                myAdapter = new AcheiveAdapter(rootView.getContext(), cursor);
+                myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
+                achieveListView.setEmptyView(emptyView);
 
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                achieveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
@@ -99,7 +95,7 @@ public class Acheivement_fragment extends Fragment {
                         startActivity(i);
                     }
                 });
-                lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                achieveListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
 
@@ -112,9 +108,12 @@ public class Acheivement_fragment extends Fragment {
                                 if (selectedItem == R.id.update) {
                                     updateGoal = "1";
                                     updateTask = "1";
+                                    goalActivityNumber = 3;
+
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
+                                    intent.putExtra("goalActivity",goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
@@ -131,21 +130,24 @@ public class Acheivement_fragment extends Fragment {
                         return true;
                     }
                 });
-                lv.setAdapter(myAdapter);
+                achieveListView.setAdapter(myAdapter);
             }
             /**
              * --------------------------------------------------------------------
              * */
             else {
 
-                final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME + " WHERE "
-                        + GoalContract.Goal_Activity + " = " + 3 , null);
+                String myQuery = " SELECT * FROM " + GoalContract.TABLE_NAME
+                        + " WHERE " + GoalContract.Goal_Activity + " = " + 3;
+                        //+ "WHERE (SELECT" + " MAX(t." + TaskContract.Task_Date + ") < " + "date('now')"
+                        //+ "OR MAX(t." + TaskContract.Task_Date + ") = " + "date('now'))";
 
-                myAdapter = new AcheiveAdapter(rootView.getContext(), cursor);
+                final Cursor cursor = db.rawQuery(myQuery, null);
 
+                myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
+                achieveListView.setEmptyView(emptyView);
 
-
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                achieveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
@@ -153,7 +155,7 @@ public class Acheivement_fragment extends Fragment {
                         startActivity(i);
                     }
                 });
-                lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                achieveListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
 
@@ -166,9 +168,12 @@ public class Acheivement_fragment extends Fragment {
                                 if (selectedItem == R.id.update) {
                                     updateGoal = "1";
                                     updateTask = "1";
+                                    goalActivityNumber = 3;
+
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
+                                    intent.putExtra("goalActivity",goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
@@ -185,7 +190,7 @@ public class Acheivement_fragment extends Fragment {
                         return true;
                     }
                 });
-                lv.setAdapter(myAdapter);
+                achieveListView.setAdapter(myAdapter);
             }
         }
         finally {
