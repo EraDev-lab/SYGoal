@@ -39,7 +39,7 @@ public class CurrentGoalsFragment extends Fragment {
     String updateGoal = "0";
     String updateTask = "0";
     int selectedItem;
-    int i = 0;
+    int countedData = 0;
     int goalActivityNumber;
 
     @Nullable
@@ -62,17 +62,29 @@ public class CurrentGoalsFragment extends Fragment {
             //open Database to read info from it
             db = helper.getReadableDatabase();
 
-            final Cursor mcursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
+            String[] projection ={GoalContract._ID,
+                    GoalContract.Goal_Name,
+                    GoalContract.Goal_Type,
+                    GoalContract.Goal_Activity,
+                    GoalContract.Goal_Percentage,
+                    GoalContract.Goal_MaxDate,
+                    GoalContract.Goal_Description};
 
-            if (mcursor.moveToFirst()) {
+            final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
+                    projection,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+
                 while (mcursor.moveToNext()) {
-                    i = i + 1;
+                    countedData = countedData + 1;
                 }
-                db.close();
                 mcursor.close();
-            }
-            db = helper.getReadableDatabase();
-            if (i == 0) {
+
+            if (countedData == 0) {
                 final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
 
                 adapter = new GoalAdapter(rootView.getContext(), cursor);

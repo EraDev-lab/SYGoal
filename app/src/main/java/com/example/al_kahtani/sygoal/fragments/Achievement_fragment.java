@@ -69,18 +69,28 @@ public class Achievement_fragment extends Fragment {
             //open Database to read info from it
             db = helper.getReadableDatabase();
 
-            String query = "SELECT * FROM " + GoalContract.TABLE_NAME;
+            String[] projection ={GoalContract._ID,
+                    GoalContract.Goal_Name,
+                    GoalContract.Goal_Type,
+                    GoalContract.Goal_Activity,
+                    GoalContract.Goal_Percentage,
+                    GoalContract.Goal_MaxDate,
+                    GoalContract.Goal_Description};
 
-            final Cursor mcursor = db.rawQuery(query, null);
+            final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
+                    projection,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
 
-            if (mcursor.moveToFirst()) {
                 while (mcursor.moveToNext()) {
                     countedData = countedData + 1;
                 }
-                db.close();
                 mcursor.close();
-            }
-            db = helper.getReadableDatabase();
+
             if (countedData == 0) {
                 final Cursor cursor = db.rawQuery(" SELECT * FROM " + GoalContract.TABLE_NAME, null);
 

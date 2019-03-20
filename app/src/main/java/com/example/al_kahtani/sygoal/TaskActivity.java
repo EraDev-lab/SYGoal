@@ -300,6 +300,24 @@ public class TaskActivity extends AppCompatActivity {
                 startDate = taskDate.getText().toString();
                 startTime = taskNotifyOn.getText().toString();
 
+                if (mTaskName.isEmpty() || startDate.isEmpty() || startTime.isEmpty()) {
+                    if (mTaskName.isEmpty()) {
+                        taskName.setError(getString(R.string.task_is_required));
+                        taskName.requestFocus();
+                    }
+
+                    if (startDate.isEmpty()) {
+                        taskDate.setError(getString(R.string.date_is_required));
+                        taskDate.requestFocus();
+                    }
+
+                    if (startTime.isEmpty()) {
+                        taskNotifyOn.setError(getString(R.string.time_is_required));
+                        taskNotifyOn.requestFocus();
+                    }
+                return;
+                }
+
                 //store the variable of alarm
                 if (sTaskAlarm.equals("Off")){
                     mTaskAlarm = 0;
@@ -363,16 +381,6 @@ public class TaskActivity extends AppCompatActivity {
                 }
                 //alarm.set(AlarmManager.RTC_WAKEUP, alerttime,alarmIntent);
                 //   PendingIntent.getBroadcast(ahmed.this, 1,intent, PendingIntent.FLAG_UPDATE_CURRENT));
-
-
-
-                if (mTaskName.isEmpty()) {
-                    taskName.setError(getString(R.string.task_is_required));
-                    taskName.requestFocus();
-                    return;
-                }
-
-
 
                 if (startDate.equals("") || startTime.equals("") || mTaskName.equals("")){
                     Toast.makeText(TaskActivity.this, "Complete all of your info", Toast.LENGTH_SHORT).show();

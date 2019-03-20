@@ -35,7 +35,7 @@ public class MissedGoalsFragment extends Fragment {
     String updateGoal;
     String updateTask = "0";
     int selectedItem;
-    int i = 0;
+    int countedData = 0;
     int goalActivityNumber;
 
     HelperClass helper;
@@ -69,23 +69,30 @@ public class MissedGoalsFragment extends Fragment {
             //open Database to read info from it
             db = helper.getReadableDatabase();
 
-            String[] projection = {
-                    GoalContract._ID,
+            String[] projection ={GoalContract._ID,
                     GoalContract.Goal_Name,
                     GoalContract.Goal_Type,
-                    GoalContract.Goal_Description
-            };
-            final Cursor mcursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
+                    GoalContract.Goal_Activity,
+                    GoalContract.Goal_Percentage,
+                    GoalContract.Goal_MaxDate,
+                    GoalContract.Goal_Description};
 
-            if (mcursor.moveToFirst()) {
-                while (mcursor.moveToNext()) {
-                    i = i + 1;
-                }
-                db.close();
-                mcursor.close();
+            final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
+                    projection,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+
+            while (mcursor.moveToNext()) {
+                countedData = countedData + 1;
             }
+            mcursor.close();
+
             db = helper.getReadableDatabase();
-            if (i == 0) {
+            if (countedData == 0) {
                 final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
 
                 myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);

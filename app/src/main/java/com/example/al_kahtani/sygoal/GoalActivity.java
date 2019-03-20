@@ -174,9 +174,17 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
              //   jobRadioButton =  findViewById(selectedId);
 
                 //Toast.makeText(GoalActivity.this, jobRadioButton.getText(), Toast.LENGTH_SHORT).show();
-                if (mGoalName.equals("") || mGoalDescription.equals("")){
-                    //goalDescription is not require, only goalName
-                    Toast.makeText(GoalActivity.this, "complete your Goal Name", Toast.LENGTH_SHORT).show();
+                if (mGoalName.isEmpty() || mGoalDescription.isEmpty()) {
+                    if (mGoalName.isEmpty()) {
+                        goalName.setError(getString(R.string.goal_is_required));
+                        goalName.requestFocus();
+                    }
+
+                    if (mGoalDescription.isEmpty()) {
+                        goalDescription.setError(getString(R.string.description_is_required));
+                        goalDescription.requestFocus();
+                    }
+                    return;
                 }
                 else if (updateGoal.equals("0")){
                     Intent intent = new Intent(GoalActivity.this, TaskActivity.class);

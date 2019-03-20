@@ -34,6 +34,8 @@
     <string name="task_is_required">يجب اعطاء اسم للمهمة</string>
     <string name="date_is_required">يجب ادخال الناريخ</string>
     <string name="time_is_required">يجب ادخال الوقت</string>
+    <string name="goal_is_required">يجب ادخال الهدف</string>
+    <string name="description_is_required">يجب ادخال التوصيف</string>
 
     <string-array name="repeating_array">
         <item>Off</item>

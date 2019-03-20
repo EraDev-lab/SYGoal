@@ -31,6 +31,8 @@
     <string name="Goal_Name">Goal Name</string>
     <string name="choose_anguage">Choose language</string>
     <string name="task_is_required">Task is required</string>
+    <string name="goal_is_required">Goal is required</string>
+    <string name="description_is_required">Description is required</string>
     <string name="date_is_required">Date is required</string>
     <string name="time_is_required">Time is required</string>
 
