@@ -4,19 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <ListView
-        android:id="@+id/current_goals_lv"
+        android:id="@+id/current_goal_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name_current"
-        android:layout_marginTop="8dp"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/emptyview"
+        android:scaleType="center"
         />
-
 </LinearLayout>

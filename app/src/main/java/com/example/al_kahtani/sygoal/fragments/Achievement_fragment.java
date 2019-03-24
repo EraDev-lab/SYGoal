@@ -1,4 +1,5 @@
 package com.example.al_kahtani.sygoal.fragments;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,9 +28,9 @@ import com.example.al_kahtani.sygoal.data.HelperClass;
 
 import java.util.Locale;
 
-public class MissedGoalsFragment extends Fragment {
+public class Achievement_fragment extends Fragment {
 
-    ListView missedListView;
+    ListView achieveListView;
     ImageView emptyView;
 
     String updateGoal;
@@ -42,7 +43,7 @@ public class MissedGoalsFragment extends Fragment {
     AchieveAndMissedAdapter myAdapter;
     SQLiteDatabase db;
 
-    public MissedGoalsFragment() {
+    public Achievement_fragment() {
         // Required emptyView public constructor
     }
 
@@ -50,19 +51,18 @@ public class MissedGoalsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         loadLocale();//load languge setting
-        final View view = inflater.inflate(R.layout.missed_goals_fragments, container, false);
+        final View view = inflater.inflate(R.layout.achievements_fragment, container, false);
 
-        // Find the {@link RecyclerView} object in the view hierarchy of the {@link achievements_fragment}.
-        // There should be a {@link RecyclerView} with the view ID called recyclerViewAchi.
-        missedListView = view.findViewById(R.id.list_view_missed);
+        // Find the {@link ListView} object in the view hierarchy of the {@link achievements_fragment}.
+        // There should be a {@link ListView} with the view ID called list_view_achievement.
+        achieveListView = view.findViewById(R.id.list_view_achievement);
         emptyView = view.findViewById(R.id.empty_view);
-
         return view;
     }
 
     @Override
     public void onViewCreated(final View rootView, @Nullable Bundle savedInstanceState) {
-
+        //instantiate object from HelperClass to access to it method
         helper = new HelperClass(rootView.getContext());
 
         try {
@@ -86,19 +86,18 @@ public class MissedGoalsFragment extends Fragment {
                     null,
                     null);
 
-            while (mcursor.moveToNext()) {
-                countedData = countedData + 1;
-            }
-            mcursor.close();
+                while (mcursor.moveToNext()) {
+                    countedData = countedData + 1;
+                }
+                mcursor.close();
 
-            db = helper.getReadableDatabase();
             if (countedData == 0) {
-                final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
+                final Cursor cursor = db.rawQuery(" SELECT * FROM " + GoalContract.TABLE_NAME, null);
 
                 myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
-                missedListView.setEmptyView(emptyView);
+                achieveListView.setEmptyView(emptyView);
 
-                missedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                achieveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
@@ -106,7 +105,7 @@ public class MissedGoalsFragment extends Fragment {
                         startActivity(i);
                     }
                 });
-                missedListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                achieveListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
 
@@ -119,7 +118,7 @@ public class MissedGoalsFragment extends Fragment {
                                 if (selectedItem == R.id.update) {
                                     updateGoal = "1";
                                     updateTask = "1";
-                                    goalActivityNumber = 2;
+                                    goalActivityNumber = 3;
 
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
@@ -141,20 +140,24 @@ public class MissedGoalsFragment extends Fragment {
                         return true;
                     }
                 });
-                missedListView.setAdapter(myAdapter);
+                achieveListView.setAdapter(myAdapter);
             }
             /**
              * --------------------------------------------------------------------
              * */
             else {
 
-                final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME + " WHERE "
-                        + GoalContract.Goal_Activity + " = " + 2 , null);
+                String myQuery = " SELECT * FROM " + GoalContract.TABLE_NAME
+                        + " WHERE " + GoalContract.Goal_Activity + " = " + 3;
+                        //+ "WHERE (SELECT" + " MAX(t." + TaskContract.Task_Date + ") < " + "date('now')"
+                        //+ "OR MAX(t." + TaskContract.Task_Date + ") = " + "date('now'))";
+
+                final Cursor cursor = db.rawQuery(myQuery, null);
 
                 myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
-                missedListView.setEmptyView(emptyView);
+                achieveListView.setEmptyView(emptyView);
 
-                missedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                achieveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
@@ -162,7 +165,7 @@ public class MissedGoalsFragment extends Fragment {
                         startActivity(i);
                     }
                 });
-                missedListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                achieveListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
 
@@ -175,7 +178,7 @@ public class MissedGoalsFragment extends Fragment {
                                 if (selectedItem == R.id.update) {
                                     updateGoal = "1";
                                     updateTask = "1";
-                                    goalActivityNumber = 2;
+                                    goalActivityNumber = 3;
 
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
@@ -197,7 +200,7 @@ public class MissedGoalsFragment extends Fragment {
                         return true;
                     }
                 });
-                missedListView.setAdapter(myAdapter);
+                achieveListView.setAdapter(myAdapter);
             }
         }
         finally {
@@ -205,7 +208,9 @@ public class MissedGoalsFragment extends Fragment {
         }
     }
 
-        // languge setting
+
+
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -223,4 +228,5 @@ public class MissedGoalsFragment extends Fragment {
         String language = pref.getString("My_Lang", "");
         setLocale(language);
     }
+
 }

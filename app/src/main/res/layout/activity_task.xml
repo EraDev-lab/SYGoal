@@ -12,10 +12,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tasks"
+        android:text="@string/Tasks"
         android:layout_marginTop="30dp"
         android:id="@+id/tasks"
         />
+    <LinearLayout
+        android:id="@+id/one_lin"
+        android:layout_below="@id/tasks"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/one"
         android:layout_width="wrap_content"
@@ -23,132 +29,160 @@
         android:text="1."
         android:textSize="15sp"
         android:layout_marginRight="5dp"
-        android:layout_below="@id/tasks"
-        android:layout_marginTop="15dp"/>
+       />
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:layout_toRightOf="@id/one"
-        android:layout_below="@id/tasks"
-        android:id="@+id/edit_tasks"
+        android:id="@+id/task_name"
 
         />
+    </LinearLayout>
 
+    <LinearLayout
+
+        android:id="@+id/date_lin"
+        android:layout_below="@id/one_lin"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date"
+        android:layout_margin="5dp"
+        android:text="@string/Date"
         android:textSize="15sp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/one"
         android:id="@+id/date"
         />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:layout_below="@id/one"
-        android:layout_toRightOf="@id/date"
-        android:layout_marginTop="10dp"
-        android:id="@+id/edit_date"
+        android:layout_margin="5dp"
+        android:id="@+id/task_date"
         />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/edit_tasks"
-        android:layout_toRightOf="@id/edit_date"
+        android:layout_margin="5dp"
+        android:layout_below="@id/task_name"
+        android:layout_toRightOf="@id/task_date"
         android:id="@+id/logo_date"
         android:src="@drawable/ic_date" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/notify_on_lin"
+        android:layout_below="@id/date_lin"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notify on"
-        android:layout_marginRight="10dp"
+        android:text="@string/Notify_on"
         android:textSize="15sp"
-        android:layout_marginLeft="40dp"
-        android:layout_below="@id/date"
-        android:layout_marginTop="30dp"
         android:id="@+id/notify_on"
-
+        android:layout_margin="5dp"
         />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:layout_below="@id/date"
-        android:layout_toRightOf="@id/notify_on"
-        android:layout_marginTop="10dp"
-        android:id="@+id/edit_notify"
-
+        android:id="@+id/task_notify_on"
+        android:layout_margin="5dp"
         />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logo_date"
-        android:layout_toRightOf="@id/edit_notify"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="0dp"
+        android:layout_margin="5dp"
         android:src="@drawable/ic_access_time"
         android:id="@+id/logo_time"/>
+    </LinearLayout>
+    <LinearLayout
+
+        android:id="@+id/alarm_lin"
+        android:layout_below="@id/notify_on_lin"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notify_on"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="60dp"
-        android:text="Alarm"
+        android:text="@string/Alarm"
         android:textSize="15sp"
-
+        android:layout_margin="5dp"
         />
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/alarm"
-        android:layout_below="@id/notify_on"
-        android:layout_marginTop="100dp"
-        android:id="@+id/Spinner"/>
+        android:layout_margin="5dp"
+        android:id="@+id/task_alarm"/>
+    </LinearLayout>
+    <LinearLayout
 
+        android:id="@+id/complet_lin"
+        android:layout_below="@id/alarm_lin"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/task_alarm"
+    android:text="@string/Completed_State"
+    android:layout_margin="5dp"
+    android:id="@+id/complete_text_view"/>
 
-
-    <Button
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:id="@+id/checkbox_completed"
+        android:layout_margin="5dp"
+        />
+    </LinearLayout>
+    <LinearLayout
+
+        android:id="@+id/Button_lin"
+        android:layout_below="@id/complet_lin"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/Delete"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="50dp"
-        android:id="@+id/delete"
+        android:id="@+id/delete_task"
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/Save"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_toRightOf="@id/delete"
-        android:id="@+id/save"
+        android:layout_toRightOf="@id/delete_task"
+        android:id="@+id/save_task"
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+
         android:layout_height="wrap_content"
-        android:text="cancle"
+        android:text="@string/cancel"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_toRightOf="@id/save"
-        android:id="@+id/cancle"/>
+        android:layout_toRightOf="@id/save_task"
+        android:id="@+id/cancel_task"/>
+    </LinearLayout>
+
 </RelativeLayout>

@@ -34,8 +34,30 @@
     <string name="task_is_required">يجب اعطاء اسم للمهمة</string>
     <string name="date_is_required">يجب ادخال الناريخ</string>
     <string name="time_is_required">يجب ادخال الوقت</string>
+    <string name="goal_is_required">يجب ادخال الهدف</string>
+    <string name="description_is_required">يجب ادخال التوصيف</string>
+
+
+    <string name="Tasks">المهام</string>
+    <string name="The_Goal">الهدف</string>
+    <string name="Goal_Type">نوع الهدف</string>
+    <string name="Description">الوصف</string>
+    <string name="Job">شغل</string>
+    <string name="Housework">عمل منزلى</string>
+    <string name="Education">تعليم</string>
+    <string name="Exercise">تمارين</string>
+    <string name="Social">اجتماعى</string>
+    <string name="Other">اخر</string>
+    <string name="Delete">مسح</string>
+    <string name="Save">حفظ</string>
+    <string name="Date">التاريخ</string>
+    <string name="Notify_on">الساعة</string>
+    <string name="Alarm">التنبية</string>
+    <string name="Completed_State">تم الاكتمال</string>
+    <string name="cancel">الغاء</string>
 
     <string-array name="repeating_array">
+        <item>Off</item>
         <item>Once</item>
         <item>Daily</item>
         <item>Weakly</item>

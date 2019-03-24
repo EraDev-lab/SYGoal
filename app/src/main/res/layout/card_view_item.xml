@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+   - This represent the achievement and missed Goal item -->
+
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,11 +23,10 @@
      android:orientation="vertical">
 
   <ImageView
-      android:id="@+id/goal_img"
+      android:id="@+id/display_recycle_goal_type"
       android:layout_width="match_parent"
       android:layout_height="138dp"
-      android:background="#9ed8ff"
-      android:layout_margin="4dp"
+       android:layout_margin="4dp"
       android:scaleType="centerCrop"/>
 <View
     android:layout_width="150dp"
@@ -34,7 +36,7 @@
     android:layout_gravity="center"/>
 
   <TextView
-      android:id="@+id/goal_textview"
+      android:id="@+id/display_recycle_goal_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"

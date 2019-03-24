@@ -19,15 +19,20 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.al_kahtani.sygoal.classes.SharedPref;
-import com.example.al_kahtani.sygoal.fragments.Acheivement_fragment;
+import com.example.al_kahtani.sygoal.fragments.Achievement_fragment;
 import com.example.al_kahtani.sygoal.fragments.CurrentGoalsFragment;
 import com.example.al_kahtani.sygoal.fragments.MissedGoalsFragment;
 
 import java.util.Locale;
 
-public class GoalsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class BottomNavigationViewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
     SharedPref sharedpref;
     FloatingActionButton fab;
+
+    String updateGoal = "0";
+    int goalActivityNumber = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedpref = new SharedPref(this);//load night mode setting
@@ -36,7 +41,7 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         }else{  setTheme(R.style.AppTheme);}
         loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goals);
+        setContentView(R.layout.bottom_navigation_view);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -45,10 +50,14 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new CurrentGoalsFragment()).commit();
 
         fab = findViewById(R.id.fabm);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GoalsActivity.this,GoalActivity.class));
+                 Intent intent = new Intent(BottomNavigationViewActivity.this,GoalActivity.class);
+                 intent.putExtra("updateGoal", updateGoal);
+                 intent.putExtra("goalActivity", goalActivityNumber);
+                 startActivity(intent);
             }
         });
     }
@@ -58,7 +67,7 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(GoalsActivity.this, Setting.class);
+            Intent intent = new Intent(BottomNavigationViewActivity.this, SettingActivity.class);
          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
            finish();
             startActivity(intent);
@@ -66,7 +75,7 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         }
         else if (id == R.id.action_home) {
 
-            Intent intent = new Intent(GoalsActivity.this, Home_Screen.class);
+            Intent intent = new Intent(BottomNavigationViewActivity.this, Home_Screen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
          finish();
             startActivity(intent);
@@ -91,7 +100,7 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         return super.onOptionsItemSelected(item);
     }
     private Intent rateIntentForUrl(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?goalId=%s", url, getPackageName())));
         int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
         if (Build.VERSION.SDK_INT >= 21) {
             flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
@@ -114,10 +123,13 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         Fragment selectedFragment = null;
         switch (item.getItemId()){
             case R.id.nav_current_goal: selectedFragment = new CurrentGoalsFragment();
+            goalActivityNumber = 1;
             break;
             case R.id.nav_missed_goals: selectedFragment = new MissedGoalsFragment();
+            goalActivityNumber = 2;
             break;
-            case R.id.nav_achievements: selectedFragment = new Acheivement_fragment();
+            case R.id.nav_achievements: selectedFragment = new Achievement_fragment();
+            goalActivityNumber = 3;
             break;
         }
 
@@ -133,14 +145,14 @@ public class GoalsActivity extends AppCompatActivity implements BottomNavigation
         Configuration configuration = new Configuration();
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-        SharedPreferences.Editor editor = getSharedPreferences("Setting", Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences("SettingActivity", Context.MODE_PRIVATE).edit();
         editor.putString("My_Lang", lang);
         editor.apply();
 
     }
 
     public void loadLocale() {
-        SharedPreferences pref = getSharedPreferences("Setting", Activity.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         String language = pref.getString("My_Lang", "");
         setLocale(language);
     }

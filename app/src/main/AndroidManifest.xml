@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -18,7 +18,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".GoalsActivity"
+            android:name=".BottomNavigationViewActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,9 +29,9 @@
         <activity
             android:name=".AboutActivity"
             android:label="About"
-            android:parentActivityName=".GoalsActivity" />
+            android:parentActivityName=".BottomNavigationViewActivity" />
         <activity
-            android:name=".Setting"
+            android:name=".SettingActivity"
             android:label="Setting" />
         <activity android:name=".GoalActivity" />
         <activity android:name=".TaskActivity" />
@@ -40,7 +40,7 @@
 
         <activity
             android:name=".DisplayTaskScreen"
-            android:parentActivityName=".GoalsActivity"></activity>
+            android:parentActivityName=".BottomNavigationViewActivity"></activity>
         <activity android:name=".WebActivity"></activity>
     </application>
 
