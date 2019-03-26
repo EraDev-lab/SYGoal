@@ -12,7 +12,7 @@ public class HelperClass extends SQLiteOpenHelper {
     //DataBase Name
     private static final String DATABASE_NAME = "goals.db";
     //DataBase Version
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     SQLiteDatabase db;
     //Create Goal Table Query
     String CREATE_GOAL_TABLE = "CREATE TABLE " + GoalContract.TABLE_NAME + " ("
@@ -32,6 +32,7 @@ public class HelperClass extends SQLiteOpenHelper {
             + TaskContract.Task_Date + " DATE NOT NULL, "
             + TaskContract.Task_Alarm + " INTEGER NOT NULL, "
             + TaskContract.Task_Notify_On + " TIME NOT NULL, "
+            + TaskContract.Task_NotifyState + " INTEGER NOT NULL, "
             + TaskContract.Task_CheckBox_Completed + " INTEGER NOT NULL);";
 
     //Constructor
@@ -170,7 +171,7 @@ public class HelperClass extends SQLiteOpenHelper {
     //-------------------------------------our Task operation-------------------------------------------------
     //--------------------------------------------------------------------------------------------------------
 
-    final public long insertTask(long taskGoalId, String name, String date, String notifyOn, int alarm, int checkBoxCompleted) {
+    final public long insertTask(long taskGoalId, String name, String date, String notifyOn, int alarm, int checkBoxCompleted, int notifyState) {
         //get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -179,6 +180,7 @@ public class HelperClass extends SQLiteOpenHelper {
 
         values.put(TaskContract.Task_Goal_Id, taskGoalId);
         values.put(TaskContract.Task_Name, name);
+        values.put(TaskContract.Task_NotifyState, notifyState);
         values.put(TaskContract.Task_Date, date);
         values.put(TaskContract.Task_Notify_On, notifyOn);
         values.put(TaskContract.Task_Alarm, alarm);
@@ -197,7 +199,7 @@ public class HelperClass extends SQLiteOpenHelper {
     //________________________________________________________________________________
 
     //update data from the Task Table
-    public int updateTask(long taskId, String name, String date, String notifyOn, int alarm, int checkBox) {
+    public int updateTask(long taskId, String name, String date, String notifyOn, int alarm, int checkBox, int notifyState) {
         //get writable database as we want to write data
         db = this.getWritableDatabase();
 
@@ -205,6 +207,7 @@ public class HelperClass extends SQLiteOpenHelper {
         values.put(TaskContract.Task_Name, name);
         values.put(TaskContract.Task_Date, date);
         values.put(TaskContract.Task_Notify_On, notifyOn);
+        values.put(TaskContract.Task_NotifyState, notifyState);
         values.put(TaskContract.Task_Alarm, alarm);
         values.put(TaskContract.Task_CheckBox_Completed, checkBox);
 

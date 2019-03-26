@@ -51,6 +51,8 @@ public class SettingActivity extends AppCompatActivity {
     String taskCompletedState;
     int goalActivityNumber = 1;
     private int notificationId = 1;
+    int mNotify;
+
     SharedPref sharedpref;
     SQLiteDatabase db;
     HelperClass helper;
@@ -129,6 +131,7 @@ public class SettingActivity extends AppCompatActivity {
                             + "t." + TaskContract.Task_Name + ", "
                             + "t." + TaskContract.Task_Date + ", "
                             + "t." + TaskContract.Task_Notify_On + ", "
+                            + "t." + TaskContract.Task_NotifyState + ", "
                             + "t." + TaskContract.Task_Alarm + ", "
                             + "t." + TaskContract.Task_CheckBox_Completed + ", "
                             + "g." + GoalContract._ID + ", "
@@ -154,10 +157,11 @@ public class SettingActivity extends AppCompatActivity {
                             taskAlarm = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Alarm));
                             taskNotifyOn = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Notify_On));
                             taskCompletedState = cursor.getString(cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed));
-                            //mNotify=
-/////////////////////////////////////////////////////////////
-                            //  if (taskCompletedState.equalsIgnoreCase("0")&&  (mNotify=1)) {
-                            if (taskCompletedState.equalsIgnoreCase("0")) {
+                            //ToDo: ========================mNotifyState=========================
+                            mNotify = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_NotifyState));
+                            //make an update for it later.. when alarm is off => notify state is 0 else notify state is 1
+
+                              if (taskCompletedState.equalsIgnoreCase("0")&&  (mNotify==1)) {
                                 String myDate = taskDate + " " + taskNotifyOn;
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                                 Date date = null;

@@ -27,6 +27,7 @@ import com.example.al_kahtani.sygoal.data.TaskContract;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -39,6 +40,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
     TextView taskPercentage;
     ProgressBar taskProgressBar;
 
+    ArrayList<TaskContract> item;
     long goalId;
     String updateTask;
     int completeTaskCount = 0;
@@ -85,12 +87,13 @@ public class DisplayTaskScreen extends AppCompatActivity {
             //open Database to read info from it
             db = helper.getReadableDatabase();
 
-            final String TaskAndGoalQuery = "SELECT g." + GoalContract.Goal_Name + ", "
+            final String TaskAndGoalQuery = "SELECT "
                     + "t." + TaskContract.Task_Name + ", "
                     + "t." + TaskContract.Task_Id + ", "
                     + "t." + TaskContract.Task_Date + ", "
                     + "t." + TaskContract.Task_Notify_On + ", "
                     + "t." + TaskContract.Task_Alarm + ", "
+                    + "t." + TaskContract.Task_NotifyState + ", "
                     + "t." + TaskContract.Task_CheckBox_Completed
                     + " FROM " + GoalContract.TABLE_NAME + " g "
                     + " LEFT JOIN " + TaskContract.TABLE_NAME + " t "
@@ -100,36 +103,38 @@ public class DisplayTaskScreen extends AppCompatActivity {
 
             final Cursor cursor = db.rawQuery(TaskAndGoalQuery, null);
 
-            adapter = new TaskAdapter(this, cursor);
-
-                while (cursor.moveToNext()){
+            if (cursor == null){
+                cursor.moveToFirst();
+                }
+                while (cursor.moveToNext()) {
                     int c = cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed);
                     completeState = cursor.getInt(c);
+
                     taskCount = taskCount + 1;
-                    if (completeState == 1){
+                    if (completeState == 1) {
                         completeTaskCount = completeTaskCount + 1;
                     }
                     nextDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
+                    //ToDo: ========================mNotifyState=========================
+                    int mNotifyState = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_NotifyState));
+                    //make an update for it later.. when alarm is off => notify state is 0 else notify state is 1
 
                     try {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd",Locale.US);
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
                         Date date1 = format.parse(beginDate);
                         Date date2 = format.parse(nextDate);
 
-                        if (date1.compareTo(date2) > 0){
+                        if (date1.compareTo(date2) > 0) {
                             maxDate = beginDate;
-                        }
-                        else if (date1.compareTo(date2) <0){
+                        } else if (date1.compareTo(date2) < 0) {
+                            maxDate = nextDate;
+                        } else if (date1.compareTo(date2) == 0) {
                             maxDate = nextDate;
                         }
-                        else if (date1.compareTo(date2) ==0){
-                            maxDate = nextDate;
-                        }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
+                    }
                 }
-            }
-
 
             try {
                 db = helper.getReadableDatabase();
@@ -150,7 +155,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 mGoalName = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Name));
                 cursor1.close();
             } finally {
-                db.close();
+
             }
 
             mPercentage = Math.floor((completeTaskCount * 100) / taskCount);
@@ -158,8 +163,6 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 taskPercentage.setText((int)mPercentage + "%");
                 taskProgressBar.setProgress((int)mPercentage);
                 goalName.setText(mGoalName);
-
-
 
             Calendar calendar = Calendar.getInstance();
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -203,8 +206,10 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //ToDo: Do The Update Here!
             helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber);
+
+            adapter = new TaskAdapter(this, cursor);
+
 
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -219,14 +224,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
 
             taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(DisplayTaskScreen.this, "clicked", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            taskListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
                     final PopupMenu popupMenu = new PopupMenu(DisplayTaskScreen.this, view);
                     popupMenu.inflate(R.menu.pop_up_menu);
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -236,7 +234,6 @@ public class DisplayTaskScreen extends AppCompatActivity {
                             if (selectedItem == R.id.update) {
                                 updateTask = "1";
                                 Intent intent = new Intent(DisplayTaskScreen.this, TaskActivity.class);
-                                //ToDo: you may need to make the goalId of type String..from: motwkel , to: motwkel
                                 intent.putExtra("taskId", id);
                                 intent.putExtra("updateTask", updateTask);
                                 startActivity(intent);
@@ -252,7 +249,6 @@ public class DisplayTaskScreen extends AppCompatActivity {
                         }
                     });
                     popupMenu.show();
-                    return true;
                 }
             });
             taskListView.setAdapter(adapter);

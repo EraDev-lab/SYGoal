@@ -5,22 +5,25 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.os.Handler;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.al_kahtani.sygoal.DisplayTaskScreen;
 import com.example.al_kahtani.sygoal.R;
 import com.example.al_kahtani.sygoal.TaskActivity;
 import com.example.al_kahtani.sygoal.classes.AlarmReceiver;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -30,22 +33,51 @@ import java.util.Date;
  * newView: inflate the xml Layout to display the data on ot.
  */
 public class TaskAdapter extends CursorAdapter {
-    private int notificationId = 1;
 
+    private int notificationId = 1;
+    int position;
+    int taskId;
+
+    private LayoutInflater mInflater;
+    Context mContextTT;
+    HelperClass helper;
+
+    static private class Holder{
+        ImageView mAlarm;
+        ImageView mTaskMenu;
+        TextView mTask_id;
+
+        public Holder(View view){
+            mTaskMenu = (ImageView) view.findViewById(R.id.task_menu);
+            mAlarm = (ImageView) view.findViewById(R.id.display_task_alarm);
+            mTask_id = (TextView) view.findViewById(R.id.display_task_id);
+        }
+    }
     //Constructor
-    public TaskAdapter(Context context, Cursor c) {
-        super(context, c, 0);
+    public TaskAdapter(final Context mContextTT, Cursor c) {
+        super(mContextTT, c, 0);
+        this.mContextTT = mContextTT;
+        mInflater = (LayoutInflater)mContextTT.getSystemService(mContextTT.LAYOUT_INFLATER_SERVICE);
     }
 
     //inflate the xml Layout to display the data on ot.
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.task_list_item, parent, false);
-    }
+
+        position = cursor.getPosition();
+        View view = mInflater.inflate(R.layout.task_list_item, parent, false);
+        Holder holder = new Holder(view);
+        view.setTag(holder);
+        return view;
+        }
 
     // get the data and display it on the screen.
     @Override
-    public void bindView(View view, final Context context, final Cursor cursor) {
+    public void bindView(final View view, final Context context, final Cursor cursor) {
+
+        final Holder holder = (Holder) view.getTag();
+        helper = new HelperClass(context);
+
         //display Task Name
         TextView taskName = (TextView) view.findViewById(R.id.display_task_name);
         taskName.setText(cursor.getString(cursor.getColumnIndex(TaskContract.Task_Name)));
@@ -54,25 +86,59 @@ public class TaskAdapter extends CursorAdapter {
         TextView date = (TextView) view.findViewById(R.id.display_task_date);
         date.setText(cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date)));
 
-        //display Task Alarm
-        final ImageView alarm = (ImageView) view.findViewById(R.id.display_task_alarm);
-        final int alarmColumnIndex = cursor.getColumnIndex(TaskContract.Task_Alarm);
-        final int mAlarm = cursor.getInt(alarmColumnIndex);
-        //adjust some operation to display the correct Task Alarm.
-        if (mAlarm == 0) { // motwakel, please replace mAlarm value of mNotify and save value in database
-            alarm.setImageResource(R.drawable.off);
-        } else {
-            alarm.setImageResource(R.drawable.on);
-        }
-        alarm.setOnClickListener(new View.OnClickListener() {
+        int id = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
+        holder.mTask_id.setVisibility(View.INVISIBLE);
+        holder.mTask_id.setText(id+"");
+        /*holder.mTaskMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                taskId = Integer.valueOf(holder.mTask_id.getText().toString());
 
-                // motwakel, please replace mAlarm value of mNotify and save value in database
-                if (mAlarm == 0) {
+                final PopupMenu popupMenu = new PopupMenu(context, view);
+                popupMenu.inflate(R.menu.pop_up_menu);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                         selectedItem = item.getItemId();
+                        if (selectedItem == R.id.update) {
+                            updateTask = "1";
+                            Intent intent = new Intent(mContextTT, TaskActivity.class);
+                            intent.putExtra("taskId", taskId);
+                            intent.putExtra("updateTask", updateTask);
+                            mContextTT.startActivity(intent);
+                        } else if (selectedItem == R.id.delete) {
+                            helper.deleteTask(taskId);
+                            Intent intent = new Intent(mContextTT, mContextTT.getClass());
+                            intent.putExtra("goalId", goalId);
+
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+*/
+        //display Task Alarm
+        final ImageView Notify = (ImageView) view.findViewById(R.id.display_task_alarm);
+        final int alarmColumnIndex = cursor.getColumnIndex(TaskContract.Task_NotifyState);
+        final int mNotify = cursor.getInt(alarmColumnIndex);
+
+        //adjust some operation to display the correct Task Alarm.
+        if (mNotify == 0) { // motwakel, please replace mNotify value of mNotify and save value in database
+            Notify.setImageResource(R.drawable.off);
+        } else {
+            Notify.setImageResource(R.drawable.on);
+        }
+        Notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // motwakel, please replace mNotify value of mNotify and save value in database
+                taskId = Integer.valueOf(holder.mTask_id.getText().toString());
+                if (mNotify == 0) {
                     Toast.makeText(context, "0", Toast.LENGTH_LONG).show();
-                    alarm.setImageResource(R.drawable.on);
-                    // mAlarm==1;// motwakel, save new value in database
+                    Notify.setImageResource(R.drawable.on);
+                    // mNotify==1;// motwakel, save new value in database
                     String startDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
                     String startTime = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Notify_On));
 
@@ -88,7 +154,7 @@ public class TaskAdapter extends CursorAdapter {
 
                     Long alerttime;
                     alerttime = date.getTime();
-                    int random = Integer.parseInt(cursor.getString(cursor.getColumnIndex(TaskContract.Task_Id)));//get key
+                    int random = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));//get key
                     Toast.makeText(context, random, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, AlarmReceiver.class);
                     intent.putExtra("notificationId", notificationId);
@@ -98,7 +164,7 @@ public class TaskAdapter extends CursorAdapter {
                     // PendingIntent alarmIntent = PendingIntent.getBroadcast(ahmed.this, 1,intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     PendingIntent alarmIntent = PendingIntent.getBroadcast(context, random, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     AlarmManager alarm = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
-                    //alarm.setRepeating +AlarmManager.INTERVAL_HOUR  for alarm Repeating
+                    //Notify.setRepeating +AlarmManager.INTERVAL_HOUR  for Notify Repeating
                     if (repeat.equalsIgnoreCase("2")) {
                         alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY, alarmIntent);
                     } else if (repeat.equalsIgnoreCase("3")) {
@@ -113,8 +179,8 @@ public class TaskAdapter extends CursorAdapter {
 
                 } else {
                     Toast.makeText(context, "1", Toast.LENGTH_LONG).show();
-                    // mAlarm=0;// save new value in database
-                    alarm.setImageResource(R.drawable.off);
+                    // mNotify=0;// save new value in database
+                    Notify.setImageResource(R.drawable.off);
 
                     Intent intent = new Intent(context, AlarmReceiver.class);
 
@@ -138,6 +204,4 @@ public class TaskAdapter extends CursorAdapter {
             checkBox.setImageResource(R.drawable.ic_check_box_outline_blank_black_24dp);
         }
     }
-
-
 }

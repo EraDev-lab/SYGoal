@@ -59,12 +59,14 @@ public class TaskActivity extends AppCompatActivity {
     int year, month, day, hour, minute;
     long alarmStartTime;
     long goalId;
-    int taskId;
+    long taskId;
     boolean isnotifyactive=false;
     String startDate;
     String  startTime;
     int mCheckBox;
+    int mTaskNotifyState;
     int mTaskAlarm;
+    int notifyState = 0;
     String sTaskAlarm;
 
     String mTaskName;
@@ -92,7 +94,7 @@ public class TaskActivity extends AppCompatActivity {
         //get intent of goalId, taskId, and updateTask
         Intent intent =getIntent();
         goalId =    intent.getLongExtra("goalId", goalId);
-        taskId =    intent.getIntExtra("taskId", taskId);
+        taskId =    intent.getLongExtra("taskId", taskId);
         updateTask = intent.getStringExtra("updateTask");
 
         //find EditText by goalId
@@ -137,6 +139,7 @@ public class TaskActivity extends AppCompatActivity {
                             TaskContract.Task_Name,
                             TaskContract.Task_Date,
                             TaskContract.Task_Notify_On,
+                            TaskContract.Task_NotifyState,
                             TaskContract.Task_Alarm,
                             TaskContract.Task_CheckBox_Completed},
 
@@ -151,12 +154,13 @@ public class TaskActivity extends AppCompatActivity {
                 cursor.moveToFirst();
 
             // prepare contract object
-            taskId = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
+            taskId = cursor.getLong(cursor.getColumnIndex(TaskContract.Task_Id));
             goalId = cursor.getLong(cursor.getColumnIndex(TaskContract.Task_Goal_Id));
             mTaskName = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Name));
             startDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
             startTime = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Notify_On));
             mTaskAlarm = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Alarm));
+            mTaskNotifyState = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_NotifyState));
             mCheckBox = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed));
 
             // close the db connection
@@ -328,7 +332,7 @@ public class TaskActivity extends AppCompatActivity {
                 else if(sTaskAlarm.equals("Daily")){
                     mTaskAlarm = 2;
                 }
-                else if(sTaskAlarm.equals("Weakly")){
+                else if(sTaskAlarm.equals("Weekly")){
                     mTaskAlarm = 3;
                 }
                 else if(sTaskAlarm.equals("Monthly")){
@@ -338,6 +342,13 @@ public class TaskActivity extends AppCompatActivity {
                     mTaskAlarm = 5;
                 }
 
+                if (sTaskAlarm.equals("Once") || sTaskAlarm.equals("Daily") || sTaskAlarm.equals("Weekly") ||
+                        sTaskAlarm.equals("Monthly") || sTaskAlarm.equals("Yearly")){
+                    notifyState = 1;
+                }
+                else if (sTaskAlarm.equals("Off")){
+                    notifyState = 0;
+                }
                 //store the variable of checkbox
                 if (!checkBoxCompleted.isChecked()){
                     mCheckBox = 0;
@@ -358,7 +369,7 @@ public class TaskActivity extends AppCompatActivity {
                 // Long alerttime=new GregorianCalendar().getTimeInMillis()+5*1000;
                 Long alerttime;
                 alerttime = date.getTime();
-                random = taskId;
+                random = (int)taskId;
                 Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
                 intent.putExtra("notificationId", notificationId);
                 intent.putExtra("todo", taskName.getText().toString());
@@ -387,13 +398,13 @@ public class TaskActivity extends AppCompatActivity {
                 else if (updateTask.equals("0")) {
 
                     Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
-                    helper.insertTask(goalId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox);
+                    helper.insertTask(goalId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox, notifyState);
                     i.putExtra("goalId", goalId);
                     startActivity(i);
                 }
                 else if (updateTask.equals("1")){
                     Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
-                    helper.updateTask(taskId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox);
+                    helper.updateTask(taskId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox, notifyState);
                     i.putExtra("goalId", goalId);
                     startActivity(i);
                 }
