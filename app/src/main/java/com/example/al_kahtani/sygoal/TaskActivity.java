@@ -50,7 +50,7 @@ public class TaskActivity extends AppCompatActivity {
     private Button saveTask, cancelTask, deleteTask;
     private ImageView setTime, setDate;
     private Spinner spinnerrepeat;
-    TextView taskNotifyOn,taskDate;
+    TextView taskNotifyOn,taskDate,textCheckBoxCompleted;
     EditText taskName;
     CheckBox checkBoxCompleted;
 
@@ -102,6 +102,7 @@ public class TaskActivity extends AppCompatActivity {
         //find TextView by goalId
         taskDate = findViewById(R.id.task_date);
         taskNotifyOn = findViewById(R.id.task_notify_on);
+        textCheckBoxCompleted = findViewById(R.id.complete_text_view);
         //find Spinner by goalId
         spinnerrepeat = findViewById(R.id.task_alarm);
         //find CheckBox by goalId
@@ -123,6 +124,8 @@ public class TaskActivity extends AppCompatActivity {
         if (updateTask.equals("0")){
             setTitle("New Task");
              deleteTask.setVisibility(View.GONE);
+             checkBoxCompleted.setVisibility(View.GONE);
+             textCheckBoxCompleted.setVisibility(View.GONE);
         }
     /**
      *  ----------------update task-----------------------

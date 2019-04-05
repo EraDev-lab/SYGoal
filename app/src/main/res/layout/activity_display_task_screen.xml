@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/taskactivity_goal_name"
-            android:text="60%"
+            android:text="00%"
             android:layout_marginTop="44dp"
             android:id="@+id/taskactivity_percentage"
             android:layout_centerHorizontal="true"
@@ -42,7 +42,7 @@
         <ProgressBar
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:progress="60"
+            android:progress="00"
             android:layout_below="@id/taskactivity_goal_name"
             android:layout_centerHorizontal="true"
             style="?android:progressBarStyleHorizontal"

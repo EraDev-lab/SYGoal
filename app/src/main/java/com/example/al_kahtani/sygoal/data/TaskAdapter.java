@@ -45,12 +45,12 @@ public class TaskAdapter extends CursorAdapter {
     static private class Holder{
         ImageView mAlarm;
         ImageView mTaskMenu;
-        TextView mTask_id;
+        TextView displayTaskId;
 
         public Holder(View view){
             mTaskMenu = (ImageView) view.findViewById(R.id.task_menu);
             mAlarm = (ImageView) view.findViewById(R.id.display_task_alarm);
-            mTask_id = (TextView) view.findViewById(R.id.display_task_id);
+            displayTaskId = view.findViewById(R.id.display_task_id);
         }
     }
     //Constructor
@@ -86,9 +86,6 @@ public class TaskAdapter extends CursorAdapter {
         TextView date = (TextView) view.findViewById(R.id.display_task_date);
         date.setText(cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date)));
 
-        int id = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
-        holder.mTask_id.setVisibility(View.INVISIBLE);
-        holder.mTask_id.setText(id+"");
         /*holder.mTaskMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,8 +95,8 @@ public class TaskAdapter extends CursorAdapter {
                 popupMenu.inflate(R.menu.pop_up_menu);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                         selectedItem = item.getItemId();
+                    public boolean onMenuItemClick(MenuItem achieve_and_missed_item) {
+                         selectedItem = achieve_and_missed_item.getItemId();
                         if (selectedItem == R.id.update) {
                             updateTask = "1";
                             Intent intent = new Intent(mContextTT, TaskActivity.class);
@@ -123,18 +120,23 @@ public class TaskAdapter extends CursorAdapter {
         final ImageView Notify = (ImageView) view.findViewById(R.id.display_task_alarm);
         final int alarmColumnIndex = cursor.getColumnIndex(TaskContract.Task_NotifyState);
         final int mNotify = cursor.getInt(alarmColumnIndex);
-
         //adjust some operation to display the correct Task Alarm.
         if (mNotify == 0) { // motwakel, please replace mNotify value of mNotify and save value in database
             Notify.setImageResource(R.drawable.off);
         } else {
             Notify.setImageResource(R.drawable.on);
         }
+
+        taskId = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
+        holder.displayTaskId.setVisibility(View.INVISIBLE);
+        holder.displayTaskId.setText(taskId+"");
+
+
         Notify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                taskId = Integer.valueOf(holder.displayTaskId.getText().toString());
                 // motwakel, please replace mNotify value of mNotify and save value in database
-                taskId = Integer.valueOf(holder.mTask_id.getText().toString());
                 if (mNotify == 0) {
                     Toast.makeText(context, "0", Toast.LENGTH_LONG).show();
                     Notify.setImageResource(R.drawable.on);

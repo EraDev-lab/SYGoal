@@ -10,7 +10,6 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.al_kahtani.sygoal.data.GoalAdapter;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 
@@ -24,7 +23,7 @@ public class AchieveAndMissedAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.item, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.achieve_and_missed_item, parent, false);
     }
 
     @Override

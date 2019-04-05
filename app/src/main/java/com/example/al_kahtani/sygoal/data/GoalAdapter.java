@@ -33,7 +33,6 @@ public class GoalAdapter extends CursorAdapter {
     //get the data and display it on the screen.
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
         //display Goal Name
         TextView name = view.findViewById(R.id.display_goal_name);
         name.setText(cursor.getString(cursor.getColumnIndex(GoalContract.Goal_Name)));
