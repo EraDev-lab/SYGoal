@@ -47,7 +47,8 @@ public class CurrentGoalsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loadLocale();//load language setting
 
-        View rootView = getLayoutInflater().inflate(R.layout.current_goals_fragment,container,false);
+        View rootView = inflater.inflate(R.layout.current_goals_fragment, container, false);
+
         return rootView;
     }
 
@@ -56,13 +57,13 @@ public class CurrentGoalsFragment extends Fragment {
         currentListView = rootView.findViewById(R.id.current_goal_list);
         emptyView = rootView.findViewById(R.id.empty_view);
 
-        helper =new HelperClass(rootView.getContext());
+        helper = new HelperClass(rootView.getContext());
 
         try {
             //open Database to read info from it
             db = helper.getReadableDatabase();
 
-            String[] projection ={GoalContract._ID,
+            String[] projection = {GoalContract._ID,
                     GoalContract.Goal_Name,
                     GoalContract.Goal_Type,
                     GoalContract.Goal_Activity,
@@ -79,10 +80,10 @@ public class CurrentGoalsFragment extends Fragment {
                     null,
                     null);
 
-                while (mcursor.moveToNext()) {
-                    countedData = countedData + 1;
-                }
-                mcursor.close();
+            while (mcursor.moveToNext()) {
+                countedData = countedData + 1;
+            }
+            mcursor.close();
 
             if (countedData == 0) {
                 final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
@@ -116,15 +117,14 @@ public class CurrentGoalsFragment extends Fragment {
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity",goalActivityNumber);
+                                    intent.putExtra("goalActivity", goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
                                     helper.deleteGoal(id);
-                                    Intent intent = new Intent(view.getContext(), view.getContext().getClass());
-                                    intent.putExtra("goalId", id);
-                                    startActivity(intent);
-
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new GoalAdapter(getContext(), cursor1);
+                                    currentListView.setAdapter(adapter);
                                 }
                                 return true;
                             }
@@ -141,7 +141,7 @@ public class CurrentGoalsFragment extends Fragment {
             else {
 
                 final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME + " WHERE "
-                        + GoalContract.Goal_Activity + " = " + 1 , null);
+                        + GoalContract.Goal_Activity + " = " + 1, null);
 
                 adapter = new GoalAdapter(rootView.getContext(), cursor);
 
@@ -157,7 +157,7 @@ public class CurrentGoalsFragment extends Fragment {
                 });
                 currentListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
+                    public boolean onItemLongClick(final AdapterView<?> parent, final View view, int position, final long id) {
 
                         final PopupMenu popupMenu = new PopupMenu(rootView.getContext(), view);
                         popupMenu.inflate(R.menu.pop_up_menu);
@@ -173,15 +173,14 @@ public class CurrentGoalsFragment extends Fragment {
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity",goalActivityNumber);
+                                    intent.putExtra("goalActivity", goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
                                     helper.deleteGoal(id);
-                                    Intent intent = new Intent(view.getContext(), view.getContext().getClass());
-                                    intent.putExtra("goalId", id);
-                                    startActivity(intent);
-
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new GoalAdapter(getContext(), cursor1);
+                                    currentListView.setAdapter(adapter);
                                 }
                                 return true;
                             }
@@ -192,8 +191,7 @@ public class CurrentGoalsFragment extends Fragment {
                 });
                 currentListView.setAdapter(adapter);
             }
-        }
-        finally {
+        } finally {
             db.close();
         }
     }
@@ -216,4 +214,28 @@ public class CurrentGoalsFragment extends Fragment {
         String language = pref.getString("My_Lang", "");
         setLocale(language);
     }
+
+    private Cursor updateUi() {
+
+        db = helper.getReadableDatabase();
+
+        String[] projection = {GoalContract._ID,
+                GoalContract.Goal_Name,
+                GoalContract.Goal_Type,
+                GoalContract.Goal_Activity,
+                GoalContract.Goal_Percentage,
+                GoalContract.Goal_MaxDate,
+                GoalContract.Goal_Description};
+
+        final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
+                projection,
+                GoalContract.Goal_Activity + "=?",
+                new String[]{String.valueOf(1)},
+                null,
+                null,
+                null,
+                null);
+
+        return mcursor;
     }
+}

@@ -1,4 +1,5 @@
 package com.example.al_kahtani.sygoal.fragments;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +40,7 @@ public class MissedGoalsFragment extends Fragment {
     int goalActivityNumber;
 
     HelperClass helper;
-    AchieveAndMissedAdapter myAdapter;
+    AchieveAndMissedAdapter adapter;
     SQLiteDatabase db;
 
     public MissedGoalsFragment() {
@@ -56,7 +57,6 @@ public class MissedGoalsFragment extends Fragment {
         // There should be a {@link RecyclerView} with the view ID called recyclerViewAchi.
         missedListView = view.findViewById(R.id.list_view_missed);
         emptyView = view.findViewById(R.id.empty_view);
-
         return view;
     }
 
@@ -69,7 +69,7 @@ public class MissedGoalsFragment extends Fragment {
             //open Database to read info from it
             db = helper.getReadableDatabase();
 
-            String[] projection ={GoalContract._ID,
+            String[] projection = {GoalContract._ID,
                     GoalContract.Goal_Name,
                     GoalContract.Goal_Type,
                     GoalContract.Goal_Activity,
@@ -95,7 +95,7 @@ public class MissedGoalsFragment extends Fragment {
             if (countedData == 0) {
                 final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME, null);
 
-                myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
+                adapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
                 missedListView.setEmptyView(emptyView);
 
                 missedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -124,14 +124,14 @@ public class MissedGoalsFragment extends Fragment {
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity",goalActivityNumber);
+                                    intent.putExtra("goalActivity", goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
                                     helper.deleteGoal(id);
-                                    Intent intent = new Intent(view.getContext(), view.getContext().getClass());
-                                    intent.putExtra("goalId", id);
-                                    startActivity(intent);
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
+                                    missedListView.setAdapter(adapter);
 
                                 }
                                 return true;
@@ -141,7 +141,7 @@ public class MissedGoalsFragment extends Fragment {
                         return true;
                     }
                 });
-                missedListView.setAdapter(myAdapter);
+                missedListView.setAdapter(adapter);
             }
             /**
              * --------------------------------------------------------------------
@@ -149,9 +149,9 @@ public class MissedGoalsFragment extends Fragment {
             else {
 
                 final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME + " WHERE "
-                        + GoalContract.Goal_Activity + " = " + 2 , null);
+                        + GoalContract.Goal_Activity + " = " + 2, null);
 
-                myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
+                adapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
                 missedListView.setEmptyView(emptyView);
 
                 missedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -180,14 +180,14 @@ public class MissedGoalsFragment extends Fragment {
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity",goalActivityNumber);
+                                    intent.putExtra("goalActivity", goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
                                     helper.deleteGoal(id);
-                                    Intent intent = new Intent(view.getContext(), view.getContext().getClass());
-                                    intent.putExtra("goalId", id);
-                                    startActivity(intent);
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
+                                    missedListView.setAdapter(adapter);
 
                                 }
                                 return true;
@@ -197,15 +197,14 @@ public class MissedGoalsFragment extends Fragment {
                         return true;
                     }
                 });
-                missedListView.setAdapter(myAdapter);
+                missedListView.setAdapter(adapter);
             }
-        }
-        finally {
+        } finally {
             db.close();
         }
     }
 
-        // languge setting
+    // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -222,5 +221,29 @@ public class MissedGoalsFragment extends Fragment {
         SharedPreferences pref = getActivity().getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         String language = pref.getString("My_Lang", "");
         setLocale(language);
+    }
+
+    private Cursor updateUi() {
+
+        db = helper.getReadableDatabase();
+
+        String[] projection = {GoalContract._ID,
+                GoalContract.Goal_Name,
+                GoalContract.Goal_Type,
+                GoalContract.Goal_Activity,
+                GoalContract.Goal_Percentage,
+                GoalContract.Goal_MaxDate,
+                GoalContract.Goal_Description};
+
+        final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
+                projection,
+                GoalContract.Goal_Activity + "=?",
+                new String[]{String.valueOf(2)},
+                null,
+                null,
+                null,
+                null);
+
+        return mcursor;
     }
 }

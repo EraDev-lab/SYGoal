@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".DisplayTaskScreen"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DisplayTaskScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="تنظيف شامل للمنزل"
+        android:textSize="30dp"
+        android:id="@+id/taskactivity_goal_name"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/taskactivity_goal_name"
+        android:text="00%"
+        android:layout_marginTop="44dp"
+        android:id="@+id/taskactivity_percentage"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+
+        />
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:progress="100"
+        android:layout_below="@id/taskactivity_goal_name"
+        android:layout_centerHorizontal="true"
+        style="?android:progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/circle"
+        android:progressTint="#d6e6d7"
+        />
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:progress="00"
+        android:layout_below="@id/taskactivity_goal_name"
+        android:layout_centerHorizontal="true"
+        style="?android:progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/circle"
+        android:id="@+id/taskactivity_progress"
+        />
+
+    <ListView
+        android:id="@+id/task_list_view"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="20dp">
+        android:layout_below="@id/taskactivity_progress"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="تنظيف شامل للمنزل"
-            android:textSize="30dp"
-            android:id="@+id/taskactivity_goal_name"
-            android:layout_centerHorizontal="true"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/taskactivity_goal_name"
-            android:text="00%"
-            android:layout_marginTop="44dp"
-            android:id="@+id/taskactivity_percentage"
-            android:layout_centerHorizontal="true"
-            android:textSize="40dp"
-
-            />
-        <ProgressBar
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:progress="100"
-            android:layout_below="@id/taskactivity_goal_name"
-            android:layout_centerHorizontal="true"
-            style="?android:progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/circle"
-            android:progressTint="#d6e6d7"
-            />
-        <ProgressBar
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:progress="00"
-            android:layout_below="@id/taskactivity_goal_name"
-            android:layout_centerHorizontal="true"
-            style="?android:progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/circle"
-            android:id="@+id/taskactivity_progress"
-            />
-
-            <ListView
-                android:id="@+id/task_list_view"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/taskactivity_progress"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/task_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            app:srcCompat="@drawable/ic_plus"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="8dp"
-            app:elevation="6dp"
-            app:fabSize="normal"
-            app:pressedTranslationZ="12dp" />
-    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/task_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/ic_plus"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="8dp"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="12dp" />
+</RelativeLayout>
 

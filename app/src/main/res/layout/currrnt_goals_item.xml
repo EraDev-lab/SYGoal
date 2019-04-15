@@ -6,26 +6,26 @@
     android:padding="8dp"
     android:orientation="horizontal"
     android:background="@drawable/item_background">
-<ImageView
-    android:layout_width="70dp"
-    android:layout_height="70dp"
-    android:id="@+id/display_goal_type"
-     />
-<TextView
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:id="@+id/display_goal_name"
-    android:layout_gravity="center"
-    tools:text="@string/Goal_Name"
-    android:gravity="center"
-    />
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/display_goal_type"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/display_goal_name"
+        android:layout_gravity="center"
+        tools:text="@string/Goal_Name"
+        android:gravity="center"
+        />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/display_goal_percentage"
-    android:layout_gravity="center"
-    tools:text="00%"
-    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/display_goal_percentage"
+        android:layout_gravity="center"
+        tools:text="00%"
+        />
 </LinearLayout>

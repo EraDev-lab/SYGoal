@@ -18,75 +18,75 @@
         android:layout_marginTop="25dp"
         android:orientation="horizontal">
         <!-- -->
-       <TextView
-           android:textColor="?attr/textcolor"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/Display_Language"
+        <TextView
+            android:textColor="?attr/textcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Display_Language"
             />
 
-       <ImageView
-           android:id="@+id/Language_setting"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="200dp"
-           android:layout_marginStart="200dp"
-           android:src="@drawable/ic_settings_lang"
-           />
-   </LinearLayout>
+        <ImageView
+            android:id="@+id/Language_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginStart="200dp"
+            android:src="@drawable/ic_settings_lang"
+            />
+    </LinearLayout>
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="10dp"
-       android:layout_marginRight="10dp"
-       android:layout_marginTop="20dp"
-       android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/Night_Mood"
-           android:textColor="?attr/textcolor"
-           />
-       <!-- "-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Night_Mood"
+            android:textColor="?attr/textcolor"
+            />
+        <!-- "-->
 
 
-       <Switch
-           android:id="@+id/Switch"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+        <Switch
+            android:id="@+id/Switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-           android:spinnerMode="dialog"
-           android:textColor="?attr/textcolor" />
-   </LinearLayout>
+            android:spinnerMode="dialog"
+            android:textColor="?attr/textcolor" />
+    </LinearLayout>
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginBottom="15dp"
-       android:layout_marginLeft="10dp"
-       android:layout_marginRight="10dp"
-       android:layout_marginTop="20dp"
-       android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/Notifications"
-           android:textColor="?attr/textcolor"
-           />
-       <!-- -->
-       <!-- -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Notifications"
+            android:textColor="?attr/textcolor"
+            />
+        <!-- -->
+        <!-- -->
 
-       <Switch
-           android:id="@+id/Switch1"
-           android:buttonTint="?attr/tintcolor"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+        <Switch
+            android:id="@+id/Switch1"
+            android:buttonTint="?attr/tintcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-           android:spinnerMode="dialog" />
-   </LinearLayout>
+            android:spinnerMode="dialog" />
+    </LinearLayout>
     <!--
        <LinearLayout
            android:layout_width="match_parent"
@@ -115,61 +115,61 @@
 
    </LinearLayout>
     -->
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="10dp"
-       android:layout_marginRight="10dp"
-       android:layout_marginTop="25dp"
-       android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
 
-       <LinearLayout
-           android:id="@+id/about"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginBottom="5dp"
-           android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
 
-           <ImageButton
-               android:layout_width="25dp"
-               android:layout_height="25dp"
-               android:background="@drawable/circular_shap"
-               android:src="@android:drawable/ic_menu_help"/>
-           <!--  android:background="?attr/textred"-->
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:layout_marginLeft="5dp"
-               android:text="@string/About_App"
-               android:textStyle="bold"
-               android:textColor="?attr/textred"
-               android:layout_marginStart="5dp" />
-       </LinearLayout>
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/circular_shap"
+                android:src="@android:drawable/ic_menu_help"/>
+            <!--  android:background="?attr/textred"-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:text="@string/About_App"
+                android:textStyle="bold"
+                android:textColor="?attr/textred"
+                android:layout_marginStart="5dp" />
+        </LinearLayout>
 
-       <LinearLayout
-           android:id="@+id/rate"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-           <ImageButton
-               android:layout_width="25dp"
-               android:layout_height="25dp"
-               android:background="@drawable/circular_shap"
-               android:src="@android:drawable/star_off" />
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/circular_shap"
+                android:src="@android:drawable/star_off" />
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:layout_marginLeft="5dp"
-               android:text="@string/Rate_Us"
-               android:textColor="?attr/textred"
-               android:textStyle="bold" />
-           <!--  android:background="?attr/textred"-->
-       </LinearLayout>
-   </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:text="@string/Rate_Us"
+                android:textColor="?attr/textred"
+                android:textStyle="bold" />
+            <!--  android:background="?attr/textred"-->
+        </LinearLayout>
+    </LinearLayout>
     <!--
       <Button
           android:layout_width="wrap_content"
@@ -195,4 +195,4 @@
                android:layout_marginStart="200dp"
                android:spinnerMode="dialog" />
        -->
-    </LinearLayout>
+</LinearLayout>

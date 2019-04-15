@@ -82,6 +82,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
             return true;
         }
         else if (id == R.id.action_contact) {
+            Intent intent = new Intent(BottomNavigationViewActivity.this, AboutActivity.class);
+            startActivity(intent);
             return true;
         }
         else if (id == R.id.action_rate) {

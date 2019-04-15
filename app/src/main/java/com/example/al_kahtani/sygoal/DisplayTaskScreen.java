@@ -17,14 +17,12 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 import com.example.al_kahtani.sygoal.data.TaskAdapter;
 import com.example.al_kahtani.sygoal.data.TaskContract;
-
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +43,14 @@ public class DisplayTaskScreen extends AppCompatActivity {
     String updateTask;
     int completeTaskCount = 0;
     int taskCount = 0;
+    int newCompleteTaskCount = 0;
+    int newTaskCount = 0;
+    double newMPercentage = 00;
+    String newBeginDate = "0000-1-1";
+    String newMaxDate;
+    String newEndDate;
+    String newNextDate;
+    String newCurrentDate;
     String beginDate = "0000-1-1";
     String maxDate;
     String endDate;
@@ -54,6 +60,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
     int goalActivityNumber;
     int completeState;
     double mPercentage = 00;
+
 
     SharedPref sharedpref;
     HelperClass helper;
@@ -100,111 +107,111 @@ public class DisplayTaskScreen extends AppCompatActivity {
                     + " JOIN " + GoalContract.TABLE_NAME + " g "
                     + " ON t." + TaskContract.Task_Goal_Id + " = " + goalId
                     + " Where g." + GoalContract._ID + " = t." + TaskContract.Task_Goal_Id
-                    + " ORDER BY t." + TaskContract.Task_Date + ", t." + TaskContract.Task_Notify_On + " ASC " ;
+                    + " ORDER BY t." + TaskContract.Task_Date + ", t." + TaskContract.Task_Notify_On + " ASC ";
 
-            final Cursor cursor = db.rawQuery(TaskAndGoalQuery ,null);
+            final Cursor cursor = db.rawQuery(TaskAndGoalQuery, null);
             if (cursor.getCount() != 0) {
-            try {
-                        while (cursor.moveToNext()) {
-                            int c = cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed);
-                            completeState = cursor.getInt(c);
+                try {
+                    while (cursor.moveToNext()) {
+                        int c = cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed);
+                        completeState = cursor.getInt(c);
 
-                            taskCount = taskCount + 1;
-                            if (completeState == 1) {
-                                completeTaskCount = completeTaskCount + 1;
-                            }
-                            nextDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
-                            //ToDo: ========================mNotifyState=========================
-                            int mNotifyState = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_NotifyState));
-                            //make an update for it later.. when alarm is off => notify state is 0 else notify state is 1
-
-                            try {
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
-                                Date date1 = format.parse(beginDate);
-                                Date date2 = format.parse(nextDate);
-
-                                if (date1.compareTo(date2) > 0) {
-                                    maxDate = beginDate;
-                                } else if (date1.compareTo(date2) < 0) {
-                                    maxDate = nextDate;
-                                } else if (date1.compareTo(date2) == 0) {
-                                    maxDate = nextDate;
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            } finally {
-                                db.close();
-                            }
+                        taskCount = taskCount + 1;
+                        if (completeState == 1) {
+                            completeTaskCount = completeTaskCount + 1;
                         }
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                    try {
-                        db = helper.getReadableDatabase();
-                        Cursor cursor1 = db.query(GoalContract.TABLE_NAME,
-                                new String[]{GoalContract._ID,
-                                        GoalContract.Goal_Name},
+                        nextDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
+                        //ToDo: ========================mNotifyState=========================
+                        int mNotifyState = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_NotifyState));
+                        //make an update for it later.. when alarm is off => notify state is 0 else notify state is 1
 
-                                GoalContract._ID + "=?",
-                                new String[]{String.valueOf(goalId)},
-                                null,
-                                null,
-                                null,
-                                null);
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+                            Date date1 = format.parse(beginDate);
+                            Date date2 = format.parse(nextDate);
 
-                        if (cursor1 != null)
-                            cursor1.moveToFirst();
-                        mGoalName = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Name));
-                        cursor1.close();
-                    } finally {
-                        db.close();
-                    }
-
-                    mPercentage = Math.floor((completeTaskCount * 100) / taskCount);
-
-                    taskPercentage.setText((int) mPercentage + "%");
-                    taskProgressBar.setProgress((int) mPercentage);
-                    goalName.setText(mGoalName);
-
-                    Calendar calendar = Calendar.getInstance();
-                    int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    int month = calendar.get(Calendar.MONTH);
-                    int year = calendar.get(Calendar.YEAR);
-                    month = month + 1;
-
-                    currentDate = year + "-" + month + "-" + day;
-
-                    try {
-                        endDate = maxDate;
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
-                        Date date1 = format.parse(endDate);
-                        Date date2 = format.parse(currentDate);
-
-                        if (date1.compareTo(date2) > 0) {
-                            if (completeTaskCount < taskCount) {
-                                goalActivityNumber = 1;
-                            } else if (completeTaskCount == taskCount) {
-                                goalActivityNumber = 3;
+                            if (date1.compareTo(date2) > 0) {
+                                maxDate = beginDate;
+                            } else if (date1.compareTo(date2) < 0) {
+                                maxDate = nextDate;
+                            } else if (date1.compareTo(date2) == 0) {
+                                maxDate = nextDate;
                             }
-                        } else if (date1.compareTo(date2) < 0) {
-                            if (completeTaskCount < taskCount) {
-                                goalActivityNumber = 2;
-                            } else if (completeTaskCount == taskCount) {
-                                goalActivityNumber = 3;
-                            }
-                        } else if (date1.compareTo(date2) == 0) {
-                            if (completeTaskCount < taskCount) {
-                                goalActivityNumber = 1;
-                            } else if (completeTaskCount == taskCount) {
-                                goalActivityNumber = 3;
-                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            db.close();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-
-                    helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                try {
+                    db = helper.getReadableDatabase();
+                    Cursor cursor1 = db.query(GoalContract.TABLE_NAME,
+                            new String[]{GoalContract._ID,
+                                    GoalContract.Goal_Name},
+
+                            GoalContract._ID + "=?",
+                            new String[]{String.valueOf(goalId)},
+                            null,
+                            null,
+                            null,
+                            null);
+
+                    if (cursor1 != null)
+                        cursor1.moveToFirst();
+                    mGoalName = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Name));
+                    cursor1.close();
+                } finally {
+                    db.close();
+                }
+
+                mPercentage = Math.floor((completeTaskCount * 100) / taskCount);
+
+                taskPercentage.setText((int) mPercentage + "%");
+                taskProgressBar.setProgress((int) mPercentage);
+                goalName.setText(mGoalName);
+
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                month = month + 1;
+
+                currentDate = year + "-" + month + "-" + day;
+
+                try {
+                    endDate = maxDate;
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+                    Date date1 = format.parse(endDate);
+                    Date date2 = format.parse(currentDate);
+
+                    if (date1.compareTo(date2) > 0) {
+                        if (completeTaskCount < taskCount) {
+                            goalActivityNumber = 1;
+                        } else if (completeTaskCount == taskCount) {
+                            goalActivityNumber = 3;
+                        }
+                    } else if (date1.compareTo(date2) < 0) {
+                        if (completeTaskCount < taskCount) {
+                            goalActivityNumber = 2;
+                        } else if (completeTaskCount == taskCount) {
+                            goalActivityNumber = 3;
+                        }
+                    } else if (date1.compareTo(date2) == 0) {
+                        if (completeTaskCount < taskCount) {
+                            goalActivityNumber = 1;
+                        } else if (completeTaskCount == taskCount) {
+                            goalActivityNumber = 3;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber);
+            }
 
             adapter = new TaskAdapter(this, cursor);
 
@@ -222,7 +229,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
 
             taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
+                public void onItemClick(AdapterView<?> parent, final View view, int position, final long id) {
                     final PopupMenu popupMenu = new PopupMenu(DisplayTaskScreen.this, view);
                     popupMenu.inflate(R.menu.pop_up_menu);
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -238,9 +245,83 @@ public class DisplayTaskScreen extends AppCompatActivity {
 
                             } else if (selectedItem == R.id.delete) {
                                 helper.deleteTask(id);
-                                Intent intent = new Intent(DisplayTaskScreen.this, DisplayTaskScreen.class);
-                                intent.putExtra("goalId", goalId);
-                                startActivity(intent);
+                                Cursor cursor = updateUi();
+
+
+                                while (cursor.moveToNext()) {
+                                    int c = cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed);
+                                    completeState = cursor.getInt(c);
+
+                                    newTaskCount = newTaskCount + 1;
+                                    if (completeState == 1) {
+                                        newCompleteTaskCount = newCompleteTaskCount + 1;
+                                    }
+
+                                    newNextDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
+                                    try {
+                                        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+                                        Date date1 = format.parse(newBeginDate);
+                                        Date date2 = format.parse(newNextDate);
+
+                                        if (date1.compareTo(date2) > 0) {
+                                            newMaxDate = newBeginDate;
+                                        } else if (date1.compareTo(date2) < 0) {
+                                            newMaxDate = newNextDate;
+                                        } else if (date1.compareTo(date2) == 0) {
+                                            newMaxDate = newNextDate;
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                newMPercentage = Math.floor((newCompleteTaskCount * 100) / newTaskCount);
+
+                                taskPercentage.setText((int) newMPercentage + "%");
+                                taskProgressBar.setProgress((int) newMPercentage);
+
+
+                                Calendar calendar = Calendar.getInstance();
+                                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                                int month = calendar.get(Calendar.MONTH);
+                                int year = calendar.get(Calendar.YEAR);
+                                month = month + 1;
+
+                                newCurrentDate = year + "-" + month + "-" + day;
+
+                                try {
+                                    newEndDate = newMaxDate;
+                                    SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+                                    Date date1 = format.parse(newEndDate);
+                                    Date date2 = format.parse(newCurrentDate);
+
+                                    if (date1.compareTo(date2) > 0) {
+                                        if (newCompleteTaskCount < newTaskCount) {
+                                            goalActivityNumber = 1;
+                                        } else if (newCompleteTaskCount == newTaskCount) {
+                                            goalActivityNumber = 3;
+                                        }
+                                    } else if (date1.compareTo(date2) < 0) {
+                                        if (newCompleteTaskCount < newTaskCount) {
+                                            goalActivityNumber = 2;
+                                        } else if (newCompleteTaskCount == newTaskCount) {
+                                            goalActivityNumber = 3;
+                                        }
+                                    } else if (date1.compareTo(date2) == 0) {
+                                        if (newCompleteTaskCount < newTaskCount) {
+                                            goalActivityNumber = 1;
+                                        } else if (newCompleteTaskCount == newTaskCount) {
+                                            goalActivityNumber = 3;
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                adapter = new TaskAdapter(DisplayTaskScreen.this, cursor);
+                                taskListView.setAdapter(adapter);
+
+                                helper.updateGoal(goalId, newMaxDate, newMPercentage, goalActivityNumber);
                             }
                             return true;
                         }
@@ -253,6 +334,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
             db.close();
         }
     }
+
     // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
@@ -272,4 +354,27 @@ public class DisplayTaskScreen extends AppCompatActivity {
         setLocale(language);
     }
 
+    private Cursor updateUi() {
+
+        db = helper.getReadableDatabase();
+
+        String TaskAndGoalQuery = "SELECT g." + GoalContract.Goal_Name + ", "
+                + "t." + TaskContract.Task_Name + ", "
+                + "t." + TaskContract.Task_Date + ", "
+                + "t." + TaskContract.Task_Notify_On + ", "
+                + "t." + TaskContract.Task_Alarm + ", "
+                + "t." + TaskContract.Task_NotifyState + ", "
+                + "t." + TaskContract.Task_Goal_Id + ", "
+                + "t." + TaskContract.Task_Id + ", "
+                + "t." + TaskContract.Task_CheckBox_Completed
+                + " FROM " + TaskContract.TABLE_NAME + " t "
+                + " JOIN " + GoalContract.TABLE_NAME + " g "
+                + " ON t." + TaskContract.Task_Goal_Id + " = " + goalId
+                + " Where g." + GoalContract._ID + " = t." + TaskContract.Task_Goal_Id
+                + " ORDER BY t." + TaskContract.Task_Date + ", t." + TaskContract.Task_Notify_On + " ASC ";
+
+        Cursor cursor = db.rawQuery(TaskAndGoalQuery, null);
+
+        return cursor;
+    }
 }

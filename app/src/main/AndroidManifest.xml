@@ -32,7 +32,8 @@
             android:parentActivityName=".BottomNavigationViewActivity" />
         <activity
             android:name=".SettingActivity"
-            android:label="Setting" />
+            android:label="Setting"
+            android:parentActivityName=".BottomNavigationViewActivity" />
         <activity android:name=".GoalActivity" />
         <activity android:name=".TaskActivity" />
 

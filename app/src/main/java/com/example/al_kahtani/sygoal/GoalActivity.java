@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -66,17 +67,17 @@ public class GoalActivity extends AppCompatActivity {
         goalActivityNumber = intent.getIntExtra("goalActivity", goalActivityNumber);
 
         helper = new HelperClass(this);
-        //find EditText by goalId
+        //find EditText by id
         goalName = findViewById(R.id.goal_name);
         goalDescription = findViewById(R.id.goal_description);
-        //find RadioButton by goalId
+        //find RadioButton by id
         jobRadioButton = findViewById(R.id.job_radiobutton);
         houseWorkRadioButton = findViewById(R.id.housework_radiobutton);
         educationRadioButton = findViewById(R.id.education_radiobutton);
         exerciseRadioButton = findViewById(R.id.exercise_radiobutton);
         socialRadioButton = findViewById(R.id.socail_radiobutton);
         otherRadioButton = findViewById(R.id.other_radiobutton);
-        //find Button by goalId
+        //find Button by id
         saveGoal = findViewById(R.id.save_goal);
         deleteGoal = findViewById(R.id.delete_goal);
         radioGroup = findViewById(R.id.radiogroup);
