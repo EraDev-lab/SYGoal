@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/backgroundcolor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
+    android:background="?attr/backgroundcolor"
     android:orientation="vertical"
     tools:context=".GoalActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/The_Goal"
-        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/goal_name"
         android:layout_width="match_parent"
+        android:background="@drawable/edit_text_outline"
+        android:layout_marginTop="20dp"
+        android:hint="@string/Goal_Name"
         android:layout_height="wrap_content"
-        android:textSize="15sp" />
+        android:padding="10dp"
+        android:textColorHint="?attr/textcolor"
+        android:textColor="?attr/textcolor"
+        android:fontFamily="sans-serif"
+        android:textSize="8pt" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/Goal_Type"
-        android:textSize="15sp" />
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:textColor="?attr/textcolor"
+        android:textSize="8pt"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/edit_text_outline">
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -94,10 +108,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="5dp"
+                android:textColor="?attr/textcolor"
                 android:layout_marginLeft="5dp"
                 android:text="@string/Job"
                 android:gravity="center"
-                android:textSize="15sp" />
+                android:fontFamily="sans-serif"
+                android:textSize="8pt" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linear2"
@@ -119,10 +135,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
+                android:textColor="?attr/textcolor"
                 android:layout_marginStart="5dp"
                 android:text="@string/Housework"
                 android:gravity="center"
-                android:textSize="15sp" />
+                android:fontFamily="sans-serif"
+                android:textSize="8pt"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linear3"
@@ -143,11 +161,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:textColor="?attr/textcolor"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/Education"
                 android:gravity="center"
-                android:textSize="15sp" />
+                android:fontFamily="sans-serif"
+                android:textSize="8pt"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linear4"
@@ -171,8 +191,10 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/Exercise"
+                android:textColor="?attr/textcolor"
                 android:gravity="center"
-                android:textSize="15sp" />
+                android:fontFamily="sans-serif"
+                android:textSize="8pt" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linear5"
@@ -195,9 +217,11 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
+                android:textColor="?attr/textcolor"
                 android:text="@string/Social"
                 android:gravity="center"
-                android:textSize="15sp" />
+                android:fontFamily="sans-serif"
+                android:textSize="8pt" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linear6"
@@ -222,7 +246,9 @@
                 android:layout_marginLeft="5dp"
                 android:text="@string/Other"
                 android:gravity="center"
-                android:textSize="15sp" />
+                android:textColor="?attr/textcolor"
+                android:fontFamily="sans-serif"
+                android:textSize="8pt" />
         </LinearLayout>
 
     </RelativeLayout>
@@ -410,38 +436,40 @@
             </LinearLayout>
             /-->
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/Description"
-        android:textSize="15sp" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="8pt"
+        android:hint="@string/Description"
+        android:background="@drawable/edit_text_outline"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColor="?attr/textcolor"
+        android:fontFamily="sans-serif"
+        android:textColorHint="?attr/textcolor"
         android:id="@+id/goal_description"
         />
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp"
             android:text="@string/Delete"
+            android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
+            android:background="@drawable/delete_button_shape"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:id="@+id/delete_goal"
+            android:textSize="8pt"
             android:textAllCaps="false" />
 
         <Button
@@ -449,8 +477,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Save"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="8pt"
+            android:drawableLeft="@drawable/ic_save_black_24dp"
+            android:background="@drawable/save_button_shape"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:textAllCaps="false" />
-    </LinearLayout>
+
+        <Button
+            android:id="@+id/cancel_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8pt"
+            android:text="Cancel"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawableLeft="@drawable/ic_cancel_black_24dp"
+            android:background="@drawable/cancel_button_shape"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
+</LinearLayout>
+</ScrollView>

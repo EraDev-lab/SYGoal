@@ -5,4 +5,4 @@
     android:gravity="start"
     android:padding="5dip"
     android:textColor="#0d0d0d"
-    android:textSize="20sp" />
+    android:textSize="8pt" />

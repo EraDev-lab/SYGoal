@@ -17,14 +17,6 @@ public class TaskContract implements BaseColumns {
     public static final String Task_Alarm = "task_alarm";
     public static final String Task_CheckBox_Completed = "task_checkbox_completed";
 
-    int taskId;
-    String taskName;
-    String taskDate;
-    String taskNotifyOn;
-    int taskAlarm;
-    int taskNotifyState;
-    int taskCheckBoxCompleted;
-
     //constructor
     public TaskContract() {
     }

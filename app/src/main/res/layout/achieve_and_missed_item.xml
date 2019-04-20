@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:background="@drawable/item_background"
+    android:paddingBottom="5dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -10,8 +11,8 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content">
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/homee"
             android:id="@+id/our_goal_type"
             />
@@ -20,35 +21,37 @@
             android:layout_height="match_parent"
             android:src="#969696"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:orientation="vertical">
-
-        <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/Goal_Name"
-        android:id="@+id/our_goal_name"
-            android:textSize="10pt"
-        android:layout_gravity="right|center|bottom"
-        />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#969696"/>
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Description"
-            android:id="@+id/our_goal_description"
-            android:textSize="10pt"
-            android:layout_gravity="right|center|top"
-            />
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Goal_Name"
+                android:id="@+id/our_goal_name"
+                android:textColor="?attr/textcolor"
+                android:textSize="10pt"
+                android:layout_gravity="right|center|bottom"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#969696"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Description"
+                android:id="@+id/our_goal_description"
+                android:textColor="?attr/textcolor"
+                android:textSize="10pt"
+                android:layout_gravity="right|center|top"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

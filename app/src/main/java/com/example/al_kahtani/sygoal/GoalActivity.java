@@ -1,6 +1,8 @@
 package com.example.al_kahtani.sygoal;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,10 +14,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.al_kahtani.sygoal.classes.AlarmReceiver;
 import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
@@ -32,7 +36,7 @@ public class GoalActivity extends AppCompatActivity {
     RadioButton jobRadioButton, houseWorkRadioButton, educationRadioButton, exerciseRadioButton,
     socialRadioButton, otherRadioButton;
 
-    Button saveGoal, deleteGoal;
+    Button saveGoal, deleteGoal, cancelGoal;
 
     int selectedType = 0;
     long goalId;
@@ -43,6 +47,7 @@ public class GoalActivity extends AppCompatActivity {
     String updateTask = "0";
     double percentage;
     String maxDate;
+    int random;
 
     SharedPref sharedpref;
     HelperClass helper;
@@ -66,19 +71,20 @@ public class GoalActivity extends AppCompatActivity {
         goalActivityNumber = intent.getIntExtra("goalActivity", goalActivityNumber);
 
         helper = new HelperClass(this);
-        //find EditText by goalId
+        //find EditText by id
         goalName = findViewById(R.id.goal_name);
         goalDescription = findViewById(R.id.goal_description);
-        //find RadioButton by goalId
+        //find RadioButton by id
         jobRadioButton = findViewById(R.id.job_radiobutton);
         houseWorkRadioButton = findViewById(R.id.housework_radiobutton);
         educationRadioButton = findViewById(R.id.education_radiobutton);
         exerciseRadioButton = findViewById(R.id.exercise_radiobutton);
         socialRadioButton = findViewById(R.id.socail_radiobutton);
         otherRadioButton = findViewById(R.id.other_radiobutton);
-        //find Button by goalId
+        //find Button by id
         saveGoal = findViewById(R.id.save_goal);
         deleteGoal = findViewById(R.id.delete_goal);
+        cancelGoal = findViewById(R.id.cancel_goal);
         radioGroup = findViewById(R.id.radiogroup);
 
 radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -220,6 +226,26 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 helper.deleteGoal(goalId);
                 intent.putExtra("goalId", goalId);
                 startActivity(intent);
+            }
+        });
+
+        cancelGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GoalActivity.this, AlarmReceiver.class);
+
+                random = (int) goalId;
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(GoalActivity.this, random,intent, 0);
+
+                //PendingIntent pendingIntent = PendingIntent.getBroadcast(SettingActivity.this, goalId, intent,0);
+                AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                alarm.cancel(pendingIntent);
+
+                Intent  intent1 = new Intent(GoalActivity.this, BottomNavigationViewActivity.class);
+                intent1.putExtra("goalId", goalId);
+                startActivity(intent1);
             }
         });
 

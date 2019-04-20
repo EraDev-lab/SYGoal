@@ -9,9 +9,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundcolor">#fcfcfc</item>
-        <item name="textred">#ffcc0000</item>
         <item name="tintcolor">#aaa</item>
-        <item name="textcolor">#000000</item>
+        <item name="textcolor">@android:color/black</item>
         <item name="buttoncolor">#2196F3</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
@@ -21,13 +20,12 @@
     <!-- Night / dark  Mode theme. -->
     <style name="darktheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#212121</item>
-        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorPrimary">#3b393c</item>
+        <item name="colorPrimaryDark">#181617</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundcolor">#303030</item>
-        <item name="textred">#ffcc0000</item>
         <item name="tintcolor">#aaa</item>
-        <item name="textcolor">#ffffff</item>
+        <item name="textcolor">@android:color/white</item>
         <item name="buttoncolor">#2196F3</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
 

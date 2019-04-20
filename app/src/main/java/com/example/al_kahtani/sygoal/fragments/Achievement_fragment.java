@@ -40,7 +40,7 @@ public class Achievement_fragment extends Fragment {
     int goalActivityNumber;
 
     HelperClass helper;
-    AchieveAndMissedAdapter myAdapter;
+    AchieveAndMissedAdapter adapter;
     SQLiteDatabase db;
 
     public Achievement_fragment() {
@@ -69,7 +69,7 @@ public class Achievement_fragment extends Fragment {
             //open Database to read info from it
             db = helper.getReadableDatabase();
 
-            String[] projection ={GoalContract._ID,
+            String[] projection = {GoalContract._ID,
                     GoalContract.Goal_Name,
                     GoalContract.Goal_Type,
                     GoalContract.Goal_Activity,
@@ -86,15 +86,15 @@ public class Achievement_fragment extends Fragment {
                     null,
                     null);
 
-                while (mcursor.moveToNext()) {
-                    countedData = countedData + 1;
-                }
-                mcursor.close();
+            while (mcursor.moveToNext()) {
+                countedData = countedData + 1;
+            }
+            mcursor.close();
 
             if (countedData == 0) {
                 final Cursor cursor = db.rawQuery(" SELECT * FROM " + GoalContract.TABLE_NAME, null);
 
-                myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
+                adapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
                 achieveListView.setEmptyView(emptyView);
 
                 achieveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,14 +123,14 @@ public class Achievement_fragment extends Fragment {
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity",goalActivityNumber);
+                                    intent.putExtra("goalActivity", goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
                                     helper.deleteGoal(id);
-                                    Intent intent = new Intent(view.getContext(), view.getContext().getClass());
-                                    intent.putExtra("goalId", id);
-                                    startActivity(intent);
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
+                                    achieveListView.setAdapter(adapter);
 
                                 }
                                 return true;
@@ -140,7 +140,7 @@ public class Achievement_fragment extends Fragment {
                         return true;
                     }
                 });
-                achieveListView.setAdapter(myAdapter);
+                achieveListView.setAdapter(adapter);
             }
             /**
              * --------------------------------------------------------------------
@@ -149,12 +149,12 @@ public class Achievement_fragment extends Fragment {
 
                 String myQuery = " SELECT * FROM " + GoalContract.TABLE_NAME
                         + " WHERE " + GoalContract.Goal_Activity + " = " + 3;
-                        //+ "WHERE (SELECT" + " MAX(t." + TaskContract.Task_Date + ") < " + "date('now')"
-                        //+ "OR MAX(t." + TaskContract.Task_Date + ") = " + "date('now'))";
+                //+ "WHERE (SELECT" + " MAX(t." + TaskContract.Task_Date + ") < " + "date('now')"
+                //+ "OR MAX(t." + TaskContract.Task_Date + ") = " + "date('now'))";
 
                 final Cursor cursor = db.rawQuery(myQuery, null);
 
-                myAdapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
+                adapter = new AchieveAndMissedAdapter(rootView.getContext(), cursor);
                 achieveListView.setEmptyView(emptyView);
 
                 achieveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -183,14 +183,14 @@ public class Achievement_fragment extends Fragment {
                                     Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
                                     intent.putExtra("goalId", id);
                                     intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity",goalActivityNumber);
+                                    intent.putExtra("goalActivity", goalActivityNumber);
                                     startActivity(intent);
 
                                 } else if (selectedItem == R.id.delete) {
                                     helper.deleteGoal(id);
-                                    Intent intent = new Intent(view.getContext(), view.getContext().getClass());
-                                    intent.putExtra("goalId", id);
-                                    startActivity(intent);
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
+                                    achieveListView.setAdapter(adapter);
 
                                 }
                                 return true;
@@ -200,14 +200,12 @@ public class Achievement_fragment extends Fragment {
                         return true;
                     }
                 });
-                achieveListView.setAdapter(myAdapter);
+                achieveListView.setAdapter(adapter);
             }
-        }
-        finally {
+        } finally {
             db.close();
         }
     }
-
 
 
     // languge setting
@@ -229,4 +227,27 @@ public class Achievement_fragment extends Fragment {
         setLocale(language);
     }
 
+    private Cursor updateUi() {
+
+        db = helper.getReadableDatabase();
+
+        String[] projection = {GoalContract._ID,
+                GoalContract.Goal_Name,
+                GoalContract.Goal_Type,
+                GoalContract.Goal_Activity,
+                GoalContract.Goal_Percentage,
+                GoalContract.Goal_MaxDate,
+                GoalContract.Goal_Description};
+
+        final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
+                projection,
+                GoalContract.Goal_Activity + "=?",
+                new String[]{String.valueOf(3)},
+                null,
+                null,
+                null,
+                null);
+
+        return mcursor;
+    }
 }

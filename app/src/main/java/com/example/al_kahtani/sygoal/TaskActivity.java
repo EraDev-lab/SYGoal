@@ -23,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,11 +49,11 @@ import java.util.Random;
 public class TaskActivity extends AppCompatActivity {
 
     private Button saveTask, cancelTask, deleteTask;
-    private ImageView setTime, setDate;
     private Spinner spinnerrepeat;
     TextView taskNotifyOn,taskDate,textCheckBoxCompleted;
     EditText taskName;
     CheckBox checkBoxCompleted;
+    LinearLayout checkBoxLinearLayout;
 
     int random=0;
     private int notificationId = 1;
@@ -97,23 +98,22 @@ public class TaskActivity extends AppCompatActivity {
         taskId =    intent.getLongExtra("taskId", taskId);
         updateTask = intent.getStringExtra("updateTask");
 
-        //find EditText by goalId
+        //find EditText by id
         taskName = findViewById(R.id.task_name);
-        //find TextView by goalId
+        //find TextView by id
         taskDate = findViewById(R.id.task_date);
         taskNotifyOn = findViewById(R.id.task_notify_on);
         textCheckBoxCompleted = findViewById(R.id.complete_text_view);
-        //find Spinner by goalId
+        //find Spinner by id
         spinnerrepeat = findViewById(R.id.task_alarm);
-        //find CheckBox by goalId
+        //find CheckBox by id
         checkBoxCompleted = findViewById(R.id.checkbox_completed);
-        //find Button by goalId
+        //find Button by id
         saveTask =  findViewById(R.id.save_task);
         cancelTask = findViewById(R.id.cancel_task);
         deleteTask = findViewById(R.id.delete_task);
-        //find ImageView by goalId
-        setDate = findViewById(R.id.logo_date);
-        setTime = findViewById(R.id.logo_time);
+        //find LinearLayout by id
+        checkBoxLinearLayout = findViewById(R.id.complete_linear_layout);
 
         /**
          *check if we are on New Task state OR in Edit Task state..
@@ -126,6 +126,7 @@ public class TaskActivity extends AppCompatActivity {
              deleteTask.setVisibility(View.GONE);
              checkBoxCompleted.setVisibility(View.GONE);
              textCheckBoxCompleted.setVisibility(View.GONE);
+             checkBoxLinearLayout.setVisibility(View.GONE);
         }
     /**
      *  ----------------update task-----------------------
@@ -229,7 +230,7 @@ public class TaskActivity extends AppCompatActivity {
         mImageGenerator.setDateColor(Color.parseColor("#3c6eaf"));
         mImageGenerator.setMonthColor(Color.WHITE);
 //select date
-        setDate.setOnClickListener(new View.OnClickListener() {
+        taskDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCurrentDate = Calendar.getInstance();
@@ -256,7 +257,7 @@ public class TaskActivity extends AppCompatActivity {
 
          //select time
 
-        setTime.setOnClickListener(new View.OnClickListener() {
+        taskNotifyOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCurrentTime = Calendar.getInstance();
@@ -287,7 +288,7 @@ public class TaskActivity extends AppCompatActivity {
         spinnerrepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorText));
+                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.textcolor));
                 //String minsurance = spinnerinsurance.getSelectedItem().toString().trim();
                 sTaskAlarm = spinnerrepeat.getItemAtPosition(position).toString();
             }

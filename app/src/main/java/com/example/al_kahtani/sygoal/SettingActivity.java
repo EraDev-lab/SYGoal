@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 
 import com.example.al_kahtani.sygoal.classes.AlarmReceiver;
@@ -160,40 +161,43 @@ public class SettingActivity extends AppCompatActivity {
                             //ToDo: ========================mNotifyState=========================
                             mNotify = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_NotifyState));
                             //make an update for it later.. when alarm is off => notify state is 0 else notify state is 1
+                            //ToDo: Remove this condition and fix the error,, from: Motwkel --- TO: Mr.Ahmed
+                            int i = 1;
+                            if (i == 0) {
+                                if (taskCompletedState.equalsIgnoreCase("0") && (mNotify == 1)) {
+                                    String myDate = taskDate + " " + taskNotifyOn;
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                    Date date = null;
+                                    try {
+                                        date = sdf.parse(myDate);
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    //long millis = date.getTime();
+                                    // Long alerttime=new GregorianCalendar().getTimeInMillis()+5*1000;
+                                    Long alerttime;
+                                    alerttime = date.getTime();
 
-                              if (taskCompletedState.equalsIgnoreCase("0")&&  (mNotify==1)) {
-                                String myDate = taskDate + " " + taskNotifyOn;
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                                Date date = null;
-                                try {
-                                    date = sdf.parse(myDate);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                //long millis = date.getTime();
-                                // Long alerttime=new GregorianCalendar().getTimeInMillis()+5*1000;
-                                Long alerttime;
-                                alerttime = date.getTime();
-
-                                Intent intent = new Intent(SettingActivity.this, AlarmReceiver.class);
-                                intent.putExtra("notificationId", notificationId);
-                                intent.putExtra("todo", taskName);
-                                intent.putExtra("random", taskId);
-                                String repeat = taskAlarm;
-                                // PendingIntent alarmIntent = PendingIntent.getBroadcast(ahmed.this, 1,intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                                PendingIntent alarmIntent = PendingIntent.getBroadcast(SettingActivity.this, taskId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                                AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
-                                //alarm.setRepeating +AlarmManager.INTERVAL_HOUR  for alarm Repeating
-                                if (repeat.equalsIgnoreCase("2")) {
-                                    alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY, alarmIntent);
-                                } else if (repeat.equalsIgnoreCase("3")) {
-                                    alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
-                                } else if (repeat.equalsIgnoreCase("4")) {
-                                    alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY * 30, alarmIntent);
-                                } else if (repeat.equalsIgnoreCase("5")) {
-                                    alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY * 365, alarmIntent);
-                                } else if (repeat.equalsIgnoreCase("1")) {
-                                    alarm.set(AlarmManager.RTC_WAKEUP, alerttime, alarmIntent);
+                                    Intent intent = new Intent(SettingActivity.this, AlarmReceiver.class);
+                                    intent.putExtra("notificationId", notificationId);
+                                    intent.putExtra("todo", taskName);
+                                    intent.putExtra("random", taskId);
+                                    String repeat = taskAlarm;
+                                    // PendingIntent alarmIntent = PendingIntent.getBroadcast(ahmed.this, 1,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    PendingIntent alarmIntent = PendingIntent.getBroadcast(SettingActivity.this, taskId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+                                    //alarm.setRepeating +AlarmManager.INTERVAL_HOUR  for alarm Repeating
+                                    if (repeat.equalsIgnoreCase("2")) {
+                                        alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY, alarmIntent);
+                                    } else if (repeat.equalsIgnoreCase("3")) {
+                                        alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
+                                    } else if (repeat.equalsIgnoreCase("4")) {
+                                        alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY * 30, alarmIntent);
+                                    } else if (repeat.equalsIgnoreCase("5")) {
+                                        alarm.setRepeating(AlarmManager.RTC_WAKEUP, alerttime, AlarmManager.INTERVAL_DAY * 365, alarmIntent);
+                                    } else if (repeat.equalsIgnoreCase("1")) {
+                                        alarm.set(AlarmManager.RTC_WAKEUP, alerttime, alarmIntent);
+                                    }
                                 }
                             }
                             //////////////////////////////////////////////////
