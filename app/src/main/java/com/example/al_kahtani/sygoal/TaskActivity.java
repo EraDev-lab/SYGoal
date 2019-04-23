@@ -13,8 +13,8 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,9 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -32,19 +30,15 @@ import android.widget.Toast;
 
 import com.example.al_kahtani.sygoal.classes.AlarmReceiver;
 import com.example.al_kahtani.sygoal.classes.SharedPref;
-import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
-import com.example.al_kahtani.sygoal.data.TaskAdapter;
 import com.example.al_kahtani.sygoal.data.TaskContract;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 public class TaskActivity extends AppCompatActivity {
 
@@ -471,4 +465,10 @@ public class TaskActivity extends AppCompatActivity {
         setLocale(language);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), DisplayTaskScreen.class);
+        startActivity(i);
+        finish();
+    }
 }

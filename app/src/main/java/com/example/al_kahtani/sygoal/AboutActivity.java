@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -27,7 +28,13 @@ public class AboutActivity extends AppCompatActivity {
         loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        if (getSupportActionBar() != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setHomeButtonEnabled(true);
+            ab.setDisplayShowTitleEnabled(false);
+        }
         facepic=findViewById(R.id.fb_logo);
         tweetpic=findViewById(R.id.twitter_logo);
         emailpic=findViewById(R.id.mail_logo);
@@ -86,4 +93,18 @@ public class AboutActivity extends AppCompatActivity {
         setLocale(language);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent i = new Intent(getApplicationContext(), BottomNavigationViewActivity.class);
+        startActivity(i);
+        finish();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), BottomNavigationViewActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

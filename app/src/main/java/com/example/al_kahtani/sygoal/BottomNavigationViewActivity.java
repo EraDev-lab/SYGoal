@@ -159,4 +159,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         setLocale(language);
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
