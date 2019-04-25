@@ -94,7 +94,7 @@ public class SettingActivity extends AppCompatActivity {
         }
         // to keep notification switch state. keep it in SharedPreferences
         SharedPreferences pref11 = getSharedPreferences("sharedprefnoty", Activity.MODE_PRIVATE);
-        boolean notifys = pref11.getBoolean("notifymode", false);
+        boolean notifys = pref11.getBoolean("notifymode", true);
         if (notifys == true) {
             notyoff.setChecked(true);
             // unactivate notification

@@ -24,6 +24,7 @@
         android:layout_gravity="center"
         android:textColor="?attr/textcolor"
         android:textSize="8pt"
+        android:textStyle="bold"
         tools:text="@string/Goal_Name"
         android:gravity="center"
         />

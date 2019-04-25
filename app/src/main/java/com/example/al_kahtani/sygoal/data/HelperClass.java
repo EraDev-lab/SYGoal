@@ -219,6 +219,21 @@ public class HelperClass extends SQLiteOpenHelper {
         return db.update(TaskContract.TABLE_NAME, values, selection, selectionArgs);
     }
 
+    public int updateCheckBoxState (long taskId,int checkBox) {
+        //get writable database as we want to write data
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(TaskContract.Task_CheckBox_Completed, checkBox);
+
+        //the where clause (SELECT * FROM TABLE_NAME -WHERE- ..)
+        String selection = TaskContract.Task_Id + " = ?";
+        String selectionArgs[] = new String[]{String.valueOf(taskId)};
+
+        //updating row
+        return db.update(TaskContract.TABLE_NAME, values, selection, selectionArgs);
+    }
+
     //________________________________________________________________________________
 
     //delete data from the Task Table

@@ -44,21 +44,22 @@ public class TaskActivity extends AppCompatActivity {
 
     private Button saveTask, cancelTask, deleteTask;
     private Spinner spinnerrepeat;
-    TextView taskNotifyOn,taskDate,textCheckBoxCompleted;
+    TextView taskNotifyOn, taskDate, textCheckBoxCompleted;
     EditText taskName;
     CheckBox checkBoxCompleted;
     LinearLayout checkBoxLinearLayout;
 
-    int random=0;
+    int random = 0;
     private int notificationId = 1;
     int year, month, day, hour, minute;
     long alarmStartTime;
     long goalId;
     long taskId;
-    boolean isnotifyactive=false;
+    boolean isnotifyactive = false;
     String startDate;
-    String  startTime;
+    String startTime;
     int mCheckBox;
+    int selectItemState = 0;
     int mTaskNotifyState;
     int mTaskAlarm;
     int notifyState = 0;
@@ -77,9 +78,11 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedpref = new SharedPref(this);//load night mode setting
-        if(sharedpref.loadNightModeState()==true) {
+        if (sharedpref.loadNightModeState() == true) {
             setTheme(R.style.darktheme);
-        }else{  setTheme(R.style.AppTheme);}
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
@@ -87,9 +90,9 @@ public class TaskActivity extends AppCompatActivity {
         helper = new HelperClass(this);
 
         //get intent of goalId, taskId, and updateTask
-        Intent intent =getIntent();
-        goalId =    intent.getLongExtra("goalId", goalId);
-        taskId =    intent.getLongExtra("taskId", taskId);
+        Intent intent = getIntent();
+        goalId = intent.getLongExtra("goalId", goalId);
+        taskId = intent.getLongExtra("taskId", taskId);
         updateTask = intent.getStringExtra("updateTask");
 
         //find EditText by id
@@ -103,11 +106,21 @@ public class TaskActivity extends AppCompatActivity {
         //find CheckBox by id
         checkBoxCompleted = findViewById(R.id.checkbox_completed);
         //find Button by id
-        saveTask =  findViewById(R.id.save_task);
+        saveTask = findViewById(R.id.save_task);
         cancelTask = findViewById(R.id.cancel_task);
         deleteTask = findViewById(R.id.delete_task);
         //find LinearLayout by id
         checkBoxLinearLayout = findViewById(R.id.complete_linear_layout);
+
+
+        if (sharedpref.loadNightModeState() == true) {
+            taskNotifyOn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_access_time_white_24dp, 0);
+            taskDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_date_range_white_24dp, 0);
+        } else {
+            taskNotifyOn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_access_time, 0);
+            taskDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_date, 0);
+        }
+
 
         /**
          *check if we are on New Task state OR in Edit Task state..
@@ -115,19 +128,21 @@ public class TaskActivity extends AppCompatActivity {
          * -------------new task---------------------
          */
 
-        if (updateTask.equals("0")){
+        if (updateTask.equals("0")) {
             setTitle("New Task");
-             deleteTask.setVisibility(View.GONE);
-             checkBoxCompleted.setVisibility(View.GONE);
-             textCheckBoxCompleted.setVisibility(View.GONE);
-             checkBoxLinearLayout.setVisibility(View.GONE);
+            selectItemState = 0;
+            deleteTask.setVisibility(View.GONE);
+            checkBoxCompleted.setVisibility(View.GONE);
+            textCheckBoxCompleted.setVisibility(View.GONE);
+            checkBoxLinearLayout.setVisibility(View.GONE);
         }
-    /**
-     *  ----------------update task-----------------------
-     */
-        else if (updateTask.equals("1")){
+        /**
+         *  ----------------update task-----------------------
+         */
+        else if (updateTask.equals("1")) {
             setTitle("Edit Task");
 
+            selectItemState = 1;
             //get the task information from database and assign it on some variables
             db = helper.getReadableDatabase();
 
@@ -169,42 +184,13 @@ public class TaskActivity extends AppCompatActivity {
             taskDate.setText(startDate);
             taskNotifyOn.setText(startTime);
 
-            /* ToDo: problem in this..
-            if (mTaskAlarm.equals("Off")){
-                spinnerrepeat.getItemAtPosition(0);
-                position = 0;
-            }
-            else if (mTaskAlarm.equals("Once")){
-                spinnerrepeat.getItemAtPosition(1);
-                position = 1;
-            }
-            else if (mTaskAlarm.equals("Daily")){
-                spinnerrepeat.getItemAtPosition(2);
-                position = 2;
-            }
-            else if (mTaskAlarm.equals("Weakly")){
-                spinnerrepeat.getItemAtPosition(3);
-                position = 3;
-            }
-            else if (mTaskAlarm.equals("Monthly")){
-                spinnerrepeat.getItemAtPosition(4);
-                position = 4;
-            }
-            else if (mTaskAlarm.equals("Yearly")){
-                spinnerrepeat.getItemAtPosition(5);
-                position = 5;
-            }
-            */
-
-
             if (mCheckBox == 1) {
                 checkBoxCompleted.setChecked(true);
-            }
-            else if (mCheckBox == 0)
+            } else if (mCheckBox == 0)
                 checkBoxCompleted.setChecked(false);
         }
 
-        notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 //to start calender
         ImageGenerator mImageGenerator = new ImageGenerator(TaskActivity.this);
@@ -228,19 +214,19 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCurrentDate = Calendar.getInstance();
-                year=mCurrentDate.get(Calendar.YEAR);
-                month=mCurrentDate.get(Calendar.MONTH);
-                day=mCurrentDate.get(Calendar.DAY_OF_MONTH);
+                year = mCurrentDate.get(Calendar.YEAR);
+                month = mCurrentDate.get(Calendar.MONTH);
+                day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
                 //final String abc= getAge(year, month, day);
 
-                DatePickerDialog mPickerDialog =  new DatePickerDialog(TaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog mPickerDialog = new DatePickerDialog(TaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int Year, int Month, int Day) {
-                        startDate = Year + "-" + (Month+1) + "-" + Day;
+                        startDate = Year + "-" + (Month + 1) + "-" + Day;
                         taskDate.setText(startDate);
                         //  Toast.makeText(RegisterPatientActivity.this,"Your age= "+abc, Toast.LENGTH_LONG).show();
 
-                        mCurrentDate.set(Year, (Month+1),Day);
+                        mCurrentDate.set(Year, (Month + 1), Day);
                         //   mImageGenerator.generateDateImage(mCurrentDate, R.drawable.empty_calendar);
                     }
                 }, year, month, day);
@@ -249,7 +235,7 @@ public class TaskActivity extends AppCompatActivity {
         });
         ///////////////////*Calender////////////////////---------------------
 
-         //select time
+        //select time
 
         taskNotifyOn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,8 +248,8 @@ public class TaskActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(TaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        startTime = selectedHour + ":" + selectedMinute;
-                        taskNotifyOn.setText( startTime);
+                        startTime = con(selectedHour) + ":" + con(selectedMinute);
+                        taskNotifyOn.setText(startTime);
                         // alarmStartTime = mCurrentTime.getTimeInMillis();
                     }
                 }, hour, minute, false);//Yes 24 hour time
@@ -282,9 +268,22 @@ public class TaskActivity extends AppCompatActivity {
         spinnerrepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.textcolor));
+
+                if (sharedpref.loadNightModeState() == true) {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
+                } else {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+
                 //String minsurance = spinnerinsurance.getSelectedItem().toString().trim();
-                sTaskAlarm = spinnerrepeat.getItemAtPosition(position).toString();
+                if (selectItemState == 1) {
+                    spinnerrepeat.setSelection(mTaskAlarm);
+                    sTaskAlarm = spinnerrepeat.getItemAtPosition(mTaskAlarm).toString();
+                    selectItemState = 0;
+                } else if (selectItemState == 0) {
+                    sTaskAlarm = spinnerrepeat.getItemAtPosition(position).toString();
+                    spinnerrepeat.setSelection(position);
+                }
             }
 
             @Override
@@ -317,41 +316,34 @@ public class TaskActivity extends AppCompatActivity {
                         taskNotifyOn.setError(getString(R.string.time_is_required));
                         taskNotifyOn.requestFocus();
                     }
-                return;
+                    return;
                 }
 
                 //store the variable of alarm
-                if (sTaskAlarm.equals("Off")){
+                if (sTaskAlarm.equals("Off")) {
                     mTaskAlarm = 0;
-                }
-                else if(sTaskAlarm.equals("Once")){
+                } else if (sTaskAlarm.equals("Once")) {
                     mTaskAlarm = 1;
-                }
-                else if(sTaskAlarm.equals("Daily")){
+                } else if (sTaskAlarm.equals("Daily")) {
                     mTaskAlarm = 2;
-                }
-                else if(sTaskAlarm.equals("Weekly")){
+                } else if (sTaskAlarm.equals("Weekly")) {
                     mTaskAlarm = 3;
-                }
-                else if(sTaskAlarm.equals("Monthly")){
+                } else if (sTaskAlarm.equals("Monthly")) {
                     mTaskAlarm = 4;
-                }
-                else if(sTaskAlarm.equals("Yearly")){
+                } else if (sTaskAlarm.equals("Yearly")) {
                     mTaskAlarm = 5;
                 }
 
                 if (sTaskAlarm.equals("Once") || sTaskAlarm.equals("Daily") || sTaskAlarm.equals("Weekly") ||
-                        sTaskAlarm.equals("Monthly") || sTaskAlarm.equals("Yearly")){
+                        sTaskAlarm.equals("Monthly") || sTaskAlarm.equals("Yearly")) {
                     notifyState = 1;
-                }
-                else if (sTaskAlarm.equals("Off")){
+                } else if (sTaskAlarm.equals("Off")) {
                     notifyState = 0;
                 }
                 //store the variable of checkbox
-                if (!checkBoxCompleted.isChecked()){
+                if (!checkBoxCompleted.isChecked()) {
                     mCheckBox = 0;
-                }
-                else if (checkBoxCompleted.isChecked()){
+                } else if (checkBoxCompleted.isChecked()) {
                     mCheckBox = 1;
                 }
 
@@ -367,7 +359,7 @@ public class TaskActivity extends AppCompatActivity {
                 // Long alerttime=new GregorianCalendar().getTimeInMillis()+5*1000;
                 Long alerttime;
                 alerttime = date.getTime();
-                random = (int)taskId;
+                random = (int) taskId;
                 Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
                 intent.putExtra("notificationId", notificationId);
                 intent.putExtra("todo", taskName.getText().toString());
@@ -389,18 +381,15 @@ public class TaskActivity extends AppCompatActivity {
                     alarm.set(AlarmManager.RTC_WAKEUP, alerttime, alarmIntent);
                 }
 
-                if (startDate.equals("") || startTime.equals("") || mTaskName.equals("")){
+                if (startDate.equals("") || startTime.equals("") || mTaskName.equals("")) {
                     Toast.makeText(TaskActivity.this, "Complete all of your info", Toast.LENGTH_SHORT).show();
-                }
-
-                else if (updateTask.equals("0")) {
+                } else if (updateTask.equals("0")) {
 
                     Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
                     helper.insertTask(goalId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox, notifyState);
                     i.putExtra("goalId", goalId);
                     startActivity(i);
-                }
-                else if (updateTask.equals("1")){
+                } else if (updateTask.equals("1")) {
                     Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
                     helper.updateTask(taskId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox, notifyState);
                     i.putExtra("goalId", goalId);
@@ -414,14 +403,14 @@ public class TaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskActivity.this, random,intent, 0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskActivity.this, random, intent, 0);
 
                 //PendingIntent pendingIntent = PendingIntent.getBroadcast(SettingActivity.this, goalId, intent,0);
                 AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                 alarm.cancel(pendingIntent);
 
-                Intent  intent1 = new Intent(TaskActivity.this, DisplayTaskScreen.class);
+                Intent intent1 = new Intent(TaskActivity.this, DisplayTaskScreen.class);
                 intent1.putExtra("goalId", goalId);
                 startActivity(intent1);
             }
@@ -432,7 +421,7 @@ public class TaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskActivity.this, random,intent, 0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskActivity.this, random, intent, 0);
 
                 //PendingIntent pendingIntent = PendingIntent.getBroadcast(SettingActivity.this, goalId, intent,0);
                 AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -446,6 +435,7 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
     }
+
     // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
@@ -468,7 +458,16 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(getApplicationContext(), DisplayTaskScreen.class);
+        i.putExtra("goalId", goalId);
         startActivity(i);
         finish();
+    }
+
+    public String con(int time) {
+        if (time >= 10) {
+            return String.valueOf(time);
+        } else {
+            return "0" + String.valueOf(time);
+        }
     }
 }

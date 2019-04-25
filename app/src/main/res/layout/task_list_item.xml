@@ -23,7 +23,8 @@
             android:id="@+id/display_task_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_check_box_black_24dp" />
+            android:src="@drawable/ic_check_box_black_24dp"
+            />
 
         <ImageView
             android:id="@+id/display_task_alarm"
@@ -42,8 +43,8 @@
             android:id="@+id/display_task_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/display_task_alarm"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
             android:text="تنظيف مجلس النساء"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="?attr/textcolor"
@@ -54,9 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/display_task_name"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/display_task_alarm"
+            android:layout_centerHorizontal="true"
             android:text="11/1/2019"
             android:textColor="?attr/textcolor"
             android:textSize="8pt"

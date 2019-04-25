@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="@drawable/item_background"
-    android:paddingBottom="5dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -14,6 +13,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/homee"
+            android:layout_margin="10dp"
             android:id="@+id/our_goal_type"
             />
         <ImageView
@@ -25,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Goal_Name"
                 android:id="@+id/our_goal_name"
+                android:textStyle="bold"
                 android:textColor="?attr/textcolor"
                 android:textSize="10pt"
                 android:layout_gravity="right|center|bottom"
@@ -40,12 +42,13 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="3dp"
                 android:background="#969696"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Description"
+                android:layout_marginTop="10dp"
                 android:id="@+id/our_goal_description"
                 android:textColor="?attr/textcolor"
                 android:textSize="10pt"

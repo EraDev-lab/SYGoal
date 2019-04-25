@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -42,22 +44,23 @@ public class TaskAdapter extends CursorAdapter {
     Context mContextTT;
     HelperClass helper;
 
-    static private class Holder{
+    static private class Holder {
         ImageView mAlarm;
         ImageView mTaskMenu;
         TextView displayTaskId;
 
-        public Holder(View view){
+        public Holder(View view) {
             mTaskMenu = (ImageView) view.findViewById(R.id.task_menu);
             mAlarm = (ImageView) view.findViewById(R.id.display_task_alarm);
             displayTaskId = view.findViewById(R.id.display_task_id);
         }
     }
+
     //Constructor
     public TaskAdapter(final Context mContextTT, Cursor c) {
         super(mContextTT, c, 0);
         this.mContextTT = mContextTT;
-        mInflater = (LayoutInflater)mContextTT.getSystemService(mContextTT.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) mContextTT.getSystemService(mContextTT.LAYOUT_INFLATER_SERVICE);
     }
 
     //inflate the xml Layout to display the data on ot.
@@ -69,7 +72,7 @@ public class TaskAdapter extends CursorAdapter {
         Holder holder = new Holder(view);
         view.setTag(holder);
         return view;
-        }
+    }
 
     // get the data and display it on the screen.
     @Override
@@ -129,7 +132,7 @@ public class TaskAdapter extends CursorAdapter {
 
         taskId = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
         holder.displayTaskId.setVisibility(View.INVISIBLE);
-        holder.displayTaskId.setText(taskId+"");
+        holder.displayTaskId.setText(taskId + "");
 
 
         Notify.setOnClickListener(new View.OnClickListener() {
@@ -195,10 +198,12 @@ public class TaskAdapter extends CursorAdapter {
                 }
             }
         });
+
         //display Task CheckBoxCompleted
         ImageView checkBox = (ImageView) view.findViewById(R.id.display_task_checkbox);
         int checkBoxColumnIndex = cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed);
         int mCheckBox = cursor.getInt(checkBoxColumnIndex);
+
         //adjust some operation to display the correct Task CheckBox Completed.
         if (mCheckBox == 1) {
             checkBox.setImageResource(R.drawable.ic_check_box_black_24dp);
