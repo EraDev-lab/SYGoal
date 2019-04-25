@@ -211,6 +211,33 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 }
 
                 helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber);
+            } else{
+                try {
+                    db = helper.getReadableDatabase();
+                    Cursor cursor1 = db.query(GoalContract.TABLE_NAME,
+                            new String[]{GoalContract._ID,
+                                    GoalContract.Goal_Name},
+
+                            GoalContract._ID + "=?",
+                            new String[]{String.valueOf(goalId)},
+                            null,
+                            null,
+                            null,
+                            null);
+
+                    if (cursor1 != null)
+                        cursor1.moveToFirst();
+                    mGoalName = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Name));
+                    cursor1.close();
+                } finally {
+                    db.close();
+                }
+
+                mPercentage = 00;
+
+                taskPercentage.setText((int) mPercentage + "%");
+                taskProgressBar.setProgress((int) mPercentage);
+                goalName.setText(mGoalName);
             }
 
             adapter = new TaskAdapter(this, cursor);
