@@ -9,7 +9,7 @@
     <string name="nav_header_desc">Navigation header</string>
 
     <string name="Goals_Activity">الاهداف الحالية</string>
-
+    <string name="Earlier_date">خطأ اختيار وقت سابق</string>
     <string name="action_settings">الاعدادات</string>
     <string name="action_home">الرئيسية</string>
     <string name="action_contact">اتصل بنا</string>

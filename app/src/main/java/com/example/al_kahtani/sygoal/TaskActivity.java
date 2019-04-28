@@ -300,7 +300,35 @@ public class TaskActivity extends AppCompatActivity {
                 mTaskName = taskName.getText().toString();
                 startDate = taskDate.getText().toString();
                 startTime = taskNotifyOn.getText().toString();
+////////////////////////////////**************************
+                ///****************************past date*************************
 
+                String savingdate=startDate+" "+startTime;//"2018_12_27 16:15:51";2019_01_1 12:00
+
+                SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Date date5 = null;
+                try {
+                    date5 = formatter1.parse(savingdate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTime(date5);
+
+
+                Calendar cal2 = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String currentdate = sdf.format(cal2.getTime());
+
+                int timecomp = cal2.compareTo(cal1);
+                // Toast.makeText(context, timecomp+"you ", Toast.LENGTH_LONG).show();
+                if (timecomp > 0) {
+                    Toast.makeText(TaskActivity.this, R.string.Earlier_date, Toast.LENGTH_LONG).show();//
+                    return;
+                } else {
+                    // cardviewbook.setCardBackgroundColor(Color.parseColor("#fd0101"));
+                }
+                /////////////////////////////////*********************
                 if (mTaskName.isEmpty() || startDate.isEmpty() || startTime.isEmpty()) {
                     if (mTaskName.isEmpty()) {
                         taskName.setError(getString(R.string.task_is_required));
@@ -348,10 +376,10 @@ public class TaskActivity extends AppCompatActivity {
                 }
 
                 String myDate = startDate + " " + startTime;
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date date = null;
                 try {
-                    date = sdf.parse(myDate);
+                    date = sdf1.parse(myDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

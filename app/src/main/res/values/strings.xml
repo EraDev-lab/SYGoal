@@ -35,7 +35,7 @@
     <string name="description_is_required">Description is required</string>
     <string name="date_is_required">Date is required</string>
     <string name="time_is_required">Time is required</string>
-
+    <string name="Earlier_date">Earlier date</string>
     <string name="Tasks">Tasks</string>
     <string name="The_Goal">The Goal</string>
     <string name="Goal_Type">Goal Type</string>
