@@ -64,4 +64,9 @@
         <item>Monthly</item>
         <item>Yearly</item>
     </string-array>
+
+    <string name="fa_icon_areachart">&#xf1fe;</string>
+    <string name="fa_icon_piechart">&#xf200;</string>
+    <string name="fa_icon_linechart">&#xf201;</string>
+    <string name="fa_icon">&#xf036;</string>
 </resources>

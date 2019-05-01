@@ -35,7 +35,7 @@
     <string name="description_is_required">Description is required</string>
     <string name="date_is_required">Date is required</string>
     <string name="time_is_required">Time is required</string>
-    <string name="Earlier_date">Earlier date</string>
+    <string name="Earlier_date">Earlier Date</string>
     <string name="Tasks">Tasks</string>
     <string name="The_Goal">The Goal</string>
     <string name="Goal_Type">Goal Type</string>
@@ -63,5 +63,10 @@
         <item>Monthly</item>
         <item>Yearly</item>
     </string-array>
+
+    <string name="fa_icon_areachart">&#xf1fe;</string>
+    <string name="fa_icon_piechart">&#xf200;</string>
+    <string name="fa_icon_linechart">&#xf201;</string>
+    <string name="fa_icon">&#xf06d;</string>
 
 </resources>

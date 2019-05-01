@@ -12,6 +12,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -37,6 +39,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
     TextView goalName;
     TextView taskPercentage;
     ProgressBar taskProgressBar;
+    ProgressBar emptyTaskProgressBar;
 
     ArrayList<TaskContract> item;
     long goalId;
@@ -45,6 +48,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
     int taskCount = 0;
     int newCompleteTaskCount = 0;
     int newTaskCount = 0;
+    int mGoalActivity = 0;
     double newMPercentage = 00;
     String newBeginDate = "0000-1-1";
     String newMaxDate;
@@ -85,6 +89,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
         goalName = findViewById(R.id.taskactivity_goal_name);
         taskPercentage = findViewById(R.id.taskactivity_percentage);
         taskProgressBar = findViewById(R.id.taskactivity_progress);
+        emptyTaskProgressBar = findViewById(R.id.empty_taskactivity_progress);
 
         Intent intent = getIntent();
         goalId = intent.getLongExtra("goalId", goalId);
@@ -150,7 +155,8 @@ public class DisplayTaskScreen extends AppCompatActivity {
                     db = helper.getReadableDatabase();
                     Cursor cursor1 = db.query(GoalContract.TABLE_NAME,
                             new String[]{GoalContract._ID,
-                                    GoalContract.Goal_Name},
+                                    GoalContract.Goal_Name,
+                                    GoalContract.Goal_Activity},
 
                             GoalContract._ID + "=?",
                             new String[]{String.valueOf(goalId)},
@@ -162,6 +168,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                     if (cursor1 != null)
                         cursor1.moveToFirst();
                     mGoalName = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Name));
+                    mGoalActivity = cursor1.getInt(cursor1.getColumnIndex(GoalContract.Goal_Activity));
                     cursor1.close();
                 } finally {
                     db.close();
@@ -216,7 +223,8 @@ public class DisplayTaskScreen extends AppCompatActivity {
                     db = helper.getReadableDatabase();
                     Cursor cursor1 = db.query(GoalContract.TABLE_NAME,
                             new String[]{GoalContract._ID,
-                                    GoalContract.Goal_Name},
+                                    GoalContract.Goal_Name,
+                                    GoalContract.Goal_Activity},
 
                             GoalContract._ID + "=?",
                             new String[]{String.valueOf(goalId)},
@@ -228,6 +236,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                     if (cursor1 != null)
                         cursor1.moveToFirst();
                     mGoalName = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Name));
+                    mGoalActivity = cursor1.getInt(cursor1.getColumnIndex(GoalContract.Goal_Activity));
                     cursor1.close();
                 } finally {
                     db.close();
@@ -242,7 +251,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
 
             adapter = new TaskAdapter(this, cursor);
 
-
+            if (mGoalActivity == 1) {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -254,112 +263,125 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 }
             });
 
-            taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, final View view, int position, final long id) {
-                    final PopupMenu popupMenu = new PopupMenu(DisplayTaskScreen.this, view);
-                    popupMenu.inflate(R.menu.pop_up_menu);
-                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            int selectedItem = item.getItemId();
-                            if (selectedItem == R.id.update) {
-                                updateTask = "1";
-                                Intent intent = new Intent(DisplayTaskScreen.this, TaskActivity.class);
-                                intent.putExtra("taskId", id);
-                                intent.putExtra("updateTask", updateTask);
-                                startActivity(intent);
+                taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, final View view, int position, final long id) {
+                        final PopupMenu popupMenu = new PopupMenu(DisplayTaskScreen.this, view);
+                        popupMenu.inflate(R.menu.pop_up_menu);
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                int selectedItem = item.getItemId();
+                                if (selectedItem == R.id.update) {
+                                    updateTask = "1";
+                                    Intent intent = new Intent(DisplayTaskScreen.this, TaskActivity.class);
+                                    intent.putExtra("taskId", id);
+                                    intent.putExtra("updateTask", updateTask);
+                                    startActivity(intent);
 
-                            } else if (selectedItem == R.id.delete) {
-                                helper.deleteTask(id);
-                                Cursor cursor = updateUi();
+                                } else if (selectedItem == R.id.delete) {
+                                    helper.deleteTask(id);
+                                    Cursor cursor = updateUi();
 
 
-                                while (cursor.moveToNext()) {
-                                    int c = cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed);
-                                    completeState = cursor.getInt(c);
+                                    while (cursor.moveToNext()) {
+                                        int c = cursor.getColumnIndex(TaskContract.Task_CheckBox_Completed);
+                                        completeState = cursor.getInt(c);
 
-                                    newTaskCount = newTaskCount + 1;
-                                    if (completeState == 1) {
-                                        newCompleteTaskCount = newCompleteTaskCount + 1;
+                                        newTaskCount = newTaskCount + 1;
+                                        if (completeState == 1) {
+                                            newCompleteTaskCount = newCompleteTaskCount + 1;
+                                        }
+
+                                        newNextDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
+                                        try {
+                                            SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+                                            Date date1 = format.parse(newBeginDate);
+                                            Date date2 = format.parse(newNextDate);
+
+                                            if (date1.compareTo(date2) > 0) {
+                                                newMaxDate = newBeginDate;
+                                            } else if (date1.compareTo(date2) < 0) {
+                                                newMaxDate = newNextDate;
+                                            } else if (date1.compareTo(date2) == 0) {
+                                                newMaxDate = newNextDate;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                     }
 
-                                    newNextDate = cursor.getString(cursor.getColumnIndex(TaskContract.Task_Date));
+                                    newMPercentage = Math.floor((newCompleteTaskCount * 100) / newTaskCount);
+
+                                    taskPercentage.setText((int) newMPercentage + "%");
+                                    taskProgressBar.setProgress((int) newMPercentage);
+
+
+                                    Calendar calendar = Calendar.getInstance();
+                                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                                    int month = calendar.get(Calendar.MONTH);
+                                    int year = calendar.get(Calendar.YEAR);
+                                    month = month + 1;
+
+                                    newCurrentDate = year + "-" + month + "-" + day;
+
                                     try {
+                                        newEndDate = newMaxDate;
                                         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
-                                        Date date1 = format.parse(newBeginDate);
-                                        Date date2 = format.parse(newNextDate);
+                                        Date date1 = format.parse(newEndDate);
+                                        Date date2 = format.parse(newCurrentDate);
 
                                         if (date1.compareTo(date2) > 0) {
-                                            newMaxDate = newBeginDate;
+                                            if (newCompleteTaskCount < newTaskCount) {
+                                                goalActivityNumber = 1;
+                                            } else if (newCompleteTaskCount == newTaskCount) {
+                                                goalActivityNumber = 3;
+                                            }
                                         } else if (date1.compareTo(date2) < 0) {
-                                            newMaxDate = newNextDate;
+                                            if (newCompleteTaskCount < newTaskCount) {
+                                                goalActivityNumber = 2;
+                                            } else if (newCompleteTaskCount == newTaskCount) {
+                                                goalActivityNumber = 3;
+                                            }
                                         } else if (date1.compareTo(date2) == 0) {
-                                            newMaxDate = newNextDate;
+                                            if (newCompleteTaskCount < newTaskCount) {
+                                                goalActivityNumber = 1;
+                                            } else if (newCompleteTaskCount == newTaskCount) {
+                                                goalActivityNumber = 3;
+                                            }
                                         }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
+
+                                    adapter = new TaskAdapter(DisplayTaskScreen.this, cursor);
+                                    taskListView.setAdapter(adapter);
+
+                                    helper.updateGoal(goalId, newMaxDate, newMPercentage, goalActivityNumber);
                                 }
-
-                                newMPercentage = Math.floor((newCompleteTaskCount * 100) / newTaskCount);
-
-                                taskPercentage.setText((int) newMPercentage + "%");
-                                taskProgressBar.setProgress((int) newMPercentage);
-
-
-                                Calendar calendar = Calendar.getInstance();
-                                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                                int month = calendar.get(Calendar.MONTH);
-                                int year = calendar.get(Calendar.YEAR);
-                                month = month + 1;
-
-                                newCurrentDate = year + "-" + month + "-" + day;
-
-                                try {
-                                    newEndDate = newMaxDate;
-                                    SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
-                                    Date date1 = format.parse(newEndDate);
-                                    Date date2 = format.parse(newCurrentDate);
-
-                                    if (date1.compareTo(date2) > 0) {
-                                        if (newCompleteTaskCount < newTaskCount) {
-                                            goalActivityNumber = 1;
-                                        } else if (newCompleteTaskCount == newTaskCount) {
-                                            goalActivityNumber = 3;
-                                        }
-                                    } else if (date1.compareTo(date2) < 0) {
-                                        if (newCompleteTaskCount < newTaskCount) {
-                                            goalActivityNumber = 2;
-                                        } else if (newCompleteTaskCount == newTaskCount) {
-                                            goalActivityNumber = 3;
-                                        }
-                                    } else if (date1.compareTo(date2) == 0) {
-                                        if (newCompleteTaskCount < newTaskCount) {
-                                            goalActivityNumber = 1;
-                                        } else if (newCompleteTaskCount == newTaskCount) {
-                                            goalActivityNumber = 3;
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                adapter = new TaskAdapter(DisplayTaskScreen.this, cursor);
-                                taskListView.setAdapter(adapter);
-
-                                helper.updateGoal(goalId, newMaxDate, newMPercentage, goalActivityNumber);
+                                return true;
                             }
-                            return true;
-                        }
-                    });
-                    popupMenu.show();
-                }
-            });
+                        });
+                        popupMenu.show();
+                    }
+                });
+            }
+            else {
+                fab.setVisibility(View.GONE);
+            }
             taskListView.setAdapter(adapter);
         } finally {
             db.close();
         }
+        Animation anim_bottom_to_top = AnimationUtils.loadAnimation(this, R.anim.anim_bottom_to_top);
+        Animation anim_left_to_right = AnimationUtils.loadAnimation(this, R.anim.anim_left_to_right);
+        Animation anim_top_to_bottom = AnimationUtils.loadAnimation(this, R.anim.anim_top_to_bottom);
+
+        taskListView.setAnimation(anim_bottom_to_top);
+        emptyTaskProgressBar.setAnimation(anim_left_to_right);
+        taskProgressBar.setAnimation(anim_left_to_right);
+        taskPercentage.setAnimation(anim_left_to_right);
+        goalName.setAnimation(anim_top_to_bottom);
     }
 
     // languge setting
@@ -379,6 +401,13 @@ public class DisplayTaskScreen extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         String language = pref.getString("My_Lang", "");
         setLocale(language);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(DisplayTaskScreen.this, BottomNavigationViewActivity.class);
+        intent.putExtra("goalId", goalId);
+        startActivity(intent);
     }
 
     private Cursor updateUi() {

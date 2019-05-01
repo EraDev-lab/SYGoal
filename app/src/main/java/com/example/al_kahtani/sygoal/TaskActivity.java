@@ -13,8 +13,10 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -71,6 +73,7 @@ public class TaskActivity extends AppCompatActivity {
     Calendar mCurrentDate;
     Calendar mCurrentTime;
     NotificationManager notificationManager;
+    DatePickerDialog mPickerDialog;
     SharedPref sharedpref;
     HelperClass helper;
     SQLiteDatabase db;
@@ -219,7 +222,7 @@ public class TaskActivity extends AppCompatActivity {
                 day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
                 //final String abc= getAge(year, month, day);
 
-                DatePickerDialog mPickerDialog = new DatePickerDialog(TaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                 mPickerDialog = new DatePickerDialog(TaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int Year, int Month, int Day) {
                         startDate = Year + "-" + (Month + 1) + "-" + Day;
@@ -230,7 +233,9 @@ public class TaskActivity extends AppCompatActivity {
                         //   mImageGenerator.generateDateImage(mCurrentDate, R.drawable.empty_calendar);
                     }
                 }, year, month, day);
-                mPickerDialog.show();
+                mPickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                mPickerDialog.setTitle("Select Date");
+                 mPickerDialog.show();
             }
         });
         ///////////////////*Calender////////////////////---------------------
@@ -252,7 +257,7 @@ public class TaskActivity extends AppCompatActivity {
                         taskNotifyOn.setText(startTime);
                         // alarmStartTime = mCurrentTime.getTimeInMillis();
                     }
-                }, hour, minute, false);//Yes 24 hour time
+                }, hour, minute,  false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
             }
@@ -300,35 +305,7 @@ public class TaskActivity extends AppCompatActivity {
                 mTaskName = taskName.getText().toString();
                 startDate = taskDate.getText().toString();
                 startTime = taskNotifyOn.getText().toString();
-////////////////////////////////**************************
-                ///****************************past date*************************
 
-                String savingdate=startDate+" "+startTime;//"2018_12_27 16:15:51";2019_01_1 12:00
-
-                SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date date5 = null;
-                try {
-                    date5 = formatter1.parse(savingdate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                Calendar cal1 = Calendar.getInstance();
-                cal1.setTime(date5);
-
-
-                Calendar cal2 = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                String currentdate = sdf.format(cal2.getTime());
-
-                int timecomp = cal2.compareTo(cal1);
-                // Toast.makeText(context, timecomp+"you ", Toast.LENGTH_LONG).show();
-                if (timecomp > 0) {
-                    Toast.makeText(TaskActivity.this, R.string.Earlier_date, Toast.LENGTH_LONG).show();//
-                    return;
-                } else {
-                    // cardviewbook.setCardBackgroundColor(Color.parseColor("#fd0101"));
-                }
-                /////////////////////////////////*********************
                 if (mTaskName.isEmpty() || startDate.isEmpty() || startTime.isEmpty()) {
                     if (mTaskName.isEmpty()) {
                         taskName.setError(getString(R.string.task_is_required));
@@ -425,7 +402,8 @@ public class TaskActivity extends AppCompatActivity {
                 }
             }
         });
-// cancel notefication
+
+        // cancel notefication
         cancelTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

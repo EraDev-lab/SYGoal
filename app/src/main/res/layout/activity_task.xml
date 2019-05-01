@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="?attr/backgroundcolor"
+    android:id="@+id/icons_container"
     android:layout_height="match_parent">
 <LinearLayout
     android:layout_width="match_parent"
@@ -21,6 +22,7 @@
             android:fontFamily="sans-serif"
             android:layout_marginTop="20dp"
             android:padding="10dp"
+            android:maxLength="50"
             android:textColorHint="?attr/textcolor"
             android:textColor="?attr/textcolor"
             android:id="@+id/task_name"
@@ -117,9 +119,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:orientation="horizontal">
 
 
@@ -129,8 +132,8 @@
             android:text="@string/Delete"
             android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
             android:background="@drawable/delete_button_shape"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:id="@+id/delete_task"
             android:textSize="8pt"
             android:textAllCaps="false" />
@@ -145,8 +148,8 @@
             android:textSize="8pt"
             android:drawableLeft="@drawable/ic_save_black_24dp"
             android:background="@drawable/save_button_shape"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textAllCaps="false" />
 
         <Button
@@ -155,8 +158,8 @@
             android:layout_height="wrap_content"
             android:textSize="8pt"
             android:text="Cancel"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:drawableLeft="@drawable/ic_cancel_black_24dp"
             android:background="@drawable/cancel_button_shape"
             android:textAllCaps="false" />

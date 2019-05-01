@@ -105,41 +105,6 @@ public class Achievement_fragment extends Fragment {
                         startActivity(i);
                     }
                 });
-                achieveListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
-
-                        final PopupMenu popupMenu = new PopupMenu(rootView.getContext(), view);
-                        popupMenu.inflate(R.menu.pop_up_menu);
-                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                selectedItem = item.getItemId();
-                                if (selectedItem == R.id.update) {
-                                    updateGoal = "1";
-                                    updateTask = "1";
-                                    goalActivityNumber = 3;
-
-                                    Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
-                                    intent.putExtra("goalId", id);
-                                    intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity", goalActivityNumber);
-                                    startActivity(intent);
-
-                                } else if (selectedItem == R.id.delete) {
-                                    helper.deleteGoal(id);
-                                    Cursor cursor1 = updateUi();
-                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
-                                    achieveListView.setAdapter(adapter);
-
-                                }
-                                return true;
-                            }
-                        });
-                        popupMenu.show();
-                        return true;
-                    }
-                });
                 achieveListView.setAdapter(adapter);
             }
             /**
@@ -163,41 +128,6 @@ public class Achievement_fragment extends Fragment {
                         Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
                         i.putExtra("goalId", id);
                         startActivity(i);
-                    }
-                });
-                achieveListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
-
-                        final PopupMenu popupMenu = new PopupMenu(rootView.getContext(), view);
-                        popupMenu.inflate(R.menu.pop_up_menu);
-                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                selectedItem = item.getItemId();
-                                if (selectedItem == R.id.update) {
-                                    updateGoal = "1";
-                                    updateTask = "1";
-                                    goalActivityNumber = 3;
-
-                                    Intent intent = new Intent(rootView.getContext(), GoalActivity.class);
-                                    intent.putExtra("goalId", id);
-                                    intent.putExtra("updateGoal", updateGoal);
-                                    intent.putExtra("goalActivity", goalActivityNumber);
-                                    startActivity(intent);
-
-                                } else if (selectedItem == R.id.delete) {
-                                    helper.deleteGoal(id);
-                                    Cursor cursor1 = updateUi();
-                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
-                                    achieveListView.setAdapter(adapter);
-
-                                }
-                                return true;
-                            }
-                        });
-                        popupMenu.show();
-                        return true;
                     }
                 });
                 achieveListView.setAdapter(adapter);
@@ -225,29 +155,5 @@ public class Achievement_fragment extends Fragment {
         SharedPreferences pref = getActivity().getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         String language = pref.getString("My_Lang", "");
         setLocale(language);
-    }
-
-    private Cursor updateUi() {
-
-        db = helper.getReadableDatabase();
-
-        String[] projection = {GoalContract._ID,
-                GoalContract.Goal_Name,
-                GoalContract.Goal_Type,
-                GoalContract.Goal_Activity,
-                GoalContract.Goal_Percentage,
-                GoalContract.Goal_MaxDate,
-                GoalContract.Goal_Description};
-
-        final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
-                projection,
-                GoalContract.Goal_Activity + "=?",
-                new String[]{String.valueOf(3)},
-                null,
-                null,
-                null,
-                null);
-
-        return mcursor;
     }
 }

@@ -12,13 +12,15 @@
     android:paddingTop="20dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="تنظيف شامل للمنزل"
         android:textColor="?attr/textcolor"
         android:textSize="15pt"
         android:id="@+id/taskactivity_goal_name"
-        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -41,6 +43,7 @@
         style="?android:progressBarStyleHorizontal"
         android:progressDrawable="@drawable/circle"
         android:progressTint="#d6e6d7"
+        android:id="@+id/empty_taskactivity_progress"
         />
     <ProgressBar
         android:layout_width="150dp"

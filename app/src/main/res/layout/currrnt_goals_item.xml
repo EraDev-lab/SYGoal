@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="110dp"
     android:padding="8dp"
     android:orientation="vertical"
     android:background="@drawable/item_background">
@@ -10,10 +10,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:gravity="center"
         android:orientation="horizontal">
     <ImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:src="@color/colorAccent"
         android:id="@+id/display_goal_type"
         />
     <TextView
@@ -21,9 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/display_goal_name"
-        android:layout_gravity="center"
         android:textColor="?attr/textcolor"
         android:textSize="8pt"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:textStyle="bold"
         tools:text="@string/Goal_Name"
         android:gravity="center"
@@ -33,7 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/display_goal_percentage"
-        android:layout_gravity="center"
         android:textColor="?attr/textcolor"
         android:textSize="8pt"
         tools:text="00%"
@@ -46,16 +48,17 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_alignParentBottom="true"
         android:progress="100"
-        android:progressTint="#9f9a9a"
+        android:progressTint="#00b2ff"
         />
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_alignParentBottom="true"
-        android:progress="00"
+        android:progress="40"
         android:layout_marginTop="10dp"
         android:id="@+id/current_goal_progressbar"
+        android:progressTint="#0800ff"
         />
 
 </RelativeLayout>

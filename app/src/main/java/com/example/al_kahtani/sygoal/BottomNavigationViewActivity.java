@@ -161,6 +161,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
 
     @Override
     public void onBackPressed() {
-        finish();
+        super.onBackPressed();
+        this.finish();
     }
 }
