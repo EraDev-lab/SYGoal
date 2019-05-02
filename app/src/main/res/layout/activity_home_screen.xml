@@ -7,13 +7,11 @@
     android:background="?attr/backgroundcolor"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Home Screen"
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/splash"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:gravity="center"
-        android:textSize="20pt"
-        android:fontFamily="sans-serif-condensed"
         />
 </RelativeLayout>
