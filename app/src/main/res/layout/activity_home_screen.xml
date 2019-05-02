@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundcolor"
+    tools:context=".Home_Screen"
     >
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/splash"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:src="@drawable/splash"
         />
+
 </RelativeLayout>

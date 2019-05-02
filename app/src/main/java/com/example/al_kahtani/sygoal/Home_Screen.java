@@ -28,16 +28,16 @@ public class Home_Screen extends AppCompatActivity {
             public  void  run() {
 
                 try {
-                     sleep(3000);
+                    sleep(3000);
 
                     Intent intent = new Intent(getApplicationContext(),BottomNavigationViewActivity.class);
                     startActivity(intent);
 
                 }
                 catch (InterruptedException e){
-                 e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
-         };
+        };
     }
 }
