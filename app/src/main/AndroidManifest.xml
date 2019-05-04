@@ -3,8 +3,7 @@
     package="com.example.al_kahtani.sygoal">
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,18 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Home_Screen"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".BottomNavigationViewActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".AboutActivity"
             android:label="About"
@@ -41,8 +30,15 @@
 
         <activity
             android:name=".DisplayTaskScreen"
-            android:parentActivityName=".BottomNavigationViewActivity"></activity>
-        <activity android:name=".WebActivity"></activity>
+            android:parentActivityName=".BottomNavigationViewActivity" />
+        <activity android:name=".WebActivity" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

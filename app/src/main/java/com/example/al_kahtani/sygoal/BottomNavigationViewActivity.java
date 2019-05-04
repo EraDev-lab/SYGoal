@@ -73,14 +73,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
             startActivity(intent);
             return true;
         }
-        else if (id == R.id.action_home) {
 
-            Intent intent = new Intent(BottomNavigationViewActivity.this, Home_Screen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-         finish();
-            startActivity(intent);
-            return true;
-        }
         else if (id == R.id.action_contact) {
             Intent intent = new Intent(BottomNavigationViewActivity.this, AboutActivity.class);
             startActivity(intent);
