@@ -22,7 +22,7 @@
             android:fontFamily="sans-serif"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:maxLength="50"
+            android:maxLength="30"
             android:textColorHint="?attr/textcolor"
             android:textColor="?attr/textcolor"
             android:id="@+id/task_name"

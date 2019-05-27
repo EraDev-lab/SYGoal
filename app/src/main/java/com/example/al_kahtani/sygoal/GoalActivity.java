@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -32,6 +33,7 @@ public class GoalActivity extends AppCompatActivity {
 
     RadioButton jobRadioButton, houseWorkRadioButton, educationRadioButton, exerciseRadioButton,
     socialRadioButton, otherRadioButton;
+    ImageView imgJob, imgHousework, imgEducation, imgExercise, imgSocial, imgOther;
 
     Button saveGoal, deleteGoal, cancelGoal;
 
@@ -45,6 +47,8 @@ public class GoalActivity extends AppCompatActivity {
     double percentage;
     String maxDate;
     int random;
+    int completeGoalCount = 0;
+    int completeGoalAll = 0;
 
     SharedPref sharedpref;
     HelperClass helper;
@@ -78,6 +82,13 @@ public class GoalActivity extends AppCompatActivity {
         exerciseRadioButton = findViewById(R.id.exercise_radiobutton);
         socialRadioButton = findViewById(R.id.socail_radiobutton);
         otherRadioButton = findViewById(R.id.other_radiobutton);
+        //find ImageView by id
+        imgJob = findViewById(R.id.job);
+        imgEducation = findViewById(R.id.education);
+        imgExercise = findViewById(R.id.exercise);
+        imgHousework = findViewById(R.id.housework);
+        imgSocial = findViewById(R.id.social);
+        imgOther = findViewById(R.id.other);
         //find Button by id
         saveGoal = findViewById(R.id.save_goal);
         deleteGoal = findViewById(R.id.delete_goal);
@@ -103,6 +114,22 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
         }
     }
 });
+
+        if(sharedpref.loadNightModeState()==true) {
+            imgJob.setImageResource(R.drawable.job_white);
+            imgSocial.setImageResource(R.drawable.social_white);
+            imgOther.setImageResource(R.drawable.other_white);
+            imgHousework.setImageResource(R.drawable.housework_white);
+            imgExercise.setImageResource(R.drawable.exercise_white);
+            imgEducation.setImageResource(R.drawable.education_white);
+        }else{
+            imgJob.setImageResource(R.drawable.job);
+            imgSocial.setImageResource(R.drawable.social);
+            imgOther.setImageResource(R.drawable.other);
+            imgHousework.setImageResource(R.drawable.housework);
+            imgExercise.setImageResource(R.drawable.exercise);
+            imgEducation.setImageResource(R.drawable.education);
+        }
 
         if (updateGoal.equals("1")){
             setTitle("Edit Goal");
@@ -195,7 +222,7 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     percentage = 00.0;
                     maxDate = "2019-3-17";
 
-                    goalId = helper.insertGoal(mGoalName, selectedType, mGoalDescription, maxDate, percentage, goalActivityNumber);
+                    goalId = helper.insertGoal(mGoalName, selectedType, mGoalDescription, maxDate, percentage, goalActivityNumber, completeGoalCount, completeGoalAll);
 
                     intent.putExtra("goalId", goalId);
                     //intent.putExtra("updateGoal", updateGoal);

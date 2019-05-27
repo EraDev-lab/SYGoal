@@ -12,7 +12,7 @@ public class HelperClass extends SQLiteOpenHelper {
     //DataBase Name
     private static final String DATABASE_NAME = "goals.db";
     //DataBase Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     SQLiteDatabase db;
     //Create Goal Table Query
     String CREATE_GOAL_TABLE = "CREATE TABLE " + GoalContract.TABLE_NAME + " ("
@@ -21,6 +21,8 @@ public class HelperClass extends SQLiteOpenHelper {
             + GoalContract.Goal_Type + " INTEGER NOT NULL, "
             + GoalContract.Goal_MaxDate + " DATE NOT NULL, "
             + GoalContract.Goal_Percentage + " INTEGER NOT NULL, "
+            + GoalContract.Goal_Complete_Count + " INTEGER NOT NULL, "
+            + GoalContract.Goal_Complete_All + " INTEGER NOT NULL, "
             + GoalContract.Goal_Activity + " INTEGER NOT NULL, "
             + GoalContract.Goal_Description + " TEXT NOT NULL);";
 
@@ -60,7 +62,7 @@ public class HelperClass extends SQLiteOpenHelper {
     //-----------------------------------our Goal Operation-------------------------------------------------
 
     //insert data into the Goal Table
-    final public long insertGoal(String name, int type, String description, String maxDate, double percentage, int activity) {
+    final public long insertGoal(String name, int type, String description, String maxDate, double percentage, int activity, int goal_complete_count, int goal_complete_all) {
         //get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -72,6 +74,8 @@ public class HelperClass extends SQLiteOpenHelper {
         values.put(GoalContract.Goal_Percentage, percentage);
         values.put(GoalContract.Goal_Activity, activity);
         values.put(GoalContract.Goal_Type, type);
+        values.put(GoalContract.Goal_Complete_Count, goal_complete_count);
+        values.put(GoalContract.Goal_Complete_All, goal_complete_all);
         values.put(GoalContract.Goal_Description, description);
 
         //insert row
@@ -108,7 +112,7 @@ public class HelperClass extends SQLiteOpenHelper {
     }
 
     //other needed update method
-    public int updateGoal(long goalId, String maxDate, double percentage, int activity) {
+    public int updateGoal(long goalId, String maxDate, double percentage, int activity, int goal_complete_count, int goal_complete_all) {
         //get writable database as we want to write data
         db = this.getWritableDatabase();
 
@@ -117,6 +121,8 @@ public class HelperClass extends SQLiteOpenHelper {
         values.put(GoalContract.Goal_MaxDate, maxDate);
         values.put(GoalContract.Goal_Percentage, percentage);
         values.put(GoalContract.Goal_Activity, activity);
+        values.put(GoalContract.Goal_Complete_Count, goal_complete_count);
+        values.put(GoalContract.Goal_Complete_All, goal_complete_all);
 
         //the where clause (SELECT * FROM TABLE_NAME -WHERE- ..)
         String selection = GoalContract._ID + " = ?";

@@ -14,6 +14,8 @@ public class GoalContract implements BaseColumns {
     public static final String Goal_Type = "goal_type";
     public static final String Goal_MaxDate = "goal_max_date";
     public static final String Goal_Percentage = "goal_percentage";
+    public static final String Goal_Complete_All = "goal_complete_all";
+    public static final String Goal_Complete_Count = "goal_complete_count";
     public static final String Goal_Description = "description";
 
     //constructor

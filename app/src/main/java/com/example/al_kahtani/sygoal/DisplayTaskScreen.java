@@ -37,11 +37,11 @@ public class DisplayTaskScreen extends AppCompatActivity {
     FloatingActionButton fab;
     ListView taskListView;
     TextView goalName;
+    TextView goalDescription;
     TextView taskPercentage;
     ProgressBar taskProgressBar;
     ProgressBar emptyTaskProgressBar;
 
-    ArrayList<TaskContract> item;
     long goalId;
     String updateTask;
     int completeTaskCount = 0;
@@ -61,6 +61,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
     String nextDate;
     String currentDate;
     String mGoalName = "";
+    String mGoalDescription = "";
     int goalActivityNumber;
     int completeState;
     double mPercentage = 00;
@@ -70,7 +71,6 @@ public class DisplayTaskScreen extends AppCompatActivity {
     HelperClass helper;
     TaskAdapter adapter;
     SQLiteDatabase db;
-    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
 
         fab = findViewById(R.id.task_fab);
         taskListView = findViewById(R.id.task_list_view);
+        goalDescription = findViewById(R.id.taskactivity_goal_description);
         goalName = findViewById(R.id.taskactivity_goal_name);
         taskPercentage = findViewById(R.id.taskactivity_percentage);
         taskProgressBar = findViewById(R.id.taskactivity_progress);
@@ -100,6 +101,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
             db = helper.getWritableDatabase();
 
             String TaskAndGoalQuery = "SELECT g." + GoalContract.Goal_Name + ", "
+                    + "g." + GoalContract.Goal_Description + ", "
                     + "t." + TaskContract.Task_Name + ", "
                     + "t." + TaskContract.Task_Date + ", "
                     + "t." + TaskContract.Task_Notify_On + ", "
@@ -156,6 +158,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                     Cursor cursor1 = db.query(GoalContract.TABLE_NAME,
                             new String[]{GoalContract._ID,
                                     GoalContract.Goal_Name,
+                                    GoalContract.Goal_Description,
                                     GoalContract.Goal_Activity},
 
                             GoalContract._ID + "=?",
@@ -169,6 +172,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                         cursor1.moveToFirst();
                     mGoalName = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Name));
                     mGoalActivity = cursor1.getInt(cursor1.getColumnIndex(GoalContract.Goal_Activity));
+                    mGoalDescription = cursor1.getString(cursor1.getColumnIndex(GoalContract.Goal_Description));
                     cursor1.close();
                 } finally {
                     db.close();
@@ -179,6 +183,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 taskPercentage.setText((int) mPercentage + "%");
                 taskProgressBar.setProgress((int) mPercentage);
                 goalName.setText(mGoalName);
+                goalDescription.setText(mGoalDescription);
 
                 Calendar calendar = Calendar.getInstance();
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -217,7 +222,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber);
+                helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber, completeTaskCount, taskCount);
             } else{
                 try {
                     db = helper.getReadableDatabase();
@@ -357,7 +362,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                                     adapter = new TaskAdapter(DisplayTaskScreen.this, cursor);
                                     taskListView.setAdapter(adapter);
 
-                                    helper.updateGoal(goalId, newMaxDate, newMPercentage, goalActivityNumber);
+                                    helper.updateGoal(goalId, newMaxDate, newMPercentage, goalActivityNumber, completeTaskCount, taskCount);
                                 }
                                 return true;
                             }

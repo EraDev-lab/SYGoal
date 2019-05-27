@@ -10,12 +10,14 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 
 public class AchieveAndMissedAdapter extends CursorAdapter {
-    HelperClass helperClass;
-    SQLiteDatabase db;
+
+    int goal_complete_count = 0;
+    int goal_complete_all = 0;
 
     public AchieveAndMissedAdapter(Context context, Cursor c) {
         super(context, c, 0);
@@ -53,5 +55,11 @@ public class AchieveAndMissedAdapter extends CursorAdapter {
 
         TextView description = view.findViewById(R.id.our_goal_description);
         description.setText(cursor.getString(cursor.getColumnIndex(GoalContract.Goal_Description)));
-      }
+
+        TextView complete_number = (TextView) view.findViewById(R.id.complete_number);
+        goal_complete_count = cursor.getInt(cursor.getColumnIndex(GoalContract.Goal_Complete_Count));
+        goal_complete_all = cursor.getInt(cursor.getColumnIndex(GoalContract.Goal_Complete_All));
+
+        complete_number.setText(goal_complete_count + "/" + goal_complete_all + "");
+    }
 }
