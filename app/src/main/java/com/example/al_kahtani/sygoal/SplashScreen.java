@@ -20,19 +20,19 @@ public class SplashScreen extends AppCompatActivity {
         Animation rotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_animation);
         splashLogo.startAnimation(rotateAnimation);
 
-        Thread timer =new Thread(new Runnable() {
+        Thread timer = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
-                    Intent intent=new Intent(SplashScreen.this,BottomNavigationViewActivity.class);
+                } finally {
+                    Intent intent = new Intent(SplashScreen.this, BottomNavigationViewActivity.class);
                     startActivity(intent);
                 }
             }
-        }) ;
+        });
         timer.start();
     }
 }

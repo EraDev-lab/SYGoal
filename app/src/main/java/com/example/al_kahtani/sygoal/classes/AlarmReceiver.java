@@ -23,12 +23,12 @@ public class AlarmReceiver extends BroadcastReceiver {
         int random = intent.getIntExtra("random", 0);
         int notificationId = intent.getIntExtra("notificationId", 0);
         String message = intent.getStringExtra("todo");
-        setAlarm(context,random,notificationId,message);
+        setAlarm(context, random, notificationId, message);
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public void setAlarm(Context context, int random, int notificationId, String message){
+    public void setAlarm(Context context, int random, int notificationId, String message) {
 
         // Get id & message from intent.
 
@@ -46,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Prepare notification.
         Notification.Builder builder = new Notification.Builder(context);
         builder.setSmallIcon(R.drawable.ic_launcher1)
-               
+
                 .setContentTitle("SYGoal")
                 .setContentText(message)
                 .setAutoCancel(true)
@@ -59,7 +59,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
     }
-
 
 
 }

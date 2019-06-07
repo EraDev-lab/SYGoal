@@ -37,10 +37,7 @@ import java.util.Locale;
 
 public class SettingActivity extends AppCompatActivity {
 
-    private Switch daynight, notyoff;
-    private ImageView langsetting;
     LinearLayout about, rate;
-
     int taskId;
     long taskGoalId;
     int activityNumber;
@@ -51,19 +48,19 @@ public class SettingActivity extends AppCompatActivity {
     String taskNotifyOn;
     String taskCompletedState;
     int goalActivityNumber = 1;
-    private int notificationId = 1;
     int mNotify;
-
     SharedPref sharedpref;
     SQLiteDatabase db;
     HelperClass helper;
+    private Switch daynight, notyoff;
+    private ImageView langsetting;
+    private int notificationId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-// select any mode day/night and save it in sharedpref
+        // select any mode day/night and save it in sharedpref
         sharedpref = new SharedPref(this);//load night mode setting
         helper = new HelperClass(this);
-
 
         if (sharedpref.loadNightModeState() == true) {
             setTheme(R.style.darktheme);

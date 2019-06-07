@@ -1,32 +1,15 @@
 package com.example.al_kahtani.sygoal.data;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.al_kahtani.sygoal.DisplayTaskScreen;
 import com.example.al_kahtani.sygoal.R;
-import com.example.al_kahtani.sygoal.TaskActivity;
-import com.example.al_kahtani.sygoal.classes.AlarmReceiver;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * We using CursorAdapter since it's better than the ArrayAdapter.
@@ -36,25 +19,12 @@ import java.util.Date;
  */
 public class TaskAdapter extends CursorAdapter {
 
-    private int notificationId = 1;
     int position;
     int taskId;
-
-    private LayoutInflater mInflater;
     Context mContextTT;
     HelperClass helper;
-
-    static private class Holder {
-        ImageView mAlarm;
-        ImageView mTaskMenu;
-        TextView displayTaskId;
-
-        public Holder(View view) {
-            mTaskMenu = (ImageView) view.findViewById(R.id.task_menu);
-            mAlarm = (ImageView) view.findViewById(R.id.display_task_alarm);
-            displayTaskId = view.findViewById(R.id.display_task_id);
-        }
-    }
+    private int notificationId = 1;
+    private LayoutInflater mInflater;
 
     //Constructor
     public TaskAdapter(final Context mContextTT, Cursor c) {
@@ -129,12 +99,12 @@ public class TaskAdapter extends CursorAdapter {
         } else {
             Notify.setImageResource(R.drawable.on);
         }
-
+        //you can get taskId here
         taskId = cursor.getInt(cursor.getColumnIndex(TaskContract.Task_Id));
         holder.displayTaskId.setVisibility(View.INVISIBLE);
         holder.displayTaskId.setText(taskId + "");
 
-
+        /*
         Notify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,6 +168,7 @@ public class TaskAdapter extends CursorAdapter {
                 }
             }
         });
+*/
 
         //display Task CheckBoxCompleted
         ImageView checkBox = (ImageView) view.findViewById(R.id.display_task_checkbox);
@@ -209,6 +180,18 @@ public class TaskAdapter extends CursorAdapter {
             checkBox.setImageResource(R.drawable.ic_check_box_black_24dp);
         } else if (mCheckBox == 0) {
             checkBox.setImageResource(R.drawable.ic_check_box_outline_blank_black_24dp);
+        }
+    }
+
+    static private class Holder {
+        ImageView mAlarm;
+        ImageView mTaskMenu;
+        TextView displayTaskId;
+
+        public Holder(View view) {
+            mTaskMenu = (ImageView) view.findViewById(R.id.task_menu);
+            mAlarm = (ImageView) view.findViewById(R.id.display_task_alarm);
+            displayTaskId = view.findViewById(R.id.display_task_id);
         }
     }
 }

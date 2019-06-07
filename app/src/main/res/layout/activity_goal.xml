@@ -2,515 +2,521 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/backgroundcolor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:background="?attr/backgroundcolor"
-    android:orientation="vertical"
-    tools:context=".GoalActivity">
-
-    <EditText
-        android:id="@+id/goal_name"
-        android:layout_width="match_parent"
-        android:background="@drawable/edit_text_outline"
-        android:layout_marginTop="20dp"
-        android:hint="@string/Goal_Name"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:maxLength="25"
-        android:textColorHint="?attr/textcolor"
-        android:textColor="?attr/textcolor"
-        android:fontFamily="sans-serif"
-        android:textSize="8pt" />
-
-
-    <!--
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-
-                >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:layout_width="40dp"
-                            android:layout_height="20dp"
-                            android:checked="true" />
-
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/job" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/Job"
-
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-
-                        <RadioButton
-                            android:layout_width="40dp"
-                            android:layout_height="20dp" />
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/housework" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/Housework"
-
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-
-                        <RadioButton
-                            android:layout_width="40dp"
-                            android:layout_height="20dp" />
-
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/education" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/Education"
-
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-
-                        <RadioButton
-                            android:id="@+id/radio1"
-                            android:layout_width="40dp"
-                            android:layout_height="20dp" />
-
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/exercise" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/Education"
-
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-
-                        <RadioButton
-                            android:layout_width="40dp"
-                            android:layout_height="20dp" />
-
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/social" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="10dp"
-                            android:text="@string/Social"
-
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-
-                        <RadioButton
-                            android:layout_width="40dp"
-                            android:layout_height="20dp" />
-
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/other" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/Other"
-                            android:textSize="15sp"
-
-                            />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-            /-->
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="8pt"
-        android:hint="@string/Description"
-        android:background="@drawable/edit_text_outline"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColor="?attr/textcolor"
-        android:maxLength="40"
-        android:fontFamily="sans-serif"
-        android:textColorHint="?attr/textcolor"
-        android:id="@+id/goal_description"
-        />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Goal_Type"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:fontFamily="sans-serif"
-        android:textColor="?attr/textcolor"
-        android:textSize="8pt"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="5dp"
-        android:paddingBottom="5dp"
-        android:background="@drawable/edit_text_outline">
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/radiogroup">
-
-            <RadioButton
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dp"
-                android:id="@+id/job_radiobutton" />
-
-            <RadioButton
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="23dp"
-                android:id="@+id/housework_radiobutton"/>
-
-            <RadioButton
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="22dp"
-                android:id="@+id/education_radiobutton" />
-
-            <RadioButton
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="26dp"
-                android:id="@+id/exercise_radiobutton" />
-
-            <RadioButton
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="27dp"
-                android:id="@+id/socail_radiobutton" />
-
-            <RadioButton
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="28dp"
-                android:id="@+id/other_radiobutton" />
-
-        </RadioGroup>
-
-        <LinearLayout
-            android:id="@+id/linear1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toEndOf="@id/radiogroup"
-            android:layout_toRightOf="@id/radiogroup"
-            android:layout_marginTop="6dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/job"
-                android:src="@drawable/job"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:textColor="?attr/textcolor"
-                android:layout_marginLeft="5dp"
-                android:text="@string/Job"
-                android:gravity="center"
-                android:fontFamily="sans-serif"
-                android:textSize="8pt" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toEndOf="@id/radiogroup"
-            android:layout_toRightOf="@id/radiogroup"
-            android:layout_below="@id/linear1"
-            android:layout_marginTop="6dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/housework"
-                android:src="@drawable/housework"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:textColor="?attr/textcolor"
-                android:layout_marginStart="5dp"
-                android:text="@string/Housework"
-                android:gravity="center"
-                android:fontFamily="sans-serif"
-                android:textSize="8pt"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toEndOf="@id/radiogroup"
-            android:layout_toRightOf="@id/radiogroup"
-            android:layout_below="@id/linear2"
-            android:layout_marginTop="6dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/education"
-                android:id="@+id/education"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:textColor="?attr/textcolor"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:text="@string/Education"
-                android:gravity="center"
-                android:fontFamily="sans-serif"
-                android:textSize="8pt"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toEndOf="@id/radiogroup"
-            android:layout_toRightOf="@id/radiogroup"
-            android:layout_below="@id/linear3"
-            android:layout_marginTop="6dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/exercise"
-                android:id="@+id/exercise"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:text="@string/Exercise"
-                android:textColor="?attr/textcolor"
-                android:gravity="center"
-                android:fontFamily="sans-serif"
-                android:textSize="8pt" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toEndOf="@id/radiogroup"
-            android:layout_toRightOf="@id/radiogroup"
-            android:layout_below="@id/linear4"
-            android:layout_marginTop="6dp">
-
-            <ImageView
-                android:layout_width="37dp"
-                android:layout_height="39dp"
-                android:layout_gravity="center"
-                android:id="@+id/social"
-                android:src="@drawable/social" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:textColor="?attr/textcolor"
-                android:text="@string/Social"
-                android:gravity="center"
-                android:fontFamily="sans-serif"
-                android:textSize="8pt" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toEndOf="@id/radiogroup"
-            android:layout_toRightOf="@id/radiogroup"
-            android:layout_below="@id/linear5"
-            android:layout_marginTop="6dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/other"
-                android:id="@+id/other"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:text="@string/Other"
-                android:gravity="center"
-                android:textColor="?attr/textcolor"
-                android:fontFamily="sans-serif"
-                android:textSize="8pt" />
-        </LinearLayout>
-
-    </RelativeLayout>
+    android:background="?attr/backgroundcolor">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundcolor"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        tools:context=".GoalActivity">
 
-
-        <Button
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/goal_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Delete"
-            android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
-            android:background="@drawable/delete_button_shape"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:id="@+id/delete_goal"
-            android:textSize="8pt"
-            android:textAllCaps="false" />
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_outline"
+            android:fontFamily="sans-serif"
+            android:gravity="center|left"
+            android:hint="@string/Goal_Name"
+            android:maxLength="25"
+            android:padding="10dp"
+            android:textColor="?attr/textcolor"
+            android:textColorHint="?attr/textcolor"
+            android:textSize="8pt" />
 
-        <Button
-            android:id="@+id/save_goal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Save"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="8pt"
-            android:drawableLeft="@drawable/ic_save_black_24dp"
-            android:background="@drawable/save_button_shape"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/cancel_goal"
-            android:layout_width="wrap_content"
+        <!--
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:layout_width="40dp"
+                                android:layout_height="20dp"
+                                android:checked="true" />
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/job" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/Job"
+
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:layout_width="40dp"
+                                android:layout_height="20dp" />
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/housework" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/Housework"
+
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:layout_width="40dp"
+                                android:layout_height="20dp" />
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/education" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/Education"
+
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/radio1"
+                                android:layout_width="40dp"
+                                android:layout_height="20dp" />
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/exercise" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/Education"
+
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:layout_width="40dp"
+                                android:layout_height="20dp" />
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/social" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/Social"
+
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:layout_width="40dp"
+                                android:layout_height="20dp" />
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/other" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/Other"
+                                android:textSize="15sp"
+
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                /-->
+
+        <EditText
+            android:id="@+id/goal_description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="8pt"
-            android:text="Cancel"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_outline"
+            android:fontFamily="sans-serif"
+            android:gravity="center|left"
+            android:hint="@string/Description"
+            android:maxLength="40"
+            android:padding="10dp"
+            android:textColor="?attr/textcolor"
+            android:textColorHint="?attr/textcolor"
+            android:textSize="8pt" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/Goal_Type"
+            android:textColor="?attr/textcolor"
+            android:textSize="8pt" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_outline"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:drawableLeft="@drawable/ic_cancel_black_24dp"
-            android:background="@drawable/cancel_button_shape"
-            android:textAllCaps="false" />
+            android:paddingBottom="5dp">
+
+            <RadioGroup
+                android:id="@+id/radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/job_radiobutton"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp" />
+
+                <RadioButton
+                    android:id="@+id/housework_radiobutton"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="23dp" />
+
+                <RadioButton
+                    android:id="@+id/education_radiobutton"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="22dp" />
+
+                <RadioButton
+                    android:id="@+id/exercise_radiobutton"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="26dp" />
+
+                <RadioButton
+                    android:id="@+id/socail_radiobutton"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="27dp" />
+
+                <RadioButton
+                    android:id="@+id/other_radiobutton"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="28dp" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/radiogroup"
+                android:layout_toRightOf="@id/radiogroup"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/job"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/job" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="@string/Job"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear1"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/radiogroup"
+                android:layout_toRightOf="@id/radiogroup"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/housework"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/housework" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="@string/Housework"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear2"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/radiogroup"
+                android:layout_toRightOf="@id/radiogroup"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/education"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/education" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="@string/Education"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear3"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/radiogroup"
+                android:layout_toRightOf="@id/radiogroup"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/exercise"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/exercise" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="@string/Exercise"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear4"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/radiogroup"
+                android:layout_toRightOf="@id/radiogroup"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/social"
+                    android:layout_width="37dp"
+                    android:layout_height="39dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/social" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="@string/Social"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear5"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/radiogroup"
+                android:layout_toRightOf="@id/radiogroup"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/other"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/other" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="@string/Other"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+
+            <Button
+                android:id="@+id/delete_goal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/delete_button_shape"
+                android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/Delete"
+                android:textAllCaps="false"
+                android:textSize="8pt" />
+
+            <Button
+                android:id="@+id/save_goal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/save_button_shape"
+                android:drawableLeft="@drawable/ic_save_black_24dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/Save"
+                android:textAllCaps="false"
+                android:textSize="8pt" />
+
+            <Button
+                android:id="@+id/cancel_goal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cancel_button_shape"
+                android:drawableLeft="@drawable/ic_cancel_black_24dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textSize="8pt" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 </ScrollView>

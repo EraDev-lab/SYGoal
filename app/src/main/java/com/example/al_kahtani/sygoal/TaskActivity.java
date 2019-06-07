@@ -13,10 +13,8 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -44,15 +43,11 @@ import java.util.Locale;
 
 public class TaskActivity extends AppCompatActivity {
 
-    private Button saveTask, cancelTask, deleteTask;
-    private Spinner spinnerrepeat;
     TextView taskNotifyOn, taskDate, textCheckBoxCompleted;
     EditText taskName;
     CheckBox checkBoxCompleted;
-    LinearLayout checkBoxLinearLayout;
-
+    RelativeLayout checkBoxRelativeLayout;
     int random = 0;
-    private int notificationId = 1;
     int year, month, day, hour, minute;
     long alarmStartTime;
     long goalId;
@@ -66,10 +61,8 @@ public class TaskActivity extends AppCompatActivity {
     int mTaskAlarm;
     int notifyState = 0;
     String sTaskAlarm;
-
     String mTaskName;
     String updateTask = "0";
-
     Calendar mCurrentDate;
     Calendar mCurrentTime;
     NotificationManager notificationManager;
@@ -77,6 +70,9 @@ public class TaskActivity extends AppCompatActivity {
     SharedPref sharedpref;
     HelperClass helper;
     SQLiteDatabase db;
+    private Button saveTask, cancelTask, deleteTask;
+    private Spinner spinnerrepeat;
+    private int notificationId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +109,7 @@ public class TaskActivity extends AppCompatActivity {
         cancelTask = findViewById(R.id.cancel_task);
         deleteTask = findViewById(R.id.delete_task);
         //find LinearLayout by id
-        checkBoxLinearLayout = findViewById(R.id.complete_linear_layout);
+        checkBoxRelativeLayout = findViewById(R.id.complete_linear_layout);
 
 
         if (sharedpref.loadNightModeState() == true) {
@@ -137,7 +133,7 @@ public class TaskActivity extends AppCompatActivity {
             deleteTask.setVisibility(View.GONE);
             checkBoxCompleted.setVisibility(View.GONE);
             textCheckBoxCompleted.setVisibility(View.GONE);
-            checkBoxLinearLayout.setVisibility(View.GONE);
+            checkBoxRelativeLayout.setVisibility(View.GONE);
         }
         /**
          *  ----------------update task-----------------------
@@ -222,7 +218,7 @@ public class TaskActivity extends AppCompatActivity {
                 day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
                 //final String abc= getAge(year, month, day);
 
-                 mPickerDialog = new DatePickerDialog(TaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                mPickerDialog = new DatePickerDialog(TaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int Year, int Month, int Day) {
                         startDate = Year + "-" + (Month + 1) + "-" + Day;
@@ -235,7 +231,7 @@ public class TaskActivity extends AppCompatActivity {
                 }, year, month, day);
                 mPickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 mPickerDialog.setTitle("Select Date");
-                 mPickerDialog.show();
+                mPickerDialog.show();
             }
         });
         ///////////////////*Calender////////////////////---------------------
@@ -257,7 +253,7 @@ public class TaskActivity extends AppCompatActivity {
                         taskNotifyOn.setText(startTime);
                         // alarmStartTime = mCurrentTime.getTimeInMillis();
                     }
-                }, hour, minute,  false);//Yes 24 hour time
+                }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
             }

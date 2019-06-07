@@ -2,7 +2,6 @@ package com.example.al_kahtani.sygoal;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.data.GoalContract;
-import com.example.al_kahtani.sygoal.data.HelperClass;
 
 public class AchieveAndMissedAdapter extends CursorAdapter {
 

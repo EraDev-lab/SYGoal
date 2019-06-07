@@ -27,7 +27,6 @@ import com.example.al_kahtani.sygoal.data.TaskAdapter;
 import com.example.al_kahtani.sygoal.data.TaskContract;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -223,7 +222,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 }
 
                 helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber, completeTaskCount, taskCount);
-            } else{
+            } else {
                 try {
                     db = helper.getReadableDatabase();
                     Cursor cursor1 = db.query(GoalContract.TABLE_NAME,
@@ -257,16 +256,16 @@ public class DisplayTaskScreen extends AppCompatActivity {
             adapter = new TaskAdapter(this, cursor);
 
             if (mGoalActivity == 1) {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(DisplayTaskScreen.this, TaskActivity.class);
-                    intent.putExtra("goalId", goalId);
-                    updateTask = "0";
-                    intent.putExtra("updateTask", updateTask);
-                    startActivity(intent);
-                }
-            });
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(DisplayTaskScreen.this, TaskActivity.class);
+                        intent.putExtra("goalId", goalId);
+                        updateTask = "0";
+                        intent.putExtra("updateTask", updateTask);
+                        startActivity(intent);
+                    }
+                });
 
                 taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -370,8 +369,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                         popupMenu.show();
                     }
                 });
-            }
-            else {
+            } else {
                 fab.setVisibility(View.GONE);
             }
             taskListView.setAdapter(adapter);

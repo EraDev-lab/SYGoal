@@ -32,7 +32,7 @@ public class GoalActivity extends AppCompatActivity {
     RadioGroup radioGroup;
 
     RadioButton jobRadioButton, houseWorkRadioButton, educationRadioButton, exerciseRadioButton,
-    socialRadioButton, otherRadioButton;
+            socialRadioButton, otherRadioButton;
     ImageView imgJob, imgHousework, imgEducation, imgExercise, imgSocial, imgOther;
 
     Button saveGoal, deleteGoal, cancelGoal;
@@ -42,7 +42,7 @@ public class GoalActivity extends AppCompatActivity {
     int goalActivityNumber;
     String mGoalName;
     String mGoalDescription;
-    String updateGoal ="0";
+    String updateGoal = "0";
     String updateTask = "0";
     double percentage;
     String maxDate;
@@ -57,9 +57,11 @@ public class GoalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedpref = new SharedPref(this);//load night mode setting
-        if(sharedpref.loadNightModeState()==true) {
+        if (sharedpref.loadNightModeState() == true) {
             setTheme(R.style.darktheme);
-        }else{  setTheme(R.style.AppTheme);}
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         loadLocale();//load languge setting
 
         super.onCreate(savedInstanceState);
@@ -95,34 +97,34 @@ public class GoalActivity extends AppCompatActivity {
         cancelGoal = findViewById(R.id.cancel_goal);
         radioGroup = findViewById(R.id.radiogroup);
 
-radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        if (jobRadioButton.isChecked()) {
-            selectedType = 1;
-        } else if (houseWorkRadioButton.isChecked()) {
-            selectedType = 2;
-        } else if (educationRadioButton.isChecked()) {
-            selectedType = 3;
-        } else if (exerciseRadioButton.isChecked()) {
-            selectedType = 4;
-        } else if (socialRadioButton.isChecked()) {
-            selectedType = 5;
-        } else if (otherRadioButton.isChecked()) {
-            selectedType = 6;
-        }
-    }
-});
+                if (jobRadioButton.isChecked()) {
+                    selectedType = 1;
+                } else if (houseWorkRadioButton.isChecked()) {
+                    selectedType = 2;
+                } else if (educationRadioButton.isChecked()) {
+                    selectedType = 3;
+                } else if (exerciseRadioButton.isChecked()) {
+                    selectedType = 4;
+                } else if (socialRadioButton.isChecked()) {
+                    selectedType = 5;
+                } else if (otherRadioButton.isChecked()) {
+                    selectedType = 6;
+                }
+            }
+        });
 
-        if(sharedpref.loadNightModeState()==true) {
+        if (sharedpref.loadNightModeState() == true) {
             imgJob.setImageResource(R.drawable.job_white);
             imgSocial.setImageResource(R.drawable.social_white);
             imgOther.setImageResource(R.drawable.other_white);
             imgHousework.setImageResource(R.drawable.housework_white);
             imgExercise.setImageResource(R.drawable.exercise_white);
             imgEducation.setImageResource(R.drawable.education_white);
-        }else{
+        } else {
             imgJob.setImageResource(R.drawable.job);
             imgSocial.setImageResource(R.drawable.social);
             imgOther.setImageResource(R.drawable.other);
@@ -131,7 +133,7 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             imgEducation.setImageResource(R.drawable.education);
         }
 
-        if (updateGoal.equals("1")){
+        if (updateGoal.equals("1")) {
             setTitle("Edit Goal");
 
             db = helper.getReadableDatabase();
@@ -153,12 +155,12 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 cursor.moveToFirst();
 
             // prepare contract object
-            goalId =cursor.getInt(cursor.getColumnIndex(GoalContract._ID));
+            goalId = cursor.getInt(cursor.getColumnIndex(GoalContract._ID));
             mGoalName = cursor.getString(cursor.getColumnIndex(GoalContract.Goal_Name));
             selectedType = cursor.getInt(cursor.getColumnIndex(GoalContract.Goal_Type));
             mGoalDescription = cursor.getString(cursor.getColumnIndex(GoalContract.Goal_Description));
 
-            switch(selectedType){
+            switch (selectedType) {
                 case 1:
                     radioGroup.check(R.id.job_radiobutton);
                     break;
@@ -184,9 +186,7 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             goalName.setText(mGoalName);
             goalDescription.setText(mGoalDescription);
-        }
-
-        else if (updateGoal.equals("0")){
+        } else if (updateGoal.equals("0")) {
             setTitle("New Goal");
             deleteGoal.setVisibility(View.GONE);
         }
@@ -198,10 +198,10 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 mGoalName = goalName.getText().toString();
                 mGoalDescription = goalDescription.getText().toString();
                 // get selected radio button from radioGroup
-           //     int selectedId = radioGroup.getCheckedRadioButtonId();
+                //     int selectedId = radioGroup.getCheckedRadioButtonId();
 
                 // find the radiobutton by returned goalId
-             //   jobRadioButton =  findViewById(selectedId);
+                //   jobRadioButton =  findViewById(selectedId);
 
                 //Toast.makeText(GoalActivity.this, jobRadioButton.getText(), Toast.LENGTH_SHORT).show();
                 if (mGoalName.isEmpty() || mGoalDescription.isEmpty()) {
@@ -215,10 +215,9 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                         goalDescription.requestFocus();
                     }
                     return;
-                }
-                else if (updateGoal.equals("0")){
+                } else if (updateGoal.equals("0")) {
                     Intent intent = new Intent(GoalActivity.this, TaskActivity.class);
-                    updateGoal ="0";
+                    updateGoal = "0";
                     percentage = 00.0;
                     maxDate = "2019-3-17";
 
@@ -228,11 +227,10 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     //intent.putExtra("updateGoal", updateGoal);
                     intent.putExtra("updateTask", updateTask);
                     startActivity(intent);
-                }
-                else if (updateGoal.equals("1")){
+                } else if (updateGoal.equals("1")) {
                     Intent intent = new Intent(GoalActivity.this, BottomNavigationViewActivity.class);
-                    helper.updateGoal(goalId, mGoalName, selectedType, mGoalDescription,goalActivityNumber);
-                    updateGoal ="1";
+                    helper.updateGoal(goalId, mGoalName, selectedType, mGoalDescription, goalActivityNumber);
+                    updateGoal = "1";
                     updateTask = "0";
                     intent.putExtra("goalId", goalId);
                     intent.putExtra("updateGoal", updateGoal);
@@ -260,20 +258,21 @@ radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
                 random = (int) goalId;
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(GoalActivity.this, random,intent, 0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(GoalActivity.this, random, intent, 0);
 
                 //PendingIntent pendingIntent = PendingIntent.getBroadcast(SettingActivity.this, goalId, intent,0);
                 AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                 alarm.cancel(pendingIntent);
 
-                Intent  intent1 = new Intent(GoalActivity.this, BottomNavigationViewActivity.class);
+                Intent intent1 = new Intent(GoalActivity.this, BottomNavigationViewActivity.class);
                 intent1.putExtra("goalId", goalId);
                 startActivity(intent1);
             }
         });
 
     }
+
     // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);

@@ -17,7 +17,7 @@
 
     <string name="Era_Dev">Era Dev</string>
     <string name="copyright_text">Copyright © 2018, Era\'Dev </string>
-    <string name="rights">All rights reserved</string>
+    <string name="rights">كل الحقوق محفوظة</string>
     <string name="current_goals">الاهداف الحالية</string>
     <string name="missed_goals">الاهداف الفائتة</string>
     <string name="achievements">الانجازات</string>
@@ -26,7 +26,7 @@
     <string name="Night_Mood">الوضع الليلى :</string>
     <string name="Notifications">الاشعارات :</string>
     <string name="Extras">المزيد :</string>
-    <string name="About_App">About App</string>
+    <string name="About_App">عن التطبيق</string>
     <string name="Rate_Us">التقييم</string>
     <string name="Done">تم</string>
     <string name="Goal_Name">اسم الهدف</string>
@@ -38,35 +38,31 @@
     <string name="description_is_required">يجب ادخال التوصيف</string>
 
 
-    <string name="Tasks">المهام</string>
-    <string name="The_Goal">الهدف</string>
+    <string name="Tasks">اسم المهمة</string>
+    <string name="The_Goal">اسم الهدف</string>
     <string name="Goal_Type">نوع الهدف</string>
-    <string name="Description">الوصف</string>
-    <string name="Job">شغل</string>
+    <string name="Description">وصف الهدف</string>
+    <string name="Job">عمل</string>
     <string name="Housework">عمل منزلى</string>
     <string name="Education">تعليم</string>
     <string name="Exercise">تمارين</string>
-    <string name="Social">اجتماعى</string>
-    <string name="Other">اخر</string>
-    <string name="Delete">مسح</string>
+    <string name="Social">اجتماعيات</string>
+    <string name="Other">اخري</string>
+    <string name="Delete">حذف</string>
     <string name="Save">حفظ</string>
-    <string name="Date">التاريخ</string>
+    <string name="Date">تاريخ المهمة</string>
     <string name="Notify_on">الساعة</string>
-    <string name="Alarm">التنبية</string>
-    <string name="Completed_State">تم الاكتمال</string>
+    <string name="Alarm">تكرار المهمة</string>
+    <string name="Completed_State">نسبة الاكتمال</string>
     <string name="cancel">الغاء</string>
 
     <string-array name="repeating_array">
-        <item>Off</item>
-        <item>Once</item>
-        <item>Daily</item>
-        <item>Weekly</item>
-        <item>Monthly</item>
-        <item>Yearly</item>
+        <item>قفل</item>
+        <item>مرة</item>
+        <item>يوميا</item>
+        <item>اسبوعيا</item>
+        <item>شهريا</item>
+        <item>سنويا</item>
     </string-array>
 
-    <string name="fa_icon_areachart">&#xf1fe;</string>
-    <string name="fa_icon_piechart">&#xf200;</string>
-    <string name="fa_icon_linechart">&#xf201;</string>
-    <string name="fa_icon">&#xf036;</string>
 </resources>

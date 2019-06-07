@@ -36,8 +36,8 @@
     <string name="date_is_required">Date is required</string>
     <string name="time_is_required">Time is required</string>
     <string name="Earlier_date">Earlier Date</string>
-    <string name="Tasks">Tasks</string>
-    <string name="The_Goal">The Goal</string>
+    <string name="Tasks">Task Name</string>
+    <string name="The_Goal">Goal Name</string>
     <string name="Goal_Type">Goal Type</string>
     <string name="Description">Description</string>
     <string name="Job">Job</string>
@@ -48,12 +48,11 @@
     <string name="Other">Other</string>
     <string name="Delete">Delete</string>
     <string name="Save">Save</string>
-    <string name="Date">Date</string>
-    <string name="Notify_on">Notify on</string>
-    <string name="Alarm">Alarm</string>
+    <string name="Date">Task Date</string>
+    <string name="Notify_on">Task Time</string>
+    <string name="Alarm">Task Alarm</string>
     <string name="Completed_State">Completed State</string>
     <string name="cancel">cancel</string>
-
 
     <string-array name="repeating_array">
         <item>Off</item>
@@ -63,10 +62,5 @@
         <item>Monthly</item>
         <item>Yearly</item>
     </string-array>
-
-    <string name="fa_icon_areachart">&#xf1fe;</string>
-    <string name="fa_icon_piechart">&#xf200;</string>
-    <string name="fa_icon_linechart">&#xf201;</string>
-    <string name="fa_icon">&#xf06d;</string>
 
 </resources>

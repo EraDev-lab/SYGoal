@@ -225,7 +225,7 @@ public class HelperClass extends SQLiteOpenHelper {
         return db.update(TaskContract.TABLE_NAME, values, selection, selectionArgs);
     }
 
-    public int updateCheckBoxState (long taskId,int checkBox) {
+    public int updateCheckBoxState(long taskId, int checkBox) {
         //get writable database as we want to write data
         db = this.getWritableDatabase();
 

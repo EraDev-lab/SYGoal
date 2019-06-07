@@ -1,63 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:padding="20dp"
     android:background="?attr/backgroundcolor"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".SettingActivity">
     <!--   -->
 
     <!-- Light/Day Mode theme. -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
         <!-- -->
         <TextView
-            android:textColor="?attr/textcolor"
             android:layout_width="wrap_content"
-            android:textSize="8pt"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:fontFamily="sans-serif"
-            android:layout_height="wrap_content"
             android:text="@string/Display_Language"
-            />
+            android:textColor="?attr/textcolor"
+            android:textSize="8pt" />
 
         <ImageView
             android:id="@+id/Language_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_settings_lang"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            />
+            android:src="@drawable/ic_settings_lang" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:textSize="8pt"
             android:fontFamily="sans-serif"
             android:text="@string/Night_Mood"
             android:textColor="?attr/textcolor"
-            />
+            android:textSize="8pt" />
         <!-- "-->
 
         <Switch
             android:id="@+id/Switch"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:layout_height="wrap_content"
             android:spinnerMode="dialog"
             android:textColor="?attr/textcolor" />
     </RelativeLayout>
@@ -70,23 +66,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Notifications"
-            android:textColor="?attr/textcolor"
             android:layout_alignParentLeft="true"
             android:fontFamily="sans-serif"
-            android:textSize="8pt"
-            />
+            android:text="@string/Notifications"
+            android:textColor="?attr/textcolor"
+            android:textSize="8pt" />
         <!-- -->
         <!-- -->
 
         <Switch
             android:id="@+id/Switch1"
-            android:buttonTint="?attr/tintcolor"
             android:layout_width="wrap_content"
-            android:layout_gravity="right|center"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="20dp"
+            android:buttonTint="?attr/tintcolor"
             android:spinnerMode="dialog" />
     </RelativeLayout>
     <!--
@@ -133,25 +128,25 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/circular_shap"
-                android:src="@android:drawable/ic_menu_help"/>
+                android:src="@android:drawable/ic_menu_help" />
             <!--  android:background="?attr/textred"-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="10dp"
                 android:text="@string/About_App"
-                android:textSize="8pt"
-                android:textStyle="bold"
                 android:textColor="?attr/textcolor"
-                android:layout_marginStart="5dp" />
+                android:textSize="8pt"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/rate"
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <ImageButton
@@ -164,10 +159,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:text="@string/Rate_Us"
                 android:textColor="?attr/textcolor"
                 android:textSize="8pt"
-                android:layout_marginLeft="10dp"
                 android:textStyle="bold" />
             <!--  android:background="?attr/textred"-->
         </LinearLayout>

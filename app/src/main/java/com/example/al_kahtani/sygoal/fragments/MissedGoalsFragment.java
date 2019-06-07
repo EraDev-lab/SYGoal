@@ -11,17 +11,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 
 import com.example.al_kahtani.sygoal.AchieveAndMissedAdapter;
 import com.example.al_kahtani.sygoal.DisplayTaskScreen;
-import com.example.al_kahtani.sygoal.GoalActivity;
 import com.example.al_kahtani.sygoal.R;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;

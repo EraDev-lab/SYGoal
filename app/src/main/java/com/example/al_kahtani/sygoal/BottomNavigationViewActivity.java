@@ -36,9 +36,11 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedpref = new SharedPref(this);//load night mode setting
-        if(sharedpref.loadNightModeState()==true) {
+        if (sharedpref.loadNightModeState() == true) {
             setTheme(R.style.darktheme);
-        }else{  setTheme(R.style.AppTheme);}
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation_view);
@@ -54,10 +56,10 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 Intent intent = new Intent(BottomNavigationViewActivity.this,GoalActivity.class);
-                 intent.putExtra("updateGoal", updateGoal);
-                 intent.putExtra("goalActivity", goalActivityNumber);
-                 startActivity(intent);
+                Intent intent = new Intent(BottomNavigationViewActivity.this, GoalActivity.class);
+                intent.putExtra("updateGoal", updateGoal);
+                intent.putExtra("goalActivity", goalActivityNumber);
+                startActivity(intent);
             }
         });
     }
@@ -68,18 +70,15 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
 
         if (id == R.id.action_settings) {
             Intent intent = new Intent(BottomNavigationViewActivity.this, SettingActivity.class);
-         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-           finish();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            finish();
             startActivity(intent);
             return true;
-        }
-
-        else if (id == R.id.action_contact) {
+        } else if (id == R.id.action_contact) {
             Intent intent = new Intent(BottomNavigationViewActivity.this, AboutActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_rate) {
+        } else if (id == R.id.action_rate) {
             try {
                 Intent rateIntent = rateIntentForUrl("market://details");
                 startActivity(rateIntent);
@@ -91,9 +90,9 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         }
 
 
-
         return super.onOptionsItemSelected(item);
     }
+
     private Intent rateIntentForUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?goalId=%s", url, getPackageName())));
         int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
@@ -106,33 +105,38 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         intent.addFlags(flags);
         return intent;
     } // rate us helper method
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.home__screen,menu);
+        getMenuInflater().inflate(R.menu.home__screen, menu);
         return true;
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
-        switch (item.getItemId()){
-            case R.id.nav_current_goal: selectedFragment = new CurrentGoalsFragment();
-            goalActivityNumber = 1;
-            break;
-            case R.id.nav_missed_goals: selectedFragment = new MissedGoalsFragment();
-            goalActivityNumber = 2;
-            break;
-            case R.id.nav_achievements: selectedFragment = new Achievement_fragment();
-            goalActivityNumber = 3;
-            break;
+        switch (item.getItemId()) {
+            case R.id.nav_current_goal:
+                selectedFragment = new CurrentGoalsFragment();
+                goalActivityNumber = 1;
+                break;
+            case R.id.nav_missed_goals:
+                selectedFragment = new MissedGoalsFragment();
+                goalActivityNumber = 2;
+                break;
+            case R.id.nav_achievements:
+                selectedFragment = new Achievement_fragment();
+                goalActivityNumber = 3;
+                break;
         }
 
-        if (selectedFragment != null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container,selectedFragment).commit();
+        if (selectedFragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, selectedFragment).commit();
         }
         return true;
     }
+
     // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);

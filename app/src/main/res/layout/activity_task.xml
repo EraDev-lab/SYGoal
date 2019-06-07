@@ -1,170 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="?attr/backgroundcolor"
     android:id="@+id/icons_container"
-    android:layout_height="match_parent">
-<LinearLayout
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="?attr/backgroundcolor"
-    android:padding="15dp"
-    tools:context=".TaskActivity">
+    android:background="?attr/backgroundcolor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundcolor"
+        android:orientation="vertical"
+        android:padding="15dp"
+        tools:context=".TaskActivity">
 
         <EditText
+            android:id="@+id/task_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="8pt"
-            android:hint="Task Name"
-            android:fontFamily="sans-serif"
             android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:maxLength="30"
-            android:textColorHint="?attr/textcolor"
-            android:textColor="?attr/textcolor"
-            android:id="@+id/task_name"
             android:background="@drawable/edit_text_outline"
-            />
+            android:fontFamily="sans-serif"
+            android:gravity="center|left"
+            android:hint="@string/Tasks"
+            android:maxLength="30"
+            android:padding="10dp"
+            android:textColor="?attr/textcolor"
+            android:textColorHint="?attr/textcolor"
+            android:textSize="8pt" />
 
         <TextView
+            android:id="@+id/task_date"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="8pt"
-            android:hint="Task Date"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_outline"
             android:drawableRight="@drawable/ic_date"
             android:fontFamily="sans-serif"
-            android:background="@drawable/edit_text_outline"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:textColorHint="?attr/textcolor"
-            android:textColor="?attr/textcolor"
             android:gravity="center|left"
-            android:id="@+id/task_date"
-            />
+            android:hint="@string/Date"
+            android:padding="10dp"
+            android:textColor="?attr/textcolor"
+            android:textColorHint="?attr/textcolor"
+            android:textSize="8pt" />
 
         <TextView
+            android:id="@+id/task_notify_on"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="8pt"
-            android:textColorHint="?attr/textcolor"
-            android:hint="Task Time "
-            android:padding="10dp"
-            android:textColor="?attr/textcolor"
-            android:drawableRight="@drawable/ic_access_time"
-            android:background="@drawable/edit_text_outline"
-            android:fontFamily="sans-serif"
-            android:id="@+id/task_notify_on"
             android:layout_marginTop="20dp"
-            />
-
-    <LinearLayout
-        android:id="@+id/alarm_linear_layout"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:background="@drawable/edit_text_outline"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/alarm"
-            android:layout_width="wrap_content"
+            android:background="@drawable/edit_text_outline"
+            android:drawableRight="@drawable/ic_access_time"
             android:fontFamily="sans-serif"
-            android:layout_height="wrap_content"
-            android:text="Task Alarm"
-            android:textSize="8pt"
-            android:textColor="?attr/textcolor"
-            android:layout_marginRight="10dp"
+            android:gravity="center|left"
+            android:hint="@string/Notify_on"
             android:padding="10dp"
+            android:textColor="?attr/textcolor"
+            android:textColorHint="?attr/textcolor"
+            android:textSize="8pt" />
 
-            />
-        <Spinner
+        <LinearLayout
+            android:id="@+id/alarm_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            android:gravity="left|center"
-            android:layout_marginRight="5dp"
-            android:id="@+id/task_alarm"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_outline">
+
+            <TextView
+                android:id="@+id/alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:fontFamily="sans-serif"
+                android:padding="10dp"
+                android:text="@string/Alarm"
+                android:textColor="?attr/textcolor"
+                android:textSize="8pt"
+
+                />
+
+            <Spinner
+                android:id="@+id/task_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginRight="5dp"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/complete_linear_layout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_outline">
+
+            <TextView
+                android:id="@+id/complete_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:fontFamily="sans-serif"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/Completed_State"
+                android:textColor="?attr/textcolor"
+                android:textSize="8pt" />
+
+            <CheckBox
+                android:id="@+id/checkbox_completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+
+            <Button
+                android:id="@+id/delete_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/delete_button_shape"
+                android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/Delete"
+                android:textAllCaps="false"
+                android:textSize="8pt" />
+
+            <Button
+                android:id="@+id/save_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/save_button_shape"
+                android:drawableLeft="@drawable/ic_save_black_24dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/Save"
+                android:textAllCaps="false"
+                android:textSize="8pt" />
+
+            <Button
+                android:id="@+id/cancel_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cancel_button_shape"
+                android:drawableLeft="@drawable/ic_cancel_black_24dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textSize="8pt" />
+
+        </LinearLayout>
+
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/complete_linear_layout"
-        android:layout_marginTop="20dp"
-        android:layout_width="200dp"
-        android:background="@drawable/edit_text_outline"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_gravity="center|left"
-            android:fontFamily="sans-serif"
-            android:textSize="8pt"
-            android:text="@string/Completed_State"
-            android:textColor="?attr/textcolor"
-            android:layout_marginRight="10dp"
-            android:id="@+id/complete_text_view"/>
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkbox_completed"
-            android:layout_gravity="center|right"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Delete"
-            android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
-            android:background="@drawable/delete_button_shape"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:id="@+id/delete_task"
-            android:textSize="8pt"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/save_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Save"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="8pt"
-            android:drawableLeft="@drawable/ic_save_black_24dp"
-            android:background="@drawable/save_button_shape"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/cancel_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="8pt"
-            android:text="Cancel"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:drawableLeft="@drawable/ic_cancel_black_24dp"
-            android:background="@drawable/cancel_button_shape"
-            android:textAllCaps="false" />
-
-    </LinearLayout>
-
-</LinearLayout>
 </ScrollView>

@@ -19,12 +19,15 @@ import java.util.Locale;
 public class AboutActivity extends AppCompatActivity {
     SharedPref sharedpref;
     ImageView facepic, tweetpic, emailpic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedpref = new SharedPref(this);//load night mode setting
-        if(sharedpref.loadNightModeState()==true) {
+        if (sharedpref.loadNightModeState() == true) {
             setTheme(R.style.darktheme);
-        }else{  setTheme(R.style.AppTheme);}
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
@@ -35,9 +38,9 @@ public class AboutActivity extends AppCompatActivity {
             ab.setHomeButtonEnabled(true);
             ab.setDisplayShowTitleEnabled(false);
         }
-        facepic=findViewById(R.id.fb_logo);
-        tweetpic=findViewById(R.id.twitter_logo);
-        emailpic=findViewById(R.id.mail_logo);
+        facepic = findViewById(R.id.fb_logo);
+        tweetpic = findViewById(R.id.twitter_logo);
+        emailpic = findViewById(R.id.mail_logo);
 
         emailpic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +62,7 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-                }
+            }
         });
         tweetpic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +73,11 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-                 }
+            }
         });
 
     }
+
     // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);

@@ -5,10 +5,12 @@
     <gradient
 
         app:angle="90"></gradient>
-    <corners app:radius="5dp"
+    <corners app:radius="0dp"
 
         ></corners>
-    <solid app:color="?attr/cardbackgroundcolor_1"></solid>
-
+    <solid app:color="#7f76cced"></solid>
+    <stroke
+        app:width="3dp"
+        app:color="#7f76cced"></stroke>
 
 </shape>
