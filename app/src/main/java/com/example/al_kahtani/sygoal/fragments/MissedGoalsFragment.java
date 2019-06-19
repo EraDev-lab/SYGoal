@@ -11,15 +11,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import com.example.al_kahtani.sygoal.AchieveAndMissedAdapter;
 import com.example.al_kahtani.sygoal.DisplayTaskScreen;
+import com.example.al_kahtani.sygoal.GoalActivity;
 import com.example.al_kahtani.sygoal.R;
+import com.example.al_kahtani.sygoal.data.GoalAdapter;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 
@@ -30,11 +34,8 @@ public class MissedGoalsFragment extends Fragment {
     ListView missedListView;
     ImageView emptyView;
 
-    String updateGoal;
-    String updateTask = "0";
     int selectedItem;
     int countedData = 0;
-    int goalActivityNumber;
 
     HelperClass helper;
     AchieveAndMissedAdapter adapter;
@@ -70,6 +71,8 @@ public class MissedGoalsFragment extends Fragment {
                     GoalContract.Goal_Name,
                     GoalContract.Goal_Type,
                     GoalContract.Goal_Activity,
+                    GoalContract.Goal_Complete_Count,
+                    GoalContract.Goal_Complete_All,
                     GoalContract.Goal_Percentage,
                     GoalContract.Goal_MaxDate,
                     GoalContract.Goal_Description};
@@ -103,6 +106,29 @@ public class MissedGoalsFragment extends Fragment {
                         startActivity(i);
                     }
                 });
+
+                missedListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
+                        final PopupMenu popupMenu = new PopupMenu(rootView.getContext(), view);
+                        popupMenu.inflate(R.menu.single_pop_up_menu);
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                selectedItem = item.getItemId();
+                                if (selectedItem == R.id.delete) {
+                                    helper.deleteGoal(id);
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
+                                    missedListView.setAdapter(adapter);
+                                }
+                                return true;
+                            }
+                        });
+                        popupMenu.show();
+                        return true;
+                    }
+                });
                 missedListView.setAdapter(adapter);
             }
             /**
@@ -124,7 +150,28 @@ public class MissedGoalsFragment extends Fragment {
                         startActivity(i);
                     }
                 });
-
+                missedListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
+                        final PopupMenu popupMenu = new PopupMenu(rootView.getContext(), view);
+                        popupMenu.inflate(R.menu.single_pop_up_menu);
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                selectedItem = item.getItemId();
+                                if (selectedItem == R.id.delete) {
+                                    helper.deleteGoal(id);
+                                    Cursor cursor1 = updateUi();
+                                    adapter = new AchieveAndMissedAdapter(getContext(), cursor1);
+                                    missedListView.setAdapter(adapter);
+                                }
+                                return true;
+                            }
+                        });
+                        popupMenu.show();
+                        return true;
+                    }
+                });
                 missedListView.setAdapter(adapter);
             }
         } finally {
@@ -151,5 +198,29 @@ public class MissedGoalsFragment extends Fragment {
         setLocale(language);
     }
 
+    private Cursor updateUi() {
 
+        db = helper.getReadableDatabase();
+
+        String[] projection = {GoalContract._ID,
+                GoalContract.Goal_Name,
+                GoalContract.Goal_Type,
+                GoalContract.Goal_Activity,
+                GoalContract.Goal_Complete_Count,
+                GoalContract.Goal_Complete_All,
+                GoalContract.Goal_Percentage,
+                GoalContract.Goal_MaxDate,
+                GoalContract.Goal_Description};
+
+        final Cursor mcursor = db.query(GoalContract.TABLE_NAME,
+                projection,
+                GoalContract.Goal_Activity + "=?",
+                new String[]{String.valueOf(2)},
+                null,
+                null,
+                null,
+                null);
+
+        return mcursor;
+    }
 }

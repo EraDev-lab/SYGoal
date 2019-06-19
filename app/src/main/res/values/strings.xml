@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SYGoal</string>
+    <string name="app_name">Goal Organizer</string>
     <string name="app_version">1.0</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -15,7 +15,7 @@
     <string name="action_rating">Rate us</string>
 
     <string name="Era_Dev">Era Dev</string>
-    <string name="copyright_text">Copyright © 2018, Era\'Dev </string>
+    <string name="copyright_text">Copyright © 2019, Era\'Dev </string>
     <string name="rights">All rights reserved</string>
     <string name="current_goals">Current goals</string>
     <string name="missed_goals">Missed goals</string>
@@ -53,6 +53,8 @@
     <string name="Alarm">Task Alarm</string>
     <string name="Completed_State">Completed State</string>
     <string name="cancel">cancel</string>
+
+    <string name="empty_state">No Goal Found</string>
 
     <string-array name="repeating_array">
         <item>Off</item>

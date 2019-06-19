@@ -222,6 +222,7 @@ public class DisplayTaskScreen extends AppCompatActivity {
                 }
 
                 helper.updateGoal(goalId, maxDate, mPercentage, goalActivityNumber, completeTaskCount, taskCount);
+                int wr;
             } else {
                 try {
                     db = helper.getReadableDatabase();

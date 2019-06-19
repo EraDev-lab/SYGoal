@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SYGoal</string>
+    <string name="app_name">Goal Organizer</string>
     <string name="app_version">1.0</string>
     <string name="navigation_drawer_open">افتح القائمة الجانبية</string>
     <string name="navigation_drawer_close">اغلق القائمة الجانبية</string>
@@ -16,7 +16,7 @@
     <string name="action_rating">التقييم</string>
 
     <string name="Era_Dev">Era Dev</string>
-    <string name="copyright_text">Copyright © 2018, Era\'Dev </string>
+    <string name="copyright_text">Copyright © 2019, Era\'Dev </string>
     <string name="rights">كل الحقوق محفوظة</string>
     <string name="current_goals">الاهداف الحالية</string>
     <string name="missed_goals">الاهداف الفائتة</string>
@@ -56,13 +56,15 @@
     <string name="Completed_State">نسبة الاكتمال</string>
     <string name="cancel">الغاء</string>
 
+    <string name="empty_state">لا توجد اهداف</string>
+
     <string-array name="repeating_array">
-        <item>قفل</item>
-        <item>مرة</item>
-        <item>يوميا</item>
-        <item>اسبوعيا</item>
-        <item>شهريا</item>
-        <item>سنويا</item>
+        <item>Off</item>
+        <item>Once</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
     </string-array>
 
 </resources>

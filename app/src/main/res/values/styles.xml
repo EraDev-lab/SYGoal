@@ -12,7 +12,7 @@
         <item name="tintcolor">#aaa</item>
         <item name="textcolor">@android:color/black</item>
         <item name="cardbackgroundcolor_1">#ffffff</item>
-        <item name="specialbackgroundcolor">#f5f5f5</item>
+        <item name="specialbackgroundcolor">#28aaaaaa</item>
         <item name="currentbackgroundcolor">@color/colorPrimary</item>
         <item name="bottomnavigationcolor">#fdfeff</item>
         <item name="selecteditemcolor">#f0ffff</item>

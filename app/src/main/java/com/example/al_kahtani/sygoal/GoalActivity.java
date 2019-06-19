@@ -142,6 +142,11 @@ public class GoalActivity extends AppCompatActivity {
                     new String[]{GoalContract._ID,
                             GoalContract.Goal_Name,
                             GoalContract.Goal_Type,
+                            GoalContract.Goal_Activity,
+                            GoalContract.Goal_Complete_Count,
+                            GoalContract.Goal_Complete_All,
+                            GoalContract.Goal_Percentage,
+                            GoalContract.Goal_MaxDate,
                             GoalContract.Goal_Description},
 
                     GoalContract._ID + "=?",

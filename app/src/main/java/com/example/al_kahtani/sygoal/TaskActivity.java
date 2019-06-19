@@ -385,7 +385,6 @@ public class TaskActivity extends AppCompatActivity {
                 if (startDate.equals("") || startTime.equals("") || mTaskName.equals("")) {
                     Toast.makeText(TaskActivity.this, "Complete all of your info", Toast.LENGTH_SHORT).show();
                 } else if (updateTask.equals("0")) {
-
                     Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
                     helper.insertTask(goalId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox, notifyState);
                     i.putExtra("goalId", goalId);

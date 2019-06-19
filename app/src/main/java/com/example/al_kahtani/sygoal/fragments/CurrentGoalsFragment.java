@@ -25,6 +25,9 @@ import com.example.al_kahtani.sygoal.data.GoalAdapter;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class CurrentGoalsFragment extends Fragment {
@@ -38,6 +41,8 @@ public class CurrentGoalsFragment extends Fragment {
 
     String updateGoal = "0";
     String updateTask = "0";
+    String currentDate;
+    String storeDate;
     int selectedItem;
     int countedData = 0;
     int goalActivityNumber;
@@ -67,6 +72,8 @@ public class CurrentGoalsFragment extends Fragment {
                     GoalContract.Goal_Name,
                     GoalContract.Goal_Type,
                     GoalContract.Goal_Activity,
+                    GoalContract.Goal_Complete_Count,
+                    GoalContract.Goal_Complete_All,
                     GoalContract.Goal_Percentage,
                     GoalContract.Goal_MaxDate,
                     GoalContract.Goal_Description};
@@ -80,8 +87,36 @@ public class CurrentGoalsFragment extends Fragment {
                     null,
                     null);
 
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
+            month = month + 1;
+
+            currentDate = year + "-" + month + "-" + day;
+
             while (mcursor.moveToNext()) {
                 countedData = countedData + 1;
+                int goalId = mcursor.getInt(mcursor.getColumnIndex(GoalContract._ID));
+                int goalActivityNumber = mcursor.getInt(mcursor.getColumnIndex(GoalContract.Goal_Activity));
+                storeDate = mcursor.getString(mcursor.getColumnIndex(GoalContract.Goal_MaxDate));
+                if (goalActivityNumber == 1) {
+                    try {
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+                        Date date1 = format.parse(storeDate);
+                        Date date2 = format.parse(currentDate);
+
+                        if (date1.compareTo(date2) > 0) {
+                            helper.updateGoalPlace(goalId, 1);
+                        } else if (date1.compareTo(date2) < 0) {
+                            helper.updateGoalPlace(goalId, 2);
+                        } else if (date1.compareTo(date2) == 0) {
+                            helper.updateGoalPlace(goalId, 1);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
             mcursor.close();
 
@@ -100,6 +135,7 @@ public class CurrentGoalsFragment extends Fragment {
                         startActivity(i);
                     }
                 });
+
                 currentListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, final long id) {
@@ -139,7 +175,6 @@ public class CurrentGoalsFragment extends Fragment {
              * --------------------------------------------------------------------
              * */
             else {
-
                 final Cursor cursor = db.rawQuery(" Select * FROM " + GoalContract.TABLE_NAME + " WHERE "
                         + GoalContract.Goal_Activity + " = " + 1, null);
 
@@ -223,6 +258,8 @@ public class CurrentGoalsFragment extends Fragment {
                 GoalContract.Goal_Name,
                 GoalContract.Goal_Type,
                 GoalContract.Goal_Activity,
+                GoalContract.Goal_Complete_Count,
+                GoalContract.Goal_Complete_All,
                 GoalContract.Goal_Percentage,
                 GoalContract.Goal_MaxDate,
                 GoalContract.Goal_Description};
@@ -238,5 +275,4 @@ public class CurrentGoalsFragment extends Fragment {
 
         return mcursor;
     }
-
 }

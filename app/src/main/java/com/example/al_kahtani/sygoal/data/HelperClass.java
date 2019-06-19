@@ -132,6 +132,22 @@ public class HelperClass extends SQLiteOpenHelper {
         return db.update(GoalContract.TABLE_NAME, values, selection, selectionArgs);
     }
 
+    public int updateGoalPlace(long goalId, int activity) {
+        //get writable database as we want to write data
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(GoalContract.Goal_Activity, activity);
+
+        //the where clause (SELECT * FROM TABLE_NAME -WHERE- ..)
+        String selection = GoalContract._ID + " = ?";
+        String selectionArgs[] = new String[]{String.valueOf(goalId)};
+
+        //updating row
+        return db.update(GoalContract.TABLE_NAME, values, selection, selectionArgs);
+    }
+
     //________________________________________________________________________________
 
     //delete data from the Goal Table with condition
