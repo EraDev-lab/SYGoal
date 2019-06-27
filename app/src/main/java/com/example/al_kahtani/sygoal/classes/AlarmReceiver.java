@@ -45,9 +45,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Prepare notification.
         Notification.Builder builder = new Notification.Builder(context);
-        builder.setSmallIcon(R.drawable.ic_launcher1)
+        builder.setSmallIcon(R.mipmap.ic_launcher1)//@mipmap/ic_launcher1
 
-                .setContentTitle("SYGoal")
+                .setContentTitle("Goal Organizer")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setContentIntent(contentIntent)

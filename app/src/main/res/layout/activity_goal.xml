@@ -27,7 +27,8 @@
             android:maxLength="25"
             android:padding="10dp"
             android:textColor="?attr/textcolor"
-            android:textColorHint="?attr/textcolor"
+            android:textColorHint="@color/colorgray"
+
             android:textSize="8pt" />
 
 
@@ -464,7 +465,7 @@
             android:maxLength="40"
             android:padding="10dp"
             android:textColor="?attr/textcolor"
-            android:textColorHint="?attr/textcolor"
+            android:textColorHint="@color/colorgray"
             android:textSize="8pt" />
 
         <LinearLayout
