@@ -1,8 +1,10 @@
 package com.example.al_kahtani.sygoal;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -13,7 +15,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +27,9 @@ import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.fragments.Achievement_fragment;
 import com.example.al_kahtani.sygoal.fragments.CurrentGoalsFragment;
 import com.example.al_kahtani.sygoal.fragments.MissedGoalsFragment;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.Locale;
 
@@ -32,7 +40,12 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
 
     String updateGoal = "0";
     int goalActivityNumber = 1;
-
+///////////////**************************
+    // Display Interestial ADMOB when User exit App
+    private InterstitialAd mInterstitial;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
+    //////////////************************
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedpref = new SharedPref(this);//load night mode setting
@@ -44,7 +57,19 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         loadLocale();//load languge setting
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation_view);
+        ///////////////**************************
+        // Display Interestial ADMOB when User exit App
+        mInterstitial = new InterstitialAd(this);
+        mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitial.loadAd(new AdRequest.Builder().build());
+        mInterstitial.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitial.loadAd(new AdRequest.Builder().build());
+            }
 
+        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -161,4 +186,51 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         super.onBackPressed();
         this.finish();
     }
+
+
+
+
+    // Display Interestial ADMOB when User exit App
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // Toast.makeText(appContext, "BAck", Toast.LENGTH_LONG).show();
+            AlertDialog.Builder alert = new AlertDialog.Builder(
+                    BottomNavigationViewActivity.this);
+            alert.setTitle(getString(R.string.app_name));
+           // alert.setIcon(R.drawable.ic_logout);
+            alert.setMessage("Are You Sure You Want To Quit?");
+            alert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int whichButton) {
+                            if (mInterstitial.isLoaded()) {
+                                mInterstitial.show();
+
+                            }
+                            finish();
+                        }
+                    });
+            alert.setNegativeButton("Rate App",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            final String appName = getPackageName();
+                            try {
+                                startActivity(new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("market://details?id="
+                                                + appName)));
+                            } catch (android.content.ActivityNotFoundException anfe) {
+                                startActivity(new Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("http://play.google.com/store/apps/details?id="
+                                                + appName)));
+                            }
+                        }
+                    });
+            alert.show();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    // End code of Display Interestial ADMOB when User exit App
 }
