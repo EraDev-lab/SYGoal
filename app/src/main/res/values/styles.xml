@@ -17,7 +17,7 @@
         <item name="bottomnavigationcolor">#fdfeff</item>
         <item name="selecteditemcolor">#f0ffff</item>
         <item name="buttoncolor">#2196F3</item>
-        <item name="emptystatecolor">#b3afaf</item>
+        <item name="emptystatecolor">#949292</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 

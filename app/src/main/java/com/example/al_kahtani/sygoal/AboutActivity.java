@@ -46,7 +46,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:SYGoal@gmail.com"));  // only email apps should handle this
+                intent.setData(Uri.parse("mailto:7eradev7@gmail.com"));  // only email apps should handle this
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -57,7 +57,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AboutActivity.this, WebActivity.class);
-                intent.putExtra("site", "https://www.facebook.com/");
+                intent.putExtra("site", "https://www.facebook.com/EraDev7/");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -68,7 +68,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AboutActivity.this, WebActivity.class);
-                intent.putExtra("site", "https://twitter.com/");
+                intent.putExtra("site", "https://twitter.com/EraDev7");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
