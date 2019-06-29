@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -60,7 +61,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         ///////////////**************************
         // Display Interestial ADMOB when User exit App
         mInterstitial = new InterstitialAd(this);
-        mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitial.setAdUnitId(getString(R.string.admob_publisher_interstitial_id));
+        //mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitial.loadAd(new AdRequest.Builder().build());
         mInterstitial.setAdListener(new AdListener() {
             @Override
@@ -181,11 +183,6 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         setLocale(language);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
-    }
 
 
 
@@ -202,13 +199,14 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
             alert.setMessage(getString(R.string.Quit));
             alert.setPositiveButton(getString(R.string.Yes),
                     new DialogInterface.OnClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
                             if (mInterstitial.isLoaded()) {
                                 mInterstitial.show();
-
+                                finishAffinity();
                             }
-                            finish();
+
                         }
                     });
             alert.setNegativeButton (getString(R.string.No),

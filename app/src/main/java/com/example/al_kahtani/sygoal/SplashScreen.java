@@ -30,6 +30,7 @@ public class SplashScreen extends AppCompatActivity {
                 } finally {
                     Intent intent = new Intent(SplashScreen.this, BottomNavigationViewActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
