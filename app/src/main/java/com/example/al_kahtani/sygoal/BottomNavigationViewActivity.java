@@ -199,8 +199,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
                     BottomNavigationViewActivity.this);
             alert.setTitle(getString(R.string.app_name));
            // alert.setIcon(R.drawable.ic_logout);
-            alert.setMessage("Are You Sure You Want To Quit?");
-            alert.setPositiveButton("Ok",
+            alert.setMessage(getString(R.string.Quit));
+            alert.setPositiveButton(getString(R.string.Yes),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
@@ -211,7 +211,17 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
                             finish();
                         }
                     });
-            alert.setNegativeButton("Rate App",
+            alert.setNegativeButton (getString(R.string.No),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int whichButton) {
+                            dialog.dismiss();
+                            }
+
+                    });
+
+
+            alert.setNeutralButton(getString(R.string.Rate_app),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             final String appName = getPackageName();

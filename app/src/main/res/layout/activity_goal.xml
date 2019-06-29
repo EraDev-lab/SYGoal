@@ -221,7 +221,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif"
-            android:gravity="center"
             android:text="@string/Goal_Type"
             android:textColor="?attr/textcolor"
             android:textSize="8pt" />
@@ -462,7 +461,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center|left"
             android:hint="@string/Description"
-            android:maxLength="40"
+           android:maxLength="100"
             android:padding="10dp"
             android:textColor="?attr/textcolor"
             android:textColorHint="@color/colorgray"

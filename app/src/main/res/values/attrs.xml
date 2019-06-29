@@ -9,6 +9,7 @@
         <attr name="currentbackgroundcolor" format="color" />
         <attr name="bottomnavigationcolor" format="color" />
         <attr name="buttoncolor" format="color" />
+        <attr name="emptystatecolor" format="color" />
         <attr name="selecteditemcolor" format="color" />
     </declare-styleable>
 </resources>

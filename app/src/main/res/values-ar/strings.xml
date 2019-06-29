@@ -57,6 +57,10 @@
     <string name="Completed_State">نسبة الاكتمال</string>
     <string name="cancel">الغاء</string>
 
+    <string name="Quit">هل أنت متأكد انك تريد انهاء التطبيق؟</string>
+    <string name="Rate_app">تقييم التطبيق</string>
+    <string name="Yes">نعم</string>
+
     <string name="empty_state">لا توجد اهداف</string>
 
     <string-array name="repeating_array">

@@ -209,16 +209,17 @@ public class GoalActivity extends AppCompatActivity {
                 //   jobRadioButton =  findViewById(selectedId);
 
                 //Toast.makeText(GoalActivity.this, jobRadioButton.getText(), Toast.LENGTH_SHORT).show();
-                if (mGoalName.isEmpty() || mGoalDescription.isEmpty()) {
+                if (mGoalName.isEmpty() ) {
                     if (mGoalName.isEmpty()) {
                         goalName.setError(getString(R.string.goal_is_required));
                         goalName.requestFocus();
                     }
 
-                    if (mGoalDescription.isEmpty()) {
+                   /* || mGoalDescription.isEmpty() this put in input parameter
+                   if (mGoalDescription.isEmpty()) {
                         goalDescription.setError(getString(R.string.description_is_required));
                         goalDescription.requestFocus();
-                    }
+                    }*/
                     return;
                 } else if (updateGoal.equals("0")) {
                     Intent intent = new Intent(GoalActivity.this, TaskActivity.class);

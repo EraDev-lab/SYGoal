@@ -53,7 +53,12 @@
     <string name="Notify_on">Task Time</string>
     <string name="Alarm">Task Alarm</string>
     <string name="Completed_State">Completed State</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="Quit">Are You Sure You Want To Quit?</string>
+    <string name="Rate_app">Rate app</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
 
     <string name="empty_state">No Goal Found</string>
 

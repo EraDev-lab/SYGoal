@@ -33,9 +33,9 @@
             android:fontFamily="sans-serif"
             android:paddingTop="10dp"
             android:text="@string/empty_state"
-            android:textColor="?attr/textcolor"
-            android:textSize="15pt"
-            android:textStyle="bold" />
+            android:textColor="?attr/emptystatecolor"
+            android:textSize="8pt"
+            />
     </RelativeLayout>
 
 </LinearLayout>
