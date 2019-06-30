@@ -46,7 +46,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:7eradev7@gmail.com"));  // only email apps should handle this
+                intent.setData(Uri.parse("mailto:7eradev@gmail.com"));  // only email apps should handle this
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }

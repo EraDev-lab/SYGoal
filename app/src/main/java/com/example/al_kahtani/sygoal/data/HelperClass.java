@@ -24,7 +24,7 @@ public class HelperClass extends SQLiteOpenHelper {
             + GoalContract.Goal_Complete_Count + " INTEGER NOT NULL, "
             + GoalContract.Goal_Complete_All + " INTEGER NOT NULL, "
             + GoalContract.Goal_Activity + " INTEGER NOT NULL, "
-            + GoalContract.Goal_Description + " TEXT NOT NULL);";
+            + GoalContract.Goal_Description + " TEXT DEFAULT'NO Description');";
 
     //Create Task Table Query
     String CREATE_TASK_TABLE = "CREATE TABLE " + TaskContract.TABLE_NAME + " ("
