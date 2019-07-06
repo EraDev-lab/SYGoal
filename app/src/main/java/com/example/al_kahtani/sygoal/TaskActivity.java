@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,6 +32,9 @@ import com.example.al_kahtani.sygoal.classes.AlarmReceiver;
 import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 import com.example.al_kahtani.sygoal.data.TaskContract;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
 
 import java.text.ParseException;
@@ -73,6 +75,7 @@ public class TaskActivity extends AppCompatActivity {
     private Button saveTask, cancelTask, deleteTask;
     private Spinner spinnerrepeat;
     private int notificationId = 1;
+    private InterstitialAd mInterstitial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +122,11 @@ public class TaskActivity extends AppCompatActivity {
             taskNotifyOn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_access_time, 0);
             taskDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_date, 0);
         }
+
+   /// load the interstitial ads
+        mInterstitial = new InterstitialAd(this);
+        mInterstitial.setAdUnitId(getString(R.string.admob_publisher_interstitial_id));
+        mInterstitial.loadAd(new AdRequest.Builder().build());
 
 
         /**
@@ -385,15 +393,52 @@ public class TaskActivity extends AppCompatActivity {
                 if (startDate.equals("") || startTime.equals("") || mTaskName.equals("")) {
                     Toast.makeText(TaskActivity.this, "Complete all of your info", Toast.LENGTH_SHORT).show();
                 } else if (updateTask.equals("0")) {
-                    Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
+                   final Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
                     helper.insertTask(goalId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox, notifyState);
                     i.putExtra("goalId", goalId);
-                    startActivity(i);
+
+
+
+                    if (mInterstitial.isLoaded()){
+                        mInterstitial.show();
+                    }else{
+                        startActivity(i);
+                    }
+                    mInterstitial.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdClosed() {
+
+                            // Load the next interstitial.
+                            mInterstitial.loadAd(new AdRequest.Builder().build());
+                            startActivity(i);
+                        }
+
+                    });
+
+
+
+
                 } else if (updateTask.equals("1")) {
-                    Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
+                   final Intent i = new Intent(TaskActivity.this, DisplayTaskScreen.class);
                     helper.updateTask(taskId, mTaskName, startDate, startTime, mTaskAlarm, mCheckBox, notifyState);
                     i.putExtra("goalId", goalId);
-                    startActivity(i);
+
+                    if (mInterstitial.isLoaded()){
+                        mInterstitial.show();
+                    }else{
+                        startActivity(i);
+                    }
+                    mInterstitial.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdClosed() {
+
+                            // Load the next interstitial.
+                            mInterstitial.loadAd(new AdRequest.Builder().build());
+                            startActivity(i);
+                        }
+
+                    });
+
                 }
             }
         });

@@ -11,6 +11,7 @@
         android:id="@+id/app_logo"
         android:layout_width="96dp"
         android:layout_height="96dp"
+        android:layout_marginTop="8dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/splash" />
 
@@ -98,5 +99,18 @@
             android:layout_height="36dp"
             android:scaleType="centerCrop"
             android:src="@drawable/mail_logo" />
+
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adUnitId="@string/admob_banner_id"
+        ads:adSize="BANNER"
+        >
+    </com.google.android.gms.ads.AdView>
 </RelativeLayout>

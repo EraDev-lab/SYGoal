@@ -3,74 +3,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="5dp"
     android:paddingTop="10dp"
     android:paddingRight="5dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@drawable/special_item_shap">
 
-        <LinearLayout
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="16dp"
+
+
+        >
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:background="@drawable/special_item_shap">
 
-            <ImageView
-                android:id="@+id/display_goal_type"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/job" />
-
-            <TextView
-                android:id="@+id/display_goal_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_weight="1"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
                 android:gravity="center"
-                android:textColor="#2a7fff"
-                android:textSize="8pt"
-                android:textStyle="bold"
-                tools:text="@string/Goal_Name" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/display_goal_percentage"
-                android:layout_width="wrap_content"
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent"
+                    android:background="#03A9F4"
+                    />
+                <ImageView
+                    android:id="@+id/display_goal_type"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/job" />
+
+                <TextView
+                    android:id="@+id/display_goal_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#2a7fff"
+                    android:textSize="8pt"
+                    android:textStyle="bold"
+                    tools:text="@string/Goal_Name" />
+
+                <TextView
+                    android:id="@+id/display_goal_percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt"
+                    tools:text="00%" />
+            </LinearLayout>
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:textColor="?attr/textcolor"
-                android:textSize="8pt"
-                tools:text="00%" />
-        </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:progress="100"
+                android:progressTint="#e7e7e7" />
 
-        <ProgressBar
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:progress="100"
-            android:progressTint="#e7e7e7" />
+            <ProgressBar
+                android:id="@+id/current_goal_progressbar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:progress="10"
+                android:progressTint="#2a7fff" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
-        <ProgressBar
-            android:id="@+id/current_goal_progressbar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:progress="10"
-            android:progressTint="#2a7fff" />
-    </RelativeLayout>
 </RelativeLayout>

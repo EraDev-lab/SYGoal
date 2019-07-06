@@ -28,9 +28,6 @@ import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.fragments.Achievement_fragment;
 import com.example.al_kahtani.sygoal.fragments.CurrentGoalsFragment;
 import com.example.al_kahtani.sygoal.fragments.MissedGoalsFragment;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.Locale;
 
@@ -42,8 +39,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
     String updateGoal = "0";
     int goalActivityNumber = 1;
 ///////////////**************************
-    // Display Interestial ADMOB when User exit App
-    private InterstitialAd mInterstitial;
+
+
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     //////////////************************
@@ -59,19 +56,9 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation_view);
         ///////////////**************************
-        // Display Interestial ADMOB when User exit App
-        mInterstitial = new InterstitialAd(this);
-        mInterstitial.setAdUnitId(getString(R.string.admob_publisher_interstitial_id));
-        //mInterstitial.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitial.loadAd(new AdRequest.Builder().build());
-        mInterstitial.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mInterstitial.loadAd(new AdRequest.Builder().build());
-            }
 
-        });
+
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -202,10 +189,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
                         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
-                            if (mInterstitial.isLoaded()) {
-                                mInterstitial.show();
-                                finishAffinity();
-                            }
+
 
                         }
                     });

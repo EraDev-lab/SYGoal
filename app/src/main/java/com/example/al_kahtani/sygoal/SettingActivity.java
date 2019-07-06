@@ -29,6 +29,8 @@ import com.example.al_kahtani.sygoal.classes.SharedPref;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
 import com.example.al_kahtani.sygoal.data.TaskContract;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,6 +57,7 @@ public class SettingActivity extends AppCompatActivity {
     private Switch daynight, notyoff;
     private ImageView langsetting;
     private int notificationId = 1;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,15 @@ public class SettingActivity extends AppCompatActivity {
         langsetting = findViewById(R.id.Language_setting);
         notyoff = (Switch) findViewById(R.id.Switch1);
         daynight = (Switch) findViewById(R.id.Switch);
+
+
+        // add banner ads
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+
         // to keep night mode switch state
         if (sharedpref.loadNightModeState() == true) {
             daynight.setChecked(true);

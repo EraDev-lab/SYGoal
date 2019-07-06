@@ -24,6 +24,9 @@ import com.example.al_kahtani.sygoal.R;
 import com.example.al_kahtani.sygoal.data.GoalAdapter;
 import com.example.al_kahtani.sygoal.data.GoalContract;
 import com.example.al_kahtani.sygoal.data.HelperClass;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,6 +49,7 @@ public class CurrentGoalsFragment extends Fragment {
     int selectedItem;
     int countedData = 0;
     int goalActivityNumber;
+    private InterstitialAd mInterstitial;
 
     @Nullable
     @Override
@@ -54,6 +58,7 @@ public class CurrentGoalsFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.current_goals_fragment, container, false);
 
+
         return rootView;
     }
 
@@ -61,6 +66,13 @@ public class CurrentGoalsFragment extends Fragment {
     public void onViewCreated(final View rootView, @Nullable Bundle savedInstanceState) {
         currentListView = rootView.findViewById(R.id.current_goal_list);
         emptyView = rootView.findViewById(R.id.empty_view);
+
+
+
+        /// load the interstitial ads
+        mInterstitial = new InterstitialAd(getContext());
+        mInterstitial.setAdUnitId(getString(R.string.admob_publisher_interstitial_id));
+        mInterstitial.loadAd(new AdRequest.Builder().build());
 
         helper = new HelperClass(rootView.getContext());
 
@@ -130,9 +142,13 @@ public class CurrentGoalsFragment extends Fragment {
                 currentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
+                       final Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
                         i.putExtra("goalId", id);
-                        startActivity(i);
+
+
+
+
+
                     }
                 });
 
@@ -182,12 +198,36 @@ public class CurrentGoalsFragment extends Fragment {
 
                 currentListView.setEmptyView(emptyView);
 
+
                 currentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
+                       final Intent i = new Intent(view.getContext(), DisplayTaskScreen.class);
                         i.putExtra("goalId", id);
-                        startActivity(i);
+
+                        if (mInterstitial.isLoaded()){
+                            mInterstitial.show();
+
+                        }else{
+                            startActivity(i);
+                        }
+
+                        mInterstitial.setAdListener(new AdListener() {
+                            @Override
+                            public void onAdClosed() {
+
+                                // Load the next interstitial.
+                                mInterstitial.loadAd(new AdRequest.Builder().build());
+                                startActivity(i);
+                            }
+
+
+
+
+                        });
+
+
+
                     }
                 });
                 currentListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

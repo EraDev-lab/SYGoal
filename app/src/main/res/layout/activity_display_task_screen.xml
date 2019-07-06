@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundcolor"
-    android:paddingLeft="8dp"
-    android:paddingTop="20dp"
-    android:paddingRight="8dp"
+
+
     tools:context=".DisplayTaskScreen">
 
     <RelativeLayout
@@ -92,6 +91,7 @@
         android:layout_centerVertical="true"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
+
 
         />
 

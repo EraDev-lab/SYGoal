@@ -13,12 +13,15 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.al_kahtani.sygoal.classes.SharedPref;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Locale;
 
 public class AboutActivity extends AppCompatActivity {
     SharedPref sharedpref;
     ImageView facepic, tweetpic, emailpic;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,13 @@ public class AboutActivity extends AppCompatActivity {
         facepic = findViewById(R.id.fb_logo);
         tweetpic = findViewById(R.id.twitter_logo);
         emailpic = findViewById(R.id.mail_logo);
+
+
+
+        // add banner ads
+        mAdView = findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         emailpic.setOnClickListener(new View.OnClickListener() {
             @Override
