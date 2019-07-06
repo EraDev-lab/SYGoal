@@ -43,6 +43,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
 
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
+
     //////////////************************
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,6 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation_view);
         ///////////////**************************
-
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -171,9 +171,6 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
     }
 
 
-
-
-
     // Display Interestial ADMOB when User exit App
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -182,7 +179,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
             AlertDialog.Builder alert = new AlertDialog.Builder(
                     BottomNavigationViewActivity.this);
             alert.setTitle(getString(R.string.app_name));
-           // alert.setIcon(R.drawable.ic_logout);
+            // alert.setIcon(R.drawable.ic_logout);
             alert.setMessage(getString(R.string.Quit));
             alert.setPositiveButton(getString(R.string.Yes),
                     new DialogInterface.OnClickListener() {
@@ -190,15 +187,15 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
 
-
+                            finish();
                         }
                     });
-            alert.setNegativeButton (getString(R.string.No),
+            alert.setNegativeButton(getString(R.string.No),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
                             dialog.dismiss();
-                            }
+                        }
 
                     });
 

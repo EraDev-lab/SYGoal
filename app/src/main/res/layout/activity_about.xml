@@ -11,7 +11,7 @@
         android:id="@+id/app_logo"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/splash" />
 
