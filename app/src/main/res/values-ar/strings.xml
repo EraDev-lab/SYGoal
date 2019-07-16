@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="admob_publisher_interstitial_id" >ca-app-pub-3940256099942544/1033173712</string>
     <string name="app_name">Goal Organizer</string>
-    <string name="app_version">1.0</string>
-    <string name="navigation_drawer_open">افتح القائمة الجانبية</string>
-    <string name="navigation_drawer_close">اغلق القائمة الجانبية</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
 
     <string name="Goals_Activity">الاهداف الحالية</string>
-    <string name="Earlier_date">خطأ اختيار وقت سابق</string>
+    <string name="Earlier_date">خطأ في اختيار التاريخ</string>
     <string name="action_settings">الاعدادات</string>
     <string name="action_home">الرئيسية</string>
     <string name="action_contact">اتصل بنا</string>
     <string name="action_rating">التقييم</string>
 
-    <string name="Era_Dev">Era Dev</string>
-    <string name="copyright_text">Copyright © 2019, Era\'Dev </string>
     <string name="rights">كل الحقوق محفوظة</string>
     <string name="current_goals">الاهداف الحالية</string>
-    <string name="missed_goals">الاهداف الفائتة</string>
     <string name="achievements">الانجازات</string>
 
     <string name="Display_Language">اعدادات اللغة :</string>
@@ -36,7 +26,7 @@
     <string name="date_is_required">يجب ادخال الناريخ</string>
     <string name="time_is_required">يجب ادخال الوقت</string>
     <string name="goal_is_required">يجب ادخال الهدف</string>
-    <string name="description_is_required">يجب ادخال التوصيف</string>
+    <string name="description_is_required">يجب ادخال الوصف</string>
 
 
     <string name="Tasks">اسم المهمة</string>
@@ -47,18 +37,18 @@
     <string name="Housework">عمل منزلى</string>
     <string name="Education">تعليم</string>
     <string name="Exercise">تمارين</string>
-    <string name="Social">اجتماعيات</string>
+    <string name="Social">اجتماعي</string>
     <string name="Other">اخري</string>
     <string name="Delete">حذف</string>
     <string name="Save">حفظ</string>
     <string name="Date">تاريخ المهمة</string>
-    <string name="Notify_on">الساعة</string>
+    <string name="Notify_on">وقت المهمة</string>
     <string name="Alarm">تكرار المهمة</string>
     <string name="Completed_State">نسبة الاكتمال</string>
     <string name="cancel">الغاء</string>
     <string name="edit">تعديل</string>
 
-    <string name="Quit">هل أنت متأكد انك تريد انهاء التطبيق؟</string>
+    <string name="Quit">هل أنت متأكد انك تريد الخروج؟</string>
     <string name="Rate_app">تقييم التطبيق</string>
     <string name="Yes">نعم</string>
     <string name="No">لا</string>
@@ -72,5 +62,6 @@
         <item>شهرياً</item>
         <item>سنوياً</item>
     </string-array>
+    <string name="missed_goals">الأهداف الضائعة</string>
 
 </resources>

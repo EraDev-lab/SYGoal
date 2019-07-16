@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -300,7 +299,7 @@ public class SettingActivity extends AppCompatActivity {
     private void showChangeLanguageDialog() {
         SharedPreferences pref = getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         int position = pref.getInt("position", -1);
-        final String[] listItme = {"English", "العربية"};
+        final String[] listItme = {"English", "العربية","Français"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingActivity.this);
         mBuilder.setTitle(R.string.choose_anguage);
         mBuilder.setIcon(R.drawable.ic_settings_lang);
@@ -312,6 +311,9 @@ public class SettingActivity extends AppCompatActivity {
                     recreate();
                 } else if (i == 1) {
                     setLocale("ar", i);
+                    recreate();
+                }else if(i ==2){
+                    setLocale("fr",i);
                     recreate();
                 }
                 dialogInterface.dismiss();
@@ -334,6 +336,7 @@ public class SettingActivity extends AppCompatActivity {
         editor.putString("My_Lang", lang);
         editor.putInt("position", pos);
         editor.apply();
+
 
     }
 

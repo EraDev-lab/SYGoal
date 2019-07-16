@@ -290,6 +290,7 @@ public class GoalActivity extends AppCompatActivity {
         editor.putString("My_Lang", lang);
         editor.apply();
 
+
     }
 
     public void loadLocale() {

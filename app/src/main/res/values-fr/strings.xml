@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Goal Organizer</string>
+    <string name="Save">Enregistrer</string>
+    <string name="Delete">Supprimer</string>
+    <string name="About_App">à propos de l\'application</string>
+    <string name="Alarm">Alarme de tâche</string>
+    <string name="Completed_State">Taux d\'achèvement</string>
+    <string name="Date">Date de la tâche</string>
+    <string name="Description">La description</string>
+    <string name="Display_Language">Paramètres de langue:</string>
+    <string name="Done">Terminé</string>
+    <string name="Education">Éducation</string>
+    <string name="Exercise">Exercises</string>
+    <string name="Extras">Extras:</string>
+    <string name="Goal_Name">"Nom de l'objectif "</string>
+    <string name="Goal_Type">Type d\'objectif</string>
+    <string name="Goals_Activity">Objectifs actuels</string>
+    <string name="Housework">Travaux ménagers</string>
+    <string name="Job">Emploi</string>
+    <string name="Night_Mood">Mode nuit:</string>
+    <string name="No">Non</string>
+    <string name="Notifications">Notifications:</string>
+    <string name="Notify_on">Temps de tâche</string>
+    <string name="Other">Autre</string>
+    <string name="Quit">Êtes-vous sûr de vouloir quitter?</string>
+    <string name="Rate_Us">Évaluez nous</string>
+    <string name="Rate_app">Évaluez l\'app</string>
+    <string name="Social">Social</string>
+    <string name="Tasks">Nom de la tâche</string>
+    <string name="The_Goal">Nom de l\'objectif</string>
+    <string name="Yes">Oui</string>
+    <string name="achievements">Réalisations</string>
+    <string name="action_contact">Contactez nous</string>
+    <string name="action_home">Accueil</string>
+    <string name="action_rating">Évaluez nous</string>
+    <string name="action_settings">Réglages</string>
+    <string name="cancel">Annuler</string>
+    <string name="choose_anguage">Choisissez la langue</string>
+    <string name="current_goals">Buts actuels</string>
+    <string name="date_is_required">La date est requise</string>
+    <string name="description_is_required">La description est requise</string>
+    <string name="edit">Modifier</string>
+    <string name="empty_state">Aucun objectifs trouvé</string>
+    <string name="goal_is_required">L\'objectif est requis</string>
+    <string name="missed_goals">Buts manqués</string>
+    <string name="rights">Tous les droits sont réservés</string>
+    <string name="task_is_required">Tâche requise</string>
+    <string name="time_is_required">Le temps est requis</string>
+    <string name="Earlier_date">Erreur de sélection de la date</string>
+
+    <string-array name="repeating_array">
+        <item>Arrêté</item>
+        <item>Une fois</item>
+        <item>Quotidien</item>
+        <item>Hebdomadaire</item>
+        <item>Mensuel</item>
+        <item>Annuel</item>
+    </string-array>
+</resources>
