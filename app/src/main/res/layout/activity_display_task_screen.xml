@@ -13,7 +13,7 @@
         android:id="@+id/relative_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2a7fff"
+        android:background="?attr/titlegoal"
         android:paddingBottom="10dp"
         android:layout_marginBottom="-16dp">
 
@@ -76,9 +76,10 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
             android:gravity="left"
-            android:paddingLeft="5dp"
+            android:padding="5dp"
+            android:textColor="?attr/textcolor"
             android:text="@string/Description"
-            android:textSize="10pt" />
+            android:textSize="8pt" />
     </RelativeLayout>
 
     <ListView
@@ -89,10 +90,8 @@
         android:layout_alignEnd="@+id/relative_parent"
         android:layout_alignRight="@+id/relative_parent"
         android:layout_centerVertical="true"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-
-
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -100,11 +99,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
         app:elevation="6dp"
         app:fabSize="normal"
         app:pressedTranslationZ="12dp"
-        app:srcCompat="@drawable/ic_plus" />
+        app:srcCompat="@drawable/ic_plus"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="?attr/FloatingActionButton"/>
 </RelativeLayout>

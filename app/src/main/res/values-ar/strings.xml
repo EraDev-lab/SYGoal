@@ -56,6 +56,7 @@
     <string name="Alarm">تكرار المهمة</string>
     <string name="Completed_State">نسبة الاكتمال</string>
     <string name="cancel">الغاء</string>
+    <string name="edit">تعديل</string>
 
     <string name="Quit">هل أنت متأكد انك تريد انهاء التطبيق؟</string>
     <string name="Rate_app">تقييم التطبيق</string>
@@ -64,12 +65,12 @@
     <string name="empty_state">لا توجد اهداف</string>
 
     <string-array name="repeating_array">
-        <item>Off</item>
-        <item>Once</item>
-        <item>Daily</item>
-        <item>Weekly</item>
-        <item>Monthly</item>
-        <item>Yearly</item>
+        <item>إيقاف</item>
+        <item>مرة واحده</item>
+        <item>يومياً</item>
+        <item>اسبوعياً</item>
+        <item>شهرياً</item>
+        <item>سنوياً</item>
     </string-array>
 
 </resources>

@@ -11,5 +11,8 @@
         <attr name="buttoncolor" format="color" />
         <attr name="emptystatecolor" format="color" />
         <attr name="selecteditemcolor" format="color" />
+        <attr name="titlegoal" format="color" />
+        <attr name="listview" format="color" />
+        <attr name="FloatingActionButton" format="color" />
     </declare-styleable>
 </resources>

@@ -17,7 +17,10 @@
         <item name="bottomnavigationcolor">#fdfeff</item>
         <item name="selecteditemcolor">#f0ffff</item>
         <item name="buttoncolor">#2196F3</item>
-        <item name="emptystatecolor">#949292</item>
+        <item name="emptystatecolor">#2d6ca4</item>
+        <item name="titlegoal">#28a1d3</item>
+        <item name="listview">#ffffff</item>
+        <item name="FloatingActionButton">@color/colorPrimary</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
@@ -37,7 +40,10 @@
         <item name="textcolor">@android:color/white</item>
         <item name="specialbackgroundcolor">#181617</item>
         <item name="buttoncolor">#2196F3</item>
-        <item name="emptystatecolor">#ffffff</item>
+        <item name="emptystatecolor">#2d6ca4</item>
+        <item name="titlegoal">#3c3a3d</item>
+        <item name="listview">#797979</item>
+        <item name="FloatingActionButton">#ffffff</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
 
     </style>

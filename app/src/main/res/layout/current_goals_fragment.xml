@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:scaleType="center"
-            android:src="@drawable/empty_state" />
+            android:src="@drawable/empty_statee" />
 
         <TextView
             android:id="@+id/empty_view_text"
@@ -33,7 +33,7 @@
             android:layout_below="@id/empty_view"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:paddingTop="10dp"
+            android:layout_marginTop="7dp"
             android:text="@string/empty_state"
             android:textColor="?attr/emptystatecolor"
             android:textSize="8pt"

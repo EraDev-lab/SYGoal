@@ -22,7 +22,8 @@
         app:itemBackground="@drawable/nav_item_background"
         app:itemIconTint="@drawable/nav_item_foreground"
         app:itemTextColor="@drawable/nav_item_foreground"
-        app:menu="@menu/bottom_navigation" />
+        app:menu="@menu/bottom_navigation"
+        />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/ic_plus"
             app:backgroundTint="@android:color/white"

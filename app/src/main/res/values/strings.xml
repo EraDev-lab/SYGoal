@@ -55,6 +55,7 @@
     <string name="Alarm">Task Alarm</string>
     <string name="Completed_State">Completed State</string>
     <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
 
     <string name="Quit">Are You Sure You Want To Quit?</string>
     <string name="Rate_app">Rate app</string>
