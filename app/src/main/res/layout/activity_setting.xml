@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,161 +8,173 @@
     tools:context=".SettingActivity">
     <!--   -->
     <!-- Light/Day Mode theme. -->
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?attr/backgroundcolor">
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-            <!-- -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="sans-serif"
-                android:text="@string/Display_Language"
-                android:textColor="?attr/textcolor"
-                android:textSize="8pt" />
-
-            <ImageView
-                android:id="@+id/Language_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/ic_settings_lang" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="sans-serif"
-                android:text="@string/Night_Mood"
-                android:textColor="?attr/textcolor"
-                android:textSize="8pt" />
-            <!-- "-->
-
-            <Switch
-                android:id="@+id/Switch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:spinnerMode="dialog"
-                android:textColor="?attr/textcolor" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="sans-serif"
-                android:text="@string/Notifications"
-                android:textColor="?attr/textcolor"
-                android:textSize="8pt" />
-            <!-- -->
-            <!-- -->
-
-            <Switch
-                android:id="@+id/Switch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="right|center"
-                android:layout_marginRight="20dp"
-                android:buttonTint="?attr/tintcolor"
-                android:spinnerMode="dialog" />
-        </RelativeLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/about"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/circular_shap"
-                    android:src="@android:drawable/ic_menu_help" />
-                <!--  android:background="?attr/textred"-->
+                android:layout_marginTop="20dp">
+                <!-- -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/About_App"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/Display_Language"
                     android:textColor="?attr/textcolor"
-                    android:textSize="8pt"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:textSize="8pt" />
+
+                <ImageView
+                    android:id="@+id/Language_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_settings_lang" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/Night_Mood"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+                <!-- "-->
+
+                <Switch
+                    android:id="@+id/Switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:spinnerMode="dialog"
+                    android:textColor="?attr/textcolor" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/Notifications"
+                    android:textColor="?attr/textcolor"
+                    android:textSize="8pt" />
+                <!-- -->
+                <!-- -->
+
+                <Switch
+                    android:id="@+id/Switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="20dp"
+                    android:buttonTint="?attr/tintcolor"
+                    android:spinnerMode="dialog" />
+            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/circular_shap"
-                    android:src="@android:drawable/star_off" />
+                <LinearLayout
+                    android:id="@+id/about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/circular_shap"
+                        android:src="@android:drawable/ic_menu_help" />
+                    <!--  android:background="?attr/textred"-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/About_App"
+                        android:textColor="?attr/textcolor"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/circular_shap"
+                        android:src="@android:drawable/star_off" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/Rate_Us"
+                        android:textColor="?attr/textcolor"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="170dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/Rate_Us"
-                    android:textColor="?attr/textcolor"
-                    android:textSize="8pt"
-                    android:textStyle="bold" />
+                    android:layout_height="30dp"
+                    android:text="" />
 
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
     </ScrollView>
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        ads:adUnitId="@string/admob_banner_id"
         ads:adSize="BANNER"
-       >
+        ads:adUnitId="@string/admob_banner_id">
+
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
