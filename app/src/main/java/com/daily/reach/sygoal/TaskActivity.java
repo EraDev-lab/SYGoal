@@ -29,6 +29,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.daily.reach.sygoal.classes.AlarmReceiver;
+import com.daily.reach.sygoal.classes.NotificationHelper;
 import com.daily.reach.sygoal.classes.SharedPref;
 import com.daily.reach.sygoal.data.HelperClass;
 import com.daily.reach.sygoal.data.TaskContract;
@@ -76,6 +77,7 @@ public class TaskActivity extends AppCompatActivity {
     private Spinner spinnerrepeat;
     private int notificationId = 1;
     private InterstitialAd mInterstitial;
+    private NotificationHelper notificationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,7 @@ public class TaskActivity extends AppCompatActivity {
         goalId = intent.getLongExtra("goalId", goalId);
         taskId = intent.getLongExtra("taskId", taskId);
         updateTask = intent.getStringExtra("updateTask");
+        notificationHelper = new NotificationHelper(this);
 
         //find EditText by id
         taskName = findViewById(R.id.task_name);
@@ -369,6 +372,8 @@ public class TaskActivity extends AppCompatActivity {
                 Long alerttime;
                 alerttime = date.getTime();
                 random = (int) taskId;
+                sendNotification("Goal Organizer",  taskName.getText().toString(),alerttime,random);// Notification oreo
+
                 Intent intent = new Intent(TaskActivity.this, AlarmReceiver.class);
                 intent.putExtra("notificationId", notificationId);
                 intent.putExtra("todo", taskName.getText().toString());
@@ -481,7 +486,11 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
     }
-
+    // Notification oreo
+    public void sendNotification(String title, String message,Long alerttime,int taskId) {
+        android.support.v4.app.NotificationCompat.Builder builder = notificationHelper.getChanalNotification(title, message,alerttime);
+        notificationHelper.getNotificationManager().notify(taskId, builder.build());
+    }
     // languge setting
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);

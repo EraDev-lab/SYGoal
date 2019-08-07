@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.daily.reach.sygoal.classes.AlarmReceiver;
+import com.daily.reach.sygoal.classes.NotificationHelper;
 import com.daily.reach.sygoal.classes.SharedPref;
 import com.daily.reach.sygoal.data.GoalContract;
 import com.daily.reach.sygoal.data.HelperClass;
@@ -57,6 +58,7 @@ public class SettingActivity extends AppCompatActivity {
     private ImageView langsetting;
     private int notificationId = 1;
     private AdView mAdView;
+    private NotificationHelper notificationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,7 @@ public class SettingActivity extends AppCompatActivity {
         notyoff = (Switch) findViewById(R.id.Switch1);
         daynight = (Switch) findViewById(R.id.Switch);
 
+        notificationHelper = new NotificationHelper(this);
 
         // add banner ads
         mAdView = findViewById(R.id.adView);
@@ -193,6 +196,7 @@ public class SettingActivity extends AppCompatActivity {
                                     // Long alerttime=new GregorianCalendar().getTimeInMillis()+5*1000;
                                     Long alerttime;
                                     alerttime = date.getTime();
+                                    sendNotification("Goal Organizer", taskName,alerttime,taskId);// Notification oreo
 
                                     Intent intent = new Intent(SettingActivity.this, AlarmReceiver.class);
                                     intent.putExtra("notificationId", notificationId);
@@ -276,7 +280,11 @@ public class SettingActivity extends AppCompatActivity {
         });
 
     }
-
+    // Notification oreo
+    public void sendNotification(String title, String message,Long alerttime,int taskId) {
+        android.support.v4.app.NotificationCompat.Builder builder = notificationHelper.getChanalNotification(title, message,alerttime);
+        notificationHelper.getNotificationManager().notify(taskId, builder.build());
+    }
     private Intent rateIntentForUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?goalId=%s", url, getPackageName())));
         int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
@@ -300,7 +308,12 @@ public class SettingActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("SettingActivity", Activity.MODE_PRIVATE);
         int position = pref.getInt("position", -1);
         final String[] listItme = {"English", "العربية","Français"};
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingActivity.this);
+        AlertDialog.Builder mBuilder;
+        if (sharedpref.loadNightModeState() == true) {
+             mBuilder = new AlertDialog.Builder(SettingActivity.this, R.style.MyAlertDialogStyle);
+        } else {
+             mBuilder = new AlertDialog.Builder(SettingActivity.this);
+        }
         mBuilder.setTitle(R.string.choose_anguage);
         mBuilder.setIcon(R.drawable.ic_settings_lang);
         mBuilder.setSingleChoiceItems(listItme, position, new DialogInterface.OnClickListener() {
